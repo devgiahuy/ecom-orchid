@@ -15,7 +15,7 @@ export default function AppProvider({ children }: AppProviderProps) {
     <HeroUIProvider>
       <QueryClientProvider client={queryClient}>
         <RouterProvider router={router} />
-        {/* <BrowserRouter>{children}</BrowserRouter> */}
+        <BrowserRouter>{children}</BrowserRouter>
       </QueryClientProvider>
     </HeroUIProvider>
   );

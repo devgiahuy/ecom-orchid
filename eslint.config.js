@@ -1,57 +1,48 @@
-// import js from '@eslint/js'
-// import globals from 'globals'
-// import reactHooks from 'eslint-plugin-react-hooks'
-// import reactRefresh from 'eslint-plugin-react-refresh'
-// import tseslint from 'typescript-eslint'
-// import { defineConfig, globalIgnores } from 'eslint/config'
-
-// export default defineConfig([
-//   globalIgnores(['dist']),
-//   {
-//     files: ['**/*.{ts,tsx}'],
-//     extends: [
-//       js.configs.recommended,
-//       tseslint.configs.recommended,
-//       reactHooks.configs['recommended-latest'],
-//       reactRefresh.configs.vite,
-//     ],
-//     languageOptions: {
-//       ecmaVersion: 2020,
-//       globals: globals.browser,
-//     },
-//   },
-// ])
-import { EslintConfig, ConfigPrettier } from "@packages/eslint-config";
-import { EslintConfigReact } from "@packages/eslint-config-react";
-import { EslintConfigReactTest } from "@packages/eslint-config-react-test";
-import { EslintConfigExpress } from "@packages/eslint-config-express";
+// eslint.config.js
+import js from "@eslint/js";
+import ts from "typescript-eslint";
+import next from "eslint-config-next";
+import globals from "globals";
+import tailwind from "eslint-plugin-tailwindcss";
+import reactHooks from "eslint-plugin-react-hooks";
+import prettier from "eslint-config-prettier";
 
 export default [
-  ConfigPrettier,
+  js.configs.recommended,
+  ...ts.configs.recommended,
+  next,
+  prettier,
   {
-    ignores: [
-      "**/node_modules",
-      "**/dist",
-      "**/build",
-      "**/__snapshots__",
-      "**/mocks",
-      "**/coverage",
-    ],
-  },
-  {
-    // Client - React
-    files: [
-      "apps/*/frontend/**/*.ts",
-      "apps/*/frontend/**/*.tsx",
-      "apps/*/frontend/**/*.jsx",
-      "apps/*/frontend/**/*.js",
-    ],
+    files: ["**/*.{js,jsx,ts,tsx}"],
     languageOptions: {
-      ...EslintConfig.languageOptions,
-      ...EslintConfigReact.languageOptions,
+      ecmaVersion: "latest",
+      sourceType: "module",
+      globals: globals.browser,
     },
-    plugins: { ...EslintConfig.plugins, ...EslintConfigReact.plugins },
-    rules: { ...EslintConfig.rules, ...EslintConfigReact.rules },
-    settings: { ...EslintConfig.settings, ...EslintConfigReact.settings },
+    plugins: {
+      tailwindcss: tailwind,
+      "react-hooks": reactHooks,
+    },
+    rules: {
+      // React & Hooks
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn",
+
+      // Tailwind
+      "tailwindcss/classnames-order": "warn",
+      "tailwindcss/no-custom-classname": "off",
+
+      // General
+      "no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
+      "no-console": ["warn", { allow: ["warn", "error"] }],
+      "react/jsx-no-target-blank": "off",
+    },
+    settings: {
+      tailwindcss: {
+        callees: ["classnames", "clsx", "ctl"],
+        config: "tailwind.config.js",
+        removeDuplicates: true,
+      },
+    },
   },
 ];

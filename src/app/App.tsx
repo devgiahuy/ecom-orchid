@@ -13,13 +13,12 @@ export default function App() {
       className="
         flex flex-col min-h-screen 
         bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100
-        transition-colors duration-300
-      "
+        transition-colors duration-300"
     >
-      {/* Thanh điều hướng */}
+      {/* Navbar */}
       <NavbarV1 />
 
-      {/* Nội dung động (router) */}
+      {/* Content */}
       <main className="flex-1 w-full max-w-7xl mx-auto px-6 py-8">
         <Outlet />
       </main>

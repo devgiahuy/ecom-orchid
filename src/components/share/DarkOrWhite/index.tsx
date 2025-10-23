@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Switch } from "@heroui/react";
-import { Sun, Moon } from "lucide-react";
+import SwitchStyled from "../../styled/SwitchStyled";
 
 /**
  * Component DarkOrWhite
@@ -23,27 +22,11 @@ export default function DarkOrWhite() {
   }, [isDarkMode]);
 
   return (
-    <div className="flex items-center gap-3">
-      <Sun
-        size={20}
-        className={`transition-colors ${
-          isDarkMode ? "text-gray-400" : "text-yellow-500"
-        }`}
-      />
-
-      <Switch
+    <div className="flex items-center gap-3 w-10">
+      <SwitchStyled
         size="sm"
-        color="success"
-        isSelected={isDarkMode}
+        // isSelected={isDarkMode}
         onValueChange={setIsDarkMode}
-        aria-label="Toggle dark mode"
-      />
-
-      <Moon
-        size={20}
-        className={`transition-colors ${
-          isDarkMode ? "text-indigo-400" : "text-gray-400"
-        }`}
       />
     </div>
   );

@@ -2,14 +2,15 @@ import { Card, CardBody, Image, Button } from "@heroui/react";
 import { Link } from "react-router-dom";
 import { Star, ArrowRight } from "lucide-react";
 import type { Orchid } from "../../../model/orchid";
+import { useSelectedItemStore } from "../../../hooks/singleton/store/selectItemStore";
 
 export default function OrchidCard({ orchid }: { orchid: Orchid }) {
-  // const dispatch = useDispatch();
+  const setSelectedItem = useSelectedItemStore((s) => s.setselectedItem);
 
   return (
     <Card
       isPressable
-      // onPress={() => dispatch(setSelectedOrchid(orchid))}
+      onPress={() => setSelectedItem(orchid)}
       as={Link}
       to={`detail/${orchid.id}`}
       shadow="sm"

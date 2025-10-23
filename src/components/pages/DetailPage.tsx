@@ -11,15 +11,17 @@ import {
   ShoppingCart,
   ArrowLeft,
 } from "lucide-react";
+import { useSelectedItemStore } from "../../hooks/singleton/store/selectItemStore";
 
 export default function DetailPage() {
   // const orchid = useSelector((state: any) => state.selectedOrchid.current);
-  const orchid = null;
-  if (!orchid) {
+  const { selectedItem } = useSelectedItemStore();
+
+  if (!selectedItem) {
     return (
       <div className="flex flex-col justify-center items-center py-20 text-center">
         <h4 className="text-gray-600 dark:text-gray-400 text-lg">
-          Không tìm thấy thông tin hoa lan 🌸
+          Không tìm thấy thông tin hoa lan
         </h4>
         <Link
           to="/home"
@@ -60,8 +62,8 @@ export default function DetailPage() {
         {/* Hình ảnh */}
         <Card shadow="sm" className="bg-white dark:bg-gray-800 rounded-2xl">
           <Image
-            src={orchid.image}
-            alt={orchid.name}
+            src={selectedItem.image}
+            alt={selectedItem.name}
             radius="lg"
             className="
               w-full h-[420px] object-contain 
@@ -73,11 +75,11 @@ export default function DetailPage() {
         {/* Thông tin mô tả */}
         <div>
           <h2 className="text-2xl font-bold mb-3 text-green-600 dark:text-green-400">
-            {orchid.name}
+            {selectedItem.name}
           </h2>
 
           <h4 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-            {(orchid.price ?? 590000).toLocaleString()} VNĐ{" "}
+            {(selectedItem.price ?? 590000).toLocaleString()} VNĐ{" "}
             <span className="text-gray-500 dark:text-gray-400 text-base font-normal">
               / Cây
             </span>
@@ -93,27 +95,27 @@ export default function DetailPage() {
             <div className="grid grid-cols-2 gap-y-3">
               <div className="flex items-center gap-2">
                 <MapPin className="text-green-500" size={18} />
-                <b>Nguồn gốc:</b> {orchid.origin}
+                <b>Nguồn gốc:</b> {selectedItem.origin}
               </div>
               <div className="flex items-center gap-2">
                 <Palette className="text-green-500" size={18} />
-                <b>Màu sắc:</b> {orchid.color}
+                <b>Màu sắc:</b> {selectedItem.color}
               </div>
               <div className="flex items-center gap-2">
                 <Flower2 className="text-green-500" size={18} />
-                <b>Loại:</b> {orchid.category ?? "Không rõ"}
+                <b>Loại:</b> {selectedItem.category ?? "Không rõ"}
               </div>
               <div className="flex items-center gap-2">
                 <Star className="text-yellow-500" size={18} />
-                <b>Đánh giá:</b> {orchid.rating} ⭐
+                <b>Đánh giá:</b> {selectedItem.rating} ⭐
               </div>
               <div className="flex items-center gap-2">
                 <Heart className="text-red-500" size={18} />
-                <b>Lượt thích:</b> {orchid.numberOfLike}
+                <b>Lượt thích:</b> {selectedItem.numberOfLike}
               </div>
               <div className="flex items-center gap-2">
                 <TreePine className="text-green-600" size={18} />
-                <b>Đặc biệt:</b> {orchid.isSpecial ? "Có" : "Không"}
+                <b>Đặc biệt:</b> {selectedItem.isSpecial ? "Có" : "Không"}
               </div>
             </div>
           </div>
@@ -156,7 +158,7 @@ export default function DetailPage() {
             "
           >
             <iframe
-              src={orchid.linkVideo}
+              src={selectedItem.linkVideo}
               title="Orchid Video"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

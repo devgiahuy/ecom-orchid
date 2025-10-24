@@ -1,41 +1,33 @@
-import { ListOfOrchids } from "../../../data/ListOfOrchids";
-import type { Orchid } from "../../../model/orchid";
-import OrchidCard from "../../styled/OrchidCard";
+import { useEffect } from "react"
+import type { Orchid } from "../../../model/orchid"
+import { CardOrchid } from "../../models/OrchidCard"
+import { useGetAllOrchids } from "../../../hooks/queries/useOrchid"
 
 export default function NaturalCardList() {
-  const orchids = ListOfOrchids.filter((val: Orchid) => val.isSpecial === true);
+    const { data: orchids, error, loading, refetch } = useGetAllOrchids()
+    useEffect(() => {
+        refetch()
+    }, [])
 
-  return (
-    <section
-      className="
-        py-16 
-        bg-green-50 dark:bg-gray-900
-        transition-colors duration-300
-      "
-    >
-      <div className="max-w-6xl mx-auto px-6">
-        {/* 🌿 Tiêu đề */}
-        <div className="text-center mb-10">
-          <h2 className="text-3xl font-extrabold text-green-600 dark:text-green-400">
-            🌸 Natural Orchids Collection
-          </h2>
-          <p className="text-gray-600 dark:text-gray-400 mt-2">
-            Discover the natural beauty of Orchide – pure, vibrant, and unique.
-          </p>
-        </div>
+    if (loading) return <p>Đang tải...</p>
+    if (error) return <p>Lỗi: {error}</p>
+    return (
+        <section className="py-10 bg-[#f8fff9]">
+            <div className="max-w-[180rem] px-0">
+                {/*title */}
+                <div className="text-center mb-12">
+                    <h1 className="text-4xl font-extrabold text-[#32CD32] tracking-tight mt-6 mb-2 drop-shadow-sm">
+                        Ecom Orchid <span className="text-[#32CD32]/80">— HYCAT 🌿</span>
+                    </h1>
+                </div>
 
-        {/* 🪴 Danh sách hoa lan */}
-        <div
-          className="
-            grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4
-            gap-6 place-items-center
-          "
-        >
-          {orchids.map((orchid: Orchid) => (
-            <OrchidCard key={orchid.id} orchid={orchid} />
-          ))}
-        </div>
-      </div>
-    </section>
-  );
+                {/* list */}
+                <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4 items-center">
+                    {orchids?.map((orchid: Orchid) => (
+                        <CardOrchid key={orchid.id} orchid={orchid} />
+                    ))}
+                </div>
+            </div>
+        </section>
+    )
 }

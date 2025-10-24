@@ -1,36 +1,10 @@
 @import "tailwindcss";
 
-/* 🌿 Khai báo màu thương hiệu Orchid */
 @theme {
-  --color-primary: #32cd32;
+    --color-primary: #32cd32;
+    --color-primary-hover: color-mix(in srgb, var(--color-primary) 90%, white);
 }
 
-/* Giữ cú pháp bg-primary, text-primary, border-primary */
-@utility bg-primary {
-  background-color: var(--color-primary);
-}
-@utility text-primary {
-  color: var(--color-primary);
-}
-@utility border-primary {
-  border-color: var(--color-primary);
-}
-
-/* Một vài preset cơ bản */
-@layer components {
-  .btn-primary {
-    @apply inline-flex items-center gap-2 px-4 py-2 font-medium rounded-2xl 
-           bg-primary text-white shadow-[0_8px_28px_rgba(50,205,50,0.18)] transition
-           hover:brightness-95 active:brightness-90;
-  }
-
-  .btn-outline {
-    @apply inline-flex items-center gap-2 px-4 py-2 font-medium rounded-2xl
-           border border-primary text-primary hover:bg-primary/10;
-  }
-
-  .card {
-    @apply rounded-3xl border border-black/5 bg-white/80 dark:bg-white/10
-           backdrop-blur p-6 shadow-[0_8px_28px_rgba(50,205,50,0.18)] transition;
-  }
+.bg-primary-gradient {
+    background: linear-gradient(135deg, #32cd32 0%, #b7e4c7 100%);
 }

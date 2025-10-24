@@ -1,8 +1,9 @@
 import { useState } from "react"
-import { Link } from "react-router-dom"
 import { Menu, X, Search } from "lucide-react"
 import { Input, Button } from "@heroui/react"
 import { ButtonStyled } from "../../styled"
+import { Link } from "react-router-dom"
+import DarkOrWhite from "../DarkOrWhite"
 
 export default function NavbarV1() {
     const [isOpen, setIsOpen] = useState(false)
@@ -122,24 +123,24 @@ export default function NavbarV1() {
                     ))}
 
                     {/* Dark switch + search bar trong mobile */}
-                    {/* <div className="flex items-center justify-between w-full mt-2">
-            <DarkOrWhite />
-            <form
-              onSubmit={(e) => e.preventDefault()}
-              className="flex items-center gap-2"
-            >
-              <Input
-                placeholder="Search..."
-                radius="full"
-                size="sm"
-                className="w-32"
-              />
-              <Button isIconOnly radius="full" color="success" variant="flat">
-                <Search size={18} />
-              </Button>
-            </form>
-          </div> */}
-                    <ButtonStyled>Login</ButtonStyled>
+                    <div className="flex items-center justify-between w-full mt-2">
+                        <DarkOrWhite />
+                        <form
+                            onSubmit={(e) => e.preventDefault()}
+                            className="flex items-center gap-2"
+                        >
+                            <Input
+                                placeholder="Search..."
+                                radius="full"
+                                size="sm"
+                                className="w-32"
+                            />
+                            <Button isIconOnly radius="full" color="success" variant="flat">
+                                <Search size={18} />
+                            </Button>
+                        </form>
+                    </div>
+                    <ButtonStyled className="bg-red-500">Login</ButtonStyled>
                 </div>
             )}
         </header>

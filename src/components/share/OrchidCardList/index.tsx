@@ -1,12 +1,26 @@
-import { ListOfOrchids } from "../../../data/ListOfOrchids"
+import { useEffect } from "react"
 import type { Orchid } from "../../../model/orchid"
-import OrchidCard from "../../styled/OrchidCard"
+import { useGetAllOrchids } from "../../../hooks/queries/useOrchid"
+import { CardOrchid } from "../../models/OrchidCard"
+import { Spinner } from "@heroui/react"
 export default function OrchidsCardList() {
-    const orchids = ListOfOrchids
+    // const orchids = ListOfOrchids
+    const { data: orchids, error, loading, refetch } = useGetAllOrchids()
 
+    useEffect(() => {
+        refetch()
+    }, [])
+
+    if (loading)
+        return (
+            <div className="flex justify-center items-center">
+                <Spinner />
+            </div>
+        )
+    if (error) return <p>Lỗi: {error}</p>
     return (
-        <section className="py-16 bg-[#f8fff9]">
-            <div className="max-w-6xl mx-auto px-6">
+        <section className="py-10 bg-[#f8fff9]">
+            <div className="max-w-[180rem] ">
                 {/*title */}
                 <div className="text-center mb-12">
                     <h1 className="text-4xl font-extrabold text-[#32CD32] tracking-tight mt-6 mb-2 drop-shadow-sm">
@@ -15,9 +29,9 @@ export default function OrchidsCardList() {
                 </div>
 
                 {/* list */}
-                <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 place-items-center">
-                    {orchids.map((orchid: Orchid) => (
-                        <OrchidCard key={orchid.id} orchid={orchid} />
+                <div className="grid gap-6  sm:grid-cols-2 lg:grid-cols-4 items-center">
+                    {orchids?.map((orchid: Orchid) => (
+                        <CardOrchid key={orchid.id} orchid={orchid} />
                     ))}
                 </div>
             </div>

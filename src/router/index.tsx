@@ -1,23 +1,26 @@
-import { createBrowserRouter } from "react-router-dom";
-import HomePage from "../components/pages/HomePage.tsx";
-import DetailPage from "../components/pages/DetailPage.tsx";
-import AboutPage from "../components/pages/AboutPage.tsx";
-import ContactPage from "../components/pages/ContactPage.tsx";
-import NaturalPage from "../components/pages/Natural.tsx";
-import DemoPage from "../components/pages/DemoPage.tsx";
+// src/router/index.tsx
+import { createBrowserRouter } from "react-router-dom"
+import DemoPage from "../components/pages/DemoPage"
+import HomePage from "../components/pages/HomePage"
+import DetailPage from "../components/pages/DetailPage"
+import AboutPage from "../components/pages/AboutPage"
+import ContactPage from "../components/pages/ContactPage"
+import NaturalPage from "../components/pages/Natural"
+import App from "../app/App"
 
 export const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <HomePage />,
-    children: [
-      { path: "/home", element: <HomePage /> },
-      { path: "home/detail/:id", element: <DetailPage /> },
-      { path: "about", element: <AboutPage /> },
-      { path: "contact", element: <ContactPage /> },
-      { path: "natural", element: <NaturalPage /> },
-      { path: "natural/detail/:id", element: <DetailPage /> },
-      { path: "/demo", element: <DemoPage /> },
-    ],
-  },
-]);
+    {
+        path: "/",
+        element: <App />,
+        children: [
+            { index: true, element: <HomePage /> },
+            { path: "/home", element: <HomePage /> },
+            { path: "home/detail/:id", element: <DetailPage /> },
+            { path: "about", element: <AboutPage /> },
+            { path: "contact", element: <ContactPage /> },
+            { path: "natural", element: <NaturalPage /> },
+            { path: "natural/detail/:id", element: <DetailPage /> },
+            { path: "demo", element: <DemoPage /> }
+        ]
+    }
+])

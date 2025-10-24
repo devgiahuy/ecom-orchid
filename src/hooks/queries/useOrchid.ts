@@ -1,35 +1,36 @@
-// src/hooks/useUsers.ts
-import { useEffect, useState } from "react";
-import type { Orchid } from "../../model/orchid";
+// src/hooks/useOrchid.ts
+import { useState, useCallback } from "react"
+import type { Orchid } from "../../model/orchid"
+import { orchidApi } from "../../service/orchidApi"
 
-export function useUsers() {
-  const [users, setUsers] = useState<Orchid[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+export function useGetAllOrchids() {
+    const [data, setData] = useState<Orchid[] | null>(null)
+    const [error, setError] = useState<string | null>(null)
+    const [loading, setLoading] = useState(false)
 
-  const fetchUsers = async () => {
-    setLoading(true);
-    const { data, error } = await userService.getAll();
-    if (error) setError(error);
-    if (data) setUsers(data);
-    setLoading(false);
-  };
+    const fetch = useCallback(async () => {
+        setLoading(true)
+        const res = await orchidApi.getAll()
+        setData(res.data)
+        setError(res.error)
+        setLoading(false)
+    }, [])
 
-  const addUser = async (user: Partial<Orchid>) => {
-    const { data, error } = await userService.create(user);
-    if (data) setUsers((prev) => [...prev, data]);
-    if (error) setError(error);
-  };
+    return { data, error, loading, refetch: fetch }
+}
 
-  const deleteUser = async (id: number) => {
-    const { error } = await userService.delete(id);
-    if (!error) setUsers((prev) => prev.filter((u) => u.id !== id));
-    else setError(error);
-  };
+export function useGetOrchidById() {
+    const [data, setData] = useState<Orchid | null>(null)
+    const [error, setError] = useState<string | null>(null)
+    const [loading, setLoading] = useState(false)
 
-  useEffect(() => {
-    fetchUsers();
-  }, []);
+    const fetch = useCallback(async (id: number) => {
+        setLoading(true)
+        const res = await orchidApi.getById(id)
+        setData(res.data)
+        setError(res.error)
+        setLoading(false)
+    }, [])
 
-  return { users, loading, error, fetchUsers, addUser, deleteUser };
+    return { data, error, loading, fetch }
 }

@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #32cd32;
+}
+
+/* thêm tiện ích cho nút, card */
+@layer components {
+  .btn-primary {
+    @apply bg-[--color-primary] text-white rounded-xl px-4 py-2 font-medium hover:brightness-95 active:brightness-90;
+  }
+  .btn-outline {
+    @apply border border-[--color-primary] text-[--color-primary] rounded-xl px-4 py-2 hover:bg-[--color-primary]/10;
+  }
+}

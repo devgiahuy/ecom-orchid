@@ -13,7 +13,6 @@ export function CardOrchid({ orchid }: { orchid: Orchid }) {
                 bg-white/95 backdrop-blur-sm border border-gray-100
                 hover:shadow-lg hover:-translate-y-1
                 transition-all duration-300 ease-out w-[20rem]"
-                onClick={setSele}
             >
                 {/*Image */}
                 <CardBody className="p-0 relative overflow-hidden">

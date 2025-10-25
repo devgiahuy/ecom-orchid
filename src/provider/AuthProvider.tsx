@@ -1,9 +1,13 @@
 import React, { createContext, useContext, useEffect, useState } from "react"
-import { onAuthStateChanged, signInWithPopup, signOut, User } from "firebase/auth"
-import { auth, googleProvider } from "@/services/firebase"
+import { onAuthStateChanged, signInWithPopup, signOut, type User } from "firebase/auth"
+import type { Role, UserData } from "../model/user"
+import { auth, googleProvider } from "../service/firebase"
+import { userApi } from "../service/userApi"
 
 type AuthContextType = {
-    user: User | null
+    firebaseUser: User | null
+    userData: UserData | null
+    role: Role
     loading: boolean
     loginWithGoogle: () => Promise<void>
     logout: () => Promise<void>
@@ -12,14 +16,40 @@ type AuthContextType = {
 const AuthContext = createContext<AuthContextType | null>(null)
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-    const [user, setUser] = useState<User | null>(null)
+    const [firebaseUser, setFirebaseUser] = useState<User | null>(null)
+    const [userData, setUserData] = useState<UserData | null>(null)
+    const [role, setRole] = useState<Role>("guest")
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
-            setUser(firebaseUser)
+        const unsubscribe = onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                setFirebaseUser(user)
+                // Lấy user trong MockAPI
+                const existing = await userApi.getByEmail(user.email!)
+                if (existing) {
+                    setUserData(existing)
+                    setRole(existing.role as Role)
+                } else {
+                    // Nếu là user mới, tạo mặc định role user
+                    const newUser: UserData = {
+                        name: user.displayName || "Người dùng mới",
+                        email: user.email!,
+                        avatar: user.photoURL || "",
+                        role: "user"
+                    }
+                    const created = await userApi.createUser(newUser)
+                    setUserData(created)
+                    setRole("user")
+                }
+            } else {
+                setFirebaseUser(null)
+                setUserData(null)
+                setRole("guest")
+            }
             setLoading(false)
         })
+
         return () => unsubscribe()
     }, [])
 
@@ -32,7 +62,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
 
     return (
-        <AuthContext.Provider value={{ user, loading, loginWithGoogle, logout }}>
+        <AuthContext.Provider
+            value={{ firebaseUser, userData, role, loading, loginWithGoogle, logout }}
+        >
             {children}
         </AuthContext.Provider>
     )

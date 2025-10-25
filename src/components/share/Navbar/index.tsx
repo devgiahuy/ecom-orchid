@@ -63,15 +63,13 @@ export default function Header() {
             <NavbarContent justify="end">
                 <NavbarItem className="hidden lg:flex">
                     <ButtonStyled
-                        as={Link}
-                        href="/login"
                         className="
               btn-primary px-5 py-2 rounded-xl font-semibold
               bg-primary text-white hover:brightness-95 active:brightness-90
               shadow-[0_4px_12px_rgba(50,205,50,0.25)]
             "
                     >
-                        Login
+                        <Link to={`/login`}>Login</Link>
                     </ButtonStyled>
                 </NavbarItem>
             </NavbarContent>

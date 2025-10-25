@@ -18,13 +18,14 @@ export default function OrchidsCardList() {
             </div>
         )
     if (error) return <p>Lỗi: {error}</p>
+
     return (
-        <section className="py-10 bg-[#f8fff9]">
-            <div className="max-w-[180rem] ">
+        <section className="py-10">
+            <div className="max-w-720 ">
                 {/*title */}
                 <div className="text-center mb-12">
                     <h1 className="text-4xl font-extrabold text-[#32CD32] tracking-tight mt-6 mb-2 drop-shadow-sm">
-                        Ecom Orchid <span className="text-[#32CD32]/80">— HYCAT 🌿</span>
+                        Ecom Orchid <span className="text-[#32CD32]/80">— HYCAT</span>
                     </h1>
                 </div>
 

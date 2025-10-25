@@ -8,3 +8,13 @@
 .bg-primary-gradient {
     background: linear-gradient(135deg, #32cd32 0%, #b7e4c7 100%);
 }
+
+@layer utilities {
+    .bg-texture {
+        background-color: #ffffff;
+        background-image: url("https://www.transparenttextures.com/patterns/xv.png");
+        background-repeat: repeat;
+        background-size: auto;
+        background-position: center;
+    }
+}

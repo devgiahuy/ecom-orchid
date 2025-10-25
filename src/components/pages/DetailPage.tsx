@@ -1,5 +1,5 @@
 // import { useSelector } from "react-redux";
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { Card, Image, Button } from "@heroui/react"
 import {
     MapPin,
@@ -14,7 +14,8 @@ import {
 import { useSelectedItemStore } from "../../hooks/singleton/store/useItemStore"
 
 export default function DetailPage() {
-    // const orchid = useSelector((state: any) => state.selectedOrchid.current);
+    const { id } = useParams()
+
     const { selectedItem } = useSelectedItemStore()
 
     if (!selectedItem) {

@@ -5,7 +5,7 @@ import HomePage from "../components/pages/HomePage"
 import DetailPage from "../components/pages/DetailPage"
 import AboutPage from "../components/pages/AboutPage"
 import ContactPage from "../components/pages/ContactPage"
-import NaturalPage from "../components/pages/Natural"
+import NaturalPage from "../components/pages/NaturalPage"
 import App from "../app/App"
 
 export const router = createBrowserRouter([

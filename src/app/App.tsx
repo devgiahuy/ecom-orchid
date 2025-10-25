@@ -4,7 +4,7 @@ import Header from "../components/share/Navbar"
 
 export default function App() {
     return (
-        <div className="min-h-dvh flex flex-col items-center justify-between bg-white text-gray-800 transition-colors duration-300">
+        <div className="min-h-dvh flex flex-col items-center justify-between bg-texture text-gray-800 transition-colors duration-300">
             {/* Navbar */}
             <Header />
 

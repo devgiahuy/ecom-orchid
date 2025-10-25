@@ -8,9 +8,11 @@ import type { Orchid } from "../../model/orchid"
 export default function HomePage() {
     const { data: orchids, error, loading, refetch } = useGetAllOrchids()
 
+    // const {setSelectedItems} = useItemStore()
+
     useEffect(() => {
         refetch()
-    }, [])
+    }, [refetch])
 
     if (loading)
         return (

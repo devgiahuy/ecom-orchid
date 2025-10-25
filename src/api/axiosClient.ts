@@ -3,19 +3,17 @@ import axios from "axios"
 import { getToken, removeToken } from "../utils/tokent"
 
 const instance = axios.create({
-    baseURL: import.meta.env.VITE_API_URL || "https://api.example.com",
+    baseURL: import.meta.env.VITE_API_URL,
     headers: { "Content-Type": "application/json" },
     timeout: 10000
 })
 
-// ✅ request interceptor
 instance.interceptors.request.use((config) => {
     const token = getToken()
     if (token) config.headers.Authorization = `Bearer ${token}`
     return config
 })
 
-// ✅ response interceptor
 instance.interceptors.response.use(
     (res) => res.data,
     (error) => {

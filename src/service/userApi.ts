@@ -6,6 +6,7 @@ const BASE_URL = "https://68fa6bc0ef8b2e621e7fef06.mockapi.io/users"
 export const userApi = {
     async getByEmail(email: string): Promise<UserData | null> {
         const res = await axios.get(`${BASE_URL}?email=${email}`)
+
         return res.data[0] || null
     },
 

@@ -8,7 +8,7 @@ export default function NaturalCardList() {
     const { data: orchids, error, loading, refetch } = useGetAllOrchids()
     useEffect(() => {
         refetch()
-    }, [])
+    }, [refetch])
 
     if (loading) return <p>Đang tải...</p>
     if (error) return <p>Lỗi: {error}</p>

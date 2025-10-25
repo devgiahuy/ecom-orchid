@@ -8,7 +8,7 @@ export default function DemoPage() {
 
     useEffect(() => {
         refetch() // tự fetch khi mount
-    }, [])
+    }, [refetch])
 
     if (loading) return <p>Đang tải...</p>
     if (error) return <p>Lỗi: {error}</p>

@@ -42,26 +42,24 @@ export const router = createBrowserRouter([
         path: "/",
         element: <App />,
         children: [
-            // Public routes (guest cũng xem được)
             { index: true, element: <HomePage /> },
+            { path: "home", element: <HomePage /> },
             { path: "about", element: <AboutPage /> },
             { path: "contact", element: <ContactPage /> },
             { path: "demo", element: <DemoPage /> },
             { path: "login", element: <LoginPage /> },
             { path: "unauthorized", element: <ErrorPage /> },
 
-            // User routes (chỉ user hoặc admin)
             {
                 element: <ProtectedRoute allowRoles={["user", "admin"]} />,
                 children: [
-                    { path: "home", element: <HomePage /> },
-                    { path: "home/detail/:id", element: <DetailPage /> },
+                    // { path: "home", element: <HomePage /> },
+                    { path: "detail/:id", element: <DetailPage /> },
                     { path: "natural", element: <NaturalPage /> },
                     { path: "natural/detail/:id", element: <DetailPage /> }
                 ]
             },
 
-            // Admin-only routes
             {
                 path: "admin",
                 element: <ProtectedRoute allowRoles={["admin"]} />,

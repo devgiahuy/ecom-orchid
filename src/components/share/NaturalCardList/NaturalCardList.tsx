@@ -1,17 +1,16 @@
-import { useEffect } from "react"
 import type { Orchid } from "../../../model/orchid"
 import { CardOrchid } from "../../models/OrchidCard"
 import { useGetAllOrchids } from "../../../hooks/queries/useOrchid"
 import { Link } from "react-router-dom"
 
 export default function NaturalCardList() {
-    const { data: orchids, error, loading, refetch } = useGetAllOrchids()
-    useEffect(() => {
-        refetch()
-    }, [refetch])
+    const { data: orchids, error, isLoading } = useGetAllOrchids()
+    // useEffect(() => {
+    //     refetch()
+    // }, [refetch])
 
-    if (loading) return <p>Đang tải...</p>
-    if (error) return <p>Lỗi: {error}</p>
+    if (isLoading) return <p>Đang tải...</p>
+    if (error) return <p>Lỗi:</p>
     return (
         <section className="py-10 bg-[#f8fff9]">
             <div className="max-w-[180rem] px-0">

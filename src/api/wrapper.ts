@@ -1,19 +1,15 @@
 import { isAxiosError } from "axios"
 
-export interface ApiResult<T> {
-    data: T | null
-    error: string | null
-}
-
-export async function wrapper<T>(promise: Promise<T>): Promise<ApiResult<T>> {
-    try {
-        const data = await promise
-        return { data, error: null }
-    } catch (err) {
+export function wrapper<T>(promise: Promise<T>): Promise<T> {
+    return promise.catch((err) => {
         let message = "Unknown error"
         if (isAxiosError(err)) {
-            message = (err.response?.data as any)?.message || err.message || "Request failed"
+            const data = err.response?.data
+            message =
+                (data && (data.message || data.detail || data.error)) ||
+                err.message ||
+                "Request failed"
         }
-        return { data: null, error: message }
-    }
+        throw new Error(message)
+    })
 }

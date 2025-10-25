@@ -18,6 +18,13 @@ export default {
                     900: "#0d380d",
                     DEFAULT: "#32cd32",
                     foreground: "#ffffff"
+                },
+                secondary: {
+                    DEFAULT: "#f4f4f4",
+                    foreground: "#111827"
+                },
+                accent: {
+                    DEFAULT: "#ff66b2"
                 }
             }
         }

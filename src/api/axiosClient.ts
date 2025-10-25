@@ -1,35 +1,11 @@
-// src/api/axiosClient.ts
 import axios from "axios"
-import { getToken, removeToken } from "../utils/tokent"
 
-const instance = axios.create({
+export const axiosClient = axios.create({
     baseURL: import.meta.env.VITE_API_URL,
-    headers: { "Content-Type": "application/json" },
-    timeout: 10000
+    headers: { "Content-Type": "application/json" }
 })
 
-instance.interceptors.request.use((config) => {
-    const token = getToken()
-    if (token) config.headers.Authorization = `Bearer ${token}`
-    return config
-})
-
-instance.interceptors.response.use(
-    (res) => res.data,
-    (error) => {
-        if (error.response?.status === 401) {
-            removeToken()
-            window.location.href = "/login"
-        }
-        return Promise.reject(error)
-    }
+axiosClient.interceptors.response.use(
+    (response) => response.data,
+    (err) => Promise.reject(err)
 )
-
-const axiosClient = {
-    get: <T>(url: string, config?: any) => instance.get<any, T>(url, config),
-    post: <T>(url: string, data?: any, config?: any) => instance.post<any, T>(url, data, config),
-    put: <T>(url: string, data?: any, config?: any) => instance.put<any, T>(url, data, config),
-    delete: <T>(url: string, config?: any) => instance.delete<any, T>(url, config)
-}
-
-export default axiosClient

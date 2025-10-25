@@ -1,10 +1,7 @@
-// src/hooks/useOrchid.ts
-import { useState, useCallback } from "react"
 import type { Orchid } from "../../model/orchid"
 import { orchidApi } from "../../service/orchidApi"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { QUERY_KEY } from "../../constants/queryKey"
-import { toast } from "@heroui/react"
 
 // export function useGetAllOrchids() {
 //     const [data, setData] = useState<Orchid[] | null>(null)
@@ -44,7 +41,7 @@ export const useCreateOrchid = () => {
             await queryClient.invalidateQueries({ queryKey: [...QUERY_KEY.ORCHIDS] })
         },
         onError: (err: Error) => {
-            // toast.error(err.message)
+            toast.error(err.message)
         }
     })
 }

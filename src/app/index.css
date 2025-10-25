@@ -2,7 +2,16 @@
 
 @theme {
     --color-primary: #32cd32;
-    --color-primary-hover: color-mix(in srgb, var(--color-primary) 90%, white);
+    --color-primary-foreground: #ffffff;
+    --color-secondary: #f4f4f4;
+    --color-secondary-foreground: #111827;
+}
+
+@utility bg-primary {
+    background-color: var(--color-primary);
+}
+@utility text-primary {
+    color: var(--color-primary);
 }
 
 .bg-primary-gradient {

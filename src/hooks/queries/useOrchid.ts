@@ -41,7 +41,7 @@ export const useCreateOrchid = () => {
             await queryClient.invalidateQueries({ queryKey: [...QUERY_KEY.ORCHIDS] })
         },
         onError: (err: Error) => {
-            toast.error(err.message)
+            // toast.error(err.message)
         }
     })
 }

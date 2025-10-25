@@ -1,7 +1,11 @@
-import { heroui } from "@heroui/react" // HeroUI plugin
-
+import { heroui } from "@heroui/theme"
+/** @type {import('tailwindcss').Config} */
 export default {
-    content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+    content: [
+        "./index.html",
+        "./src/**/*.{js,ts,jsx,tsx}",
+        "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}"
+    ],
     theme: {
         extend: {
             colors: {
@@ -10,7 +14,7 @@ export default {
                     100: "#b7e4b7",
                     200: "#7fd87f",
                     300: "#4fcc4f",
-                    400: "#32cd32", // 🌿 Orchid brand
+                    400: "#32cd32",
                     500: "#28b428",
                     600: "#229422",
                     700: "#1c751c",

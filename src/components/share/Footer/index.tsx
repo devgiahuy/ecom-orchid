@@ -15,7 +15,15 @@ export default function Footer() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
                     {/* 🌿 Logo + mô tả */}
                     <div>
-                        <h5 className="text-2xl font-bold text-green-600 mb-2">🌿 Orchide</h5>
+                        <div className="flex items-center mt-[-40px]">
+                            <img
+                                src="/HYCAT-ORCHID.png"
+                                alt="Orchid Logo"
+                                className="h-30 w-30 object-contain bg-transparent"
+                            />
+                            <h5 className="text-2xl font-bold text-green-600 mb-2"> Orchide</h5>
+                        </div>
+
                         <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
                             Orchide mang đến những sản phẩm tự nhiên, tinh tế và thân thiện với môi
                             trường. Cảm ơn bạn đã đồng hành cùng chúng tôi 🌸

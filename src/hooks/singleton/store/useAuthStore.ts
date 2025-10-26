@@ -35,5 +35,17 @@ export const useAuthStore = create<AuthState>((set) => ({
     logout: () => {
         removeToken()
         set({ user: null, token: null })
+    },
+
+    loginWithGoogle: async () => {
+        set({ loading: true })
+        try {
+            const { user, token } = await authApi.loginWithGoogle()
+            setToken(token)
+            set({ user, token, loading: false })
+        } catch (error) {
+            console.error(error)
+            set({ loading: false })
+        }
     }
 }))

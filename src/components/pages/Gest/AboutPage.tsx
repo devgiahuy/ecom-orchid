@@ -8,7 +8,7 @@ export function AboutPage() {
         bg-white dark:bg-gray-900
         border border-green-100 dark:border-gray-800
         rounded-3xl shadow-lg relative overflow-hidden
-        transition-colors duration-300
+        transition-colors duration-300 
       "
         >
             {/* 🌿 Background accent */}

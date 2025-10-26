@@ -1,6 +1,8 @@
 import { axiosClient } from "@/api/axiosClient"
 import { wrapper } from "../api/wrapper"
 import type { UserData } from "../model/user"
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth"
+import { auth } from "./firebase"
 
 const BASE_URL = "/users" // axiosClient đã có baseURL
 
@@ -23,5 +25,20 @@ export const authApi = {
     register: (payload: UserData) => wrapper(axiosClient.post<UserData>(BASE_URL, payload)),
 
     //  Logout – Hiện tại chỉ xóa token local, không cần gọi API
-    logout: async () => ({ data: { success: true }, error: null })
+    logout: async () => ({ data: { success: true }, error: null }),
+    loginWithGoogle: async () => {
+        const provider = new GoogleAuthProvider()
+        provider.setCustomParameters({
+            prompt: "select_account" // ✅ luôn hiển thị popup chọn tài khoản
+        })
+
+        const result = await signInWithPopup(auth, provider)
+        const user = result.user
+        const token = await user.getIdToken()
+
+        // Bạn có thể đồng bộ với json-server nếu muốn:
+        // await axiosClient.post("/users", { name: user.displayName, email: user.email })
+
+        return { user, token }
+    }
 }

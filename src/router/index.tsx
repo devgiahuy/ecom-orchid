@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom"
 import App from "../app/App"
 import { ProtectedRoute } from "./ProtectedRoter"
-import CreateOrchid from "@/components/pages/Admin/CreateOrchid"
+import CreateOrchid from "@/components/pages/User/CreateOrchid"
 import { Dashboard } from "@/components/pages/Admin/Dashboard"
 import { UpdatePage } from "@/components/pages/Admin/UpdatePage"
 import {

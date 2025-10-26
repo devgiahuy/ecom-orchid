@@ -31,12 +31,14 @@ export default function Header() {
             shouldHideOnScroll
             className="
         bg-white/90 backdrop-blur-md border-b border-primary/10 
-        px-6 py-3 shadow-[0_2px_8px_rgba(50,205,50,0.08)] sticky top-0 z-50
+        px-6 py-1 shadow-[0_2px_8px_rgba(50,205,50,0.08)] sticky top-0 z-50
       "
         >
             {/* 🌿 Logo thương hiệu */}
             <NavbarBrand>
-                <OrchidLogo />
+                <Link to={"/home"}>
+                    <OrchidLogo />
+                </Link>
             </NavbarBrand>
 
             {/* 🔹 Navigation links */}

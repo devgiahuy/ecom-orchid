@@ -1,27 +1,86 @@
+import { Button, Card, CardBody, CardHeader } from "@heroui/react"
 import { useAuth } from "../../provider/AuthProvider"
+import { Leaf, LogOut, LogIn } from "lucide-react"
 
 export default function LoginPage() {
     const { loginWithGoogle, firebaseUser, logout, role } = useAuth()
 
     return (
-        <div className="p-10 text-center space-y-4">
-            <h1 className="text-2xl font-bold">Đăng nhập Orchid Shop</h1>
-            {firebaseUser ? (
-                <>
-                    <p>Xin chào, {firebaseUser.displayName}!</p>
-                    <p>Vai trò: {role}</p>
-                    <button onClick={logout} className="bg-red-500 text-white px-4 py-2 rounded">
-                        Đăng xuất
-                    </button>
-                </>
-            ) : (
-                <button
-                    onClick={loginWithGoogle}
-                    className="bg-green-500 text-white px-4 py-2 rounded"
-                >
-                    Đăng nhập với Google
-                </button>
-            )}
-        </div>
+        <section
+            className="
+        flex items-center justify-center min-h-[80vh]
+        bg-transparent dark:bg-gray-900
+        relative overflow-hidden
+      "
+        >
+            {/* 🌿 Background accent */}
+            <div className="absolute inset-0 opacity-[0.05] bg-[url('https://www.transparenttextures.com/patterns/green-dust-and-scratches.png')] pointer-events-none"></div>
+
+            {/* 🌸 Login Card */}
+            <Card
+                shadow="lg"
+                radius="lg"
+                className="
+          w-full max-w-md bg-white/95 dark:bg-gray-800/90 
+          border border-green-100 dark:border-gray-700 
+          backdrop-blur-sm text-center relative z-10
+        "
+            >
+                <CardHeader className="flex flex-col items-center justify-center py-6 border-b border-green-100 dark:border-gray-700">
+                    <Leaf className="text-green-600 mb-2" size={36} />
+                    <h1 className="text-3xl font-extrabold text-green-600 dark:text-green-400">
+                        Orchide Shop
+                    </h1>
+                    <p className="text-gray-500 dark:text-gray-400 mt-1 text-sm">
+                        Đăng nhập để trải nghiệm mua sắm xanh 🌿
+                    </p>
+                </CardHeader>
+
+                <CardBody className="py-10 space-y-6">
+                    {firebaseUser ? (
+                        <>
+                            <p className="text-gray-800 dark:text-gray-200 text-lg">
+                                Xin chào,{" "}
+                                <span className="font-semibold text-green-600 dark:text-green-400">
+                                    {firebaseUser.displayName}
+                                </span>
+                                !
+                            </p>
+                            <p className="text-gray-600 dark:text-gray-400 text-sm">
+                                Vai trò:{" "}
+                                <span className="font-medium text-green-600 dark:text-green-400">
+                                    {role}
+                                </span>
+                            </p>
+
+                            <Button
+                                onPress={logout}
+                                color="danger"
+                                radius="full"
+                                startContent={<LogOut size={18} />}
+                                className="mt-4 font-semibold"
+                            >
+                                Đăng xuất
+                            </Button>
+                        </>
+                    ) : (
+                        <>
+                            <p className="text-gray-600 dark:text-gray-400 text-sm">
+                                Đăng nhập nhanh bằng tài khoản Google của bạn
+                            </p>
+                            <Button
+                                onPress={loginWithGoogle}
+                                color="success"
+                                radius="full"
+                                startContent={<LogIn size={18} />}
+                                className="font-semibold bg-green-600 hover:bg-green-700 text-white"
+                            >
+                                Đăng nhập với Google
+                            </Button>
+                        </>
+                    )}
+                </CardBody>
+            </Card>
+        </section>
     )
 }

@@ -5,7 +5,7 @@ import { useGetAllOrchids } from "../../hooks/queries/useOrchid"
 import { CardOrchid } from "../models/OrchidCard"
 import type { Orchid } from "../../model/orchid"
 export default function HomePage() {
-    const { data: orchids, isLoading, error } = useGetAllOrchids()
+    const { data: orchids, isLoading } = useGetAllOrchids()
 
     if (isLoading)
         return (
@@ -13,7 +13,6 @@ export default function HomePage() {
                 <Spinner />
             </div>
         )
-    if (error) return <p>Lỗi: </p>
     return (
         <>
             <motion.div

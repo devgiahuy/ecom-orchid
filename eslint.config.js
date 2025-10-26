@@ -25,20 +25,6 @@ export default [
             "react-hooks": reactHooks
         },
 
-        // rules: {
-        //     // React
-        //     "react/jsx-uses-react": "off",
-        //     "react/react-in-jsx-scope": "off",
-
-        //     // React Hooks
-        //     "react-hooks/rules-of-hooks": "error",
-        //     "react-hooks/exhaustive-deps": "warn",
-
-        //     // Clean code
-        //     "no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
-        //     "no-console": ["warn", { allow: ["warn", "error"] }]
-        // },
-
         rules: {
             "react-hooks/rules-of-hooks": "error",
             "react-hooks/exhaustive-deps": "warn",
@@ -49,8 +35,8 @@ export default [
 
             // ⚙️ Cảnh báo nhẹ thôi
             "no-console": "off",
-            "no-unused-vars": "warn",
-            "tailwindcss/suggestCanonicalClasses": "off"
+            "no-unused-vars": "warn"
+            // "tailwindcss/suggestCanonicalClasses": "off"
         },
 
         settings: {

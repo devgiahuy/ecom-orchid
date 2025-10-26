@@ -21,7 +21,8 @@ import { persist } from "zustand/middleware"
 
 type SelectedItemStore = {
     selectedItem?: Orchid | null
-    setselectedItem: (item: Orchid) => void
+    // eslint-disable-next-line no-unused-vars
+    setSelectedItem: (item: Orchid) => void
     clearselectedItemm?: () => void
 }
 
@@ -29,7 +30,7 @@ export const useItemStore = create(
     persist<SelectedItemStore>(
         (set) => ({
             selectedItem: null,
-            setselectedItem: (item) => set({ selectedItem: item }),
+            setSelectedItem: (item) => set({ selectedItem: item }),
             clearselectedItemm: () => set({ selectedItem: null })
         }),
         {

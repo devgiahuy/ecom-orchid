@@ -1,4 +1,4 @@
-import axiosClient from "../api/axiosClient"
+import { axiosClient } from "@/api/axiosClient"
 import { wrapper } from "../api/wrapper"
 import type { UserData } from "../model/user"
 
@@ -9,7 +9,7 @@ export const authApi = {
     login: (email: string, password: string) =>
         wrapper(
             axiosClient.get<UserData[]>(`/users?email=${email}`).then((res) => {
-                const user = res[0]
+                const user = res.data[0]
                 if (!user) throw new Error("Tài khoản không tồn tại")
                 // Giả lập token base
                 const token = btoa(`${email}:${password}`)

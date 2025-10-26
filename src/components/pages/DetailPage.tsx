@@ -1,6 +1,6 @@
 // import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom"
-import { Card, Image, Button } from "@heroui/react"
+import { Card, Image, Button, CardBody, Spinner } from "@heroui/react"
 import {
     MapPin,
     Palette,
@@ -9,25 +9,28 @@ import {
     Heart,
     TreePine,
     ShoppingCart,
-    ArrowLeft
+    ArrowLeft,
+    Flower,
+    Video
 } from "lucide-react"
-import { useItemStore } from "../../hooks/singleton/store/useItemStore"
+import { useGetOrchidById } from "@/hooks/queries/useOrchid"
 export default function DetailPage() {
     const { id } = useParams()
     // const idOrchid = id?.toString
-    const { selectedItem } = useItemStore()
-    // const { data: item } = useGetOrchidById
+    // const { selectedItem } = useItemStore()
+    const { data: selectedItem } = useGetOrchidById(id!)
 
     if (!selectedItem) {
         return (
             <div className="flex flex-col justify-center items-center py-20 text-center">
-                <h4 className="text-gray-600 dark:text-gray-400 text-lg">
+                {/* <h4 className="text-gray-600 dark:text-gray-400 text-lg">
                     Không tìm thấy thông tin hoa lan
-                </h4>
+                </h4> */}
+                <Spinner />
                 <Link
                     to="/home"
                     className="
-            mt-4 px-5 py-2 rounded-full bg-green-600 text-white 
+            mt-4 px-5 py-2 rounded-full bg-green-600 text-white
             hover:bg-green-700 transition-colors font-semibold shadow-sm
           "
                 >
@@ -40,93 +43,104 @@ export default function DetailPage() {
     return (
         <section
             className="
-        max-w-6xl mx-auto my-12 px-6 py-10 
-        rounded-3xl shadow-sm 
-        bg-gradient-to-b from-green-50 to-white 
-        dark:from-gray-900 dark:to-gray-950 
-        border border-green-100 dark:border-gray-800
-        transition-colors duration-300
+        max-w-7xl mx-auto my-16 px-6 lg:px-10 py-12 
+        bg-white dark:bg-gray-900 
+        rounded-3xl shadow-lg border border-green-100 dark:border-gray-800
+        relative overflow-hidden
       "
         >
-            {/* 🌿 Tiêu đề */}
-            <div className="text-center mb-10">
-                <h2 className="text-3xl font-extrabold text-green-600 dark:text-green-400">
-                    🌸 Thông tin chi tiết
+            {/* 🌿 Background accent */}
+            <div className="absolute inset-0 opacity-[0.05] bg-[url('https://www.transparenttextures.com/patterns/green-dust-and-scratches.png')] pointer-events-none"></div>
+
+            {/* Header */}
+            <div className="relative text-center mb-14">
+                <h2 className="text-4xl font-extrabold text-green-600 dark:text-green-400 tracking-tight">
+                    {selectedItem.name}
                 </h2>
                 <p className="text-gray-600 dark:text-gray-400 mt-2">
-                    Tất cả những gì bạn cần biết về loài lan này
+                    <span className="flex justify-center items-center">
+                        <Flower color="pink" size={30} />
+                        Tất cả những gì bạn cần biết về loài lan này
+                        <Flower color="pink" size={30} />
+                    </span>
                 </p>
+                <div className="mt-4 flex justify-center items-center gap-1 text-yellow-500">
+                    {Array.from({ length: Math.round(selectedItem.rating ?? 1) }).map((_, i) => (
+                        <Star key={i} size={18} fill="currentColor" />
+                    ))}
+                </div>
             </div>
 
-            {/* 🪴 Nội dung chính */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            {/* Content */}
+            <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
                 {/* Hình ảnh */}
-                <Card shadow="sm" className="bg-white dark:bg-gray-800 rounded-2xl">
-                    <Image
-                        src={selectedItem.image}
-                        alt={selectedItem.name}
-                        radius="lg"
-                        className="
-              w-full h-[420px] object-contain 
-              transition-transform duration-500 hover:scale-105
-            "
-                    />
+                <Card
+                    shadow="sm"
+                    radius="lg"
+                    className="bg-white dark:bg-gray-800 border border-green-100 dark:border-gray-700"
+                >
+                    <CardBody className="p-4">
+                        <img
+                            src={selectedItem.image}
+                            alt={selectedItem.name}
+                            // radius="lg"
+                            className="w-full h-[420px] object-contain transition-transform duration-500 hover:scale-[1.05] rounded-2xl"
+                        />
+                    </CardBody>
                 </Card>
 
-                {/* Thông tin mô tả */}
-                <div>
-                    <h2 className="text-2xl font-bold mb-3 text-green-600 dark:text-green-400">
-                        {selectedItem.name}
-                    </h2>
-
-                    <h4 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-                        {(selectedItem.price ?? 590000).toLocaleString()} VNĐ{" "}
-                        <span className="text-gray-500 dark:text-gray-400 text-base font-normal">
-                            / Cây
+                {/* Mô tả */}
+                <div className="relative space-y-6">
+                    <h3 className="text-3xl font-bold text-green-600 dark:text-green-400">
+                        {(selectedItem.price ?? 590000).toLocaleString()}{" "}
+                        <span className="text-lg text-gray-500 dark:text-gray-400 font-normal">
+                            VNĐ / Cây
                         </span>
-                    </h4>
+                    </h3>
 
-                    {/* Thông tin chi tiết */}
                     <div
                         className="
-              bg-white dark:bg-gray-800 border border-green-100 dark:border-gray-700
-              rounded-2xl p-5 shadow-sm text-gray-700 dark:text-gray-300
+              bg-green-50/50 dark:bg-gray-800/80 
+              border border-green-100 dark:border-gray-700
+              rounded-2xl p-6 shadow-sm
+              text-gray-700 dark:text-gray-300
             "
                     >
-                        <div className="grid grid-cols-2 gap-y-3">
-                            <div className="flex items-center gap-2">
-                                <MapPin className="text-green-500" size={18} />
-                                <b>Nguồn gốc:</b> {selectedItem.origin}
-                            </div>
-                            <div className="flex items-center gap-2">
-                                <Palette className="text-green-500" size={18} />
-                                <b>Màu sắc:</b> {selectedItem.color}
-                            </div>
-                            <div className="flex items-center gap-2">
-                                <Flower2 className="text-green-500" size={18} />
-                                <b>Loại:</b> {selectedItem.category ?? "Không rõ"}
-                            </div>
-                            <div className="flex items-center gap-2">
-                                <Star className="text-yellow-500" size={18} />
-                                <b>Đánh giá:</b> {selectedItem.rating} ⭐
-                            </div>
-                            <div className="flex items-center gap-2">
-                                <Heart className="text-red-500" size={18} />
-                                <b>Lượt thích:</b> {selectedItem.numberOfLike}
-                            </div>
-                            <div className="flex items-center gap-2">
-                                <TreePine className="text-green-600" size={18} />
-                                <b>Đặc biệt:</b> {selectedItem.isSpecial ? "Có" : "Không"}
-                            </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6">
+                            <DetailItem
+                                icon={<MapPin />}
+                                label="Nguồn gốc"
+                                value={selectedItem.origin}
+                            />
+                            <DetailItem
+                                icon={<Palette />}
+                                label="Màu sắc"
+                                value={selectedItem.color}
+                            />
+                            <DetailItem
+                                icon={<Flower2 />}
+                                label="Loại"
+                                value={selectedItem.category ?? "Không rõ"}
+                            />
+                            <DetailItem
+                                icon={<Heart className="text-red-500" />}
+                                label="Lượt thích"
+                                value={selectedItem.numberOfLike ?? 0}
+                            />
+                            <DetailItem
+                                icon={<TreePine />}
+                                label="Đặc biệt"
+                                value={selectedItem.isSpecial ? "Có" : "Không"}
+                            />
                         </div>
                     </div>
 
                     {/* Buttons */}
-                    <div className="flex flex-wrap gap-4 mt-6">
+                    <div className="flex flex-wrap gap-4">
                         <Button
                             color="success"
                             radius="full"
-                            className="flex-1 font-semibold"
+                            className="flex-1 font-semibold text-white text-base bg-green-600 hover:bg-green-700"
                             startContent={<ShoppingCart size={18} />}
                         >
                             Đặt Mua Ngay
@@ -146,29 +160,51 @@ export default function DetailPage() {
                 </div>
             </div>
 
-            {/* 🎥 Video */}
-            <div className="mt-10 pt-8 border-t border-green-200 dark:border-gray-700">
-                <h4 className="text-xl font-semibold text-green-600 dark:text-green-400 mb-5 text-center">
-                    🎥 Video mô tả chi tiết
-                </h4>
-                <div className="flex justify-center">
-                    <div
-                        className="
-              rounded-2xl overflow-hidden shadow-md border border-green-100 dark:border-gray-700
-              w-[560px] h-[315px] max-w-full
-            "
-                    >
-                        <iframe
-                            src={selectedItem.linkVideo}
-                            title="Orchid Video"
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                            className="w-full h-full block"
-                        ></iframe>
+            {selectedItem.linkVideo && (
+                <div className="relative mt-16 pt-10 border-t border-green-100 dark:border-gray-700">
+                    <h4 className="text-2xl font-semibold text-green-600 dark:text-green-400 mb-5 text-center">
+                        <span className="flex justify-center items-center gap-2">
+                            <Video />
+                            Video mô tả chi tiết
+                        </span>
+                    </h4>
+                    <div className="flex justify-center">
+                        <div
+                            className="
+                rounded-2xl overflow-hidden shadow-md border border-green-100 dark:border-gray-700
+                w-[560px] h-[315px] max-w-full
+              "
+                        >
+                            <iframe
+                                src={selectedItem.linkVideo}
+                                title="Orchid Video"
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                                className="w-full h-full block"
+                            ></iframe>
+                        </div>
                     </div>
                 </div>
-            </div>
+            )}
         </section>
+    )
+}
+
+function DetailItem({
+    icon,
+    label,
+    value
+}: {
+    icon: React.ReactNode
+    label: string
+    value: string | number
+}) {
+    return (
+        <div className="flex items-center gap-2">
+            <span className="text-green-500">{icon}</span>
+            <b>{label}:</b>
+            <span className="ml-1 text-gray-800 dark:text-gray-200">{value}</span>
+        </div>
     )
 }

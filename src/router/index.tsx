@@ -1,30 +1,3 @@
-// import { createBrowserRouter } from "react-router-dom"
-// import DemoPage from "../components/pages/DemoPage"
-// import HomePage from "../components/pages/HomePage"
-// import DetailPage from "../components/pages/DetailPage"
-// import AboutPage from "../components/pages/AboutPage"
-// import ContactPage from "../components/pages/ContactPage"
-// import NaturalPage from "../components/pages/NaturalPage"
-// import App from "../app/App"
-// import { ProtectedRoute } from "./ProtectedRoter"
-
-// export const router = createBrowserRouter([
-//     {
-//         path: "/",
-//         element: <App />,
-//         children: [
-//             { index: true, element: <HomePage /> },
-//             { path: "/home", element: <HomePage /> },
-//             { path: "home/detail/:id", element: <DetailPage /> },
-//             { path: "about", element: <AboutPage /> },
-//             { path: "contact", element: <ContactPage /> },
-//             { path: "natural", element: <NaturalPage /> },
-//             { path: "natural/detail/:id", element: <DetailPage /> },
-//             { path: "demo", element: <DemoPage /> }
-//         ]
-//     }
-// ])
-
 import { createBrowserRouter } from "react-router-dom"
 import App from "../app/App"
 import HomePage from "../components/pages/HomePage"
@@ -36,6 +9,9 @@ import { ProtectedRoute } from "./ProtectedRoter"
 import DetailPage from "../components/pages/DetailPage"
 import NaturalPage from "../components/pages/NaturalPage"
 import ErrorPage from "../components/pages/ErrorPage"
+import CreateOrchid from "@/components/pages/User/CreateOrchid"
+import { Dashboard } from "@/components/pages/Admin/Dashboard"
+import { UpdatePage } from "@/components/pages/Admin/UpdatePage"
 
 export const router = createBrowserRouter([
     {
@@ -56,14 +32,20 @@ export const router = createBrowserRouter([
                     // { path: "home", element: <HomePage /> },
                     { path: "detail/:id", element: <DetailPage /> },
                     { path: "natural", element: <NaturalPage /> },
-                    { path: "natural/detail/:id", element: <DetailPage /> }
+                    { path: "natural/detail/:id", element: <DetailPage /> },
+                    { path: "dashboard/create", element: <CreateOrchid /> },
+                    { path: "dashboard", element: <Dashboard /> },
+                    { path: "dashboard/:id", element: <UpdatePage /> }
                 ]
             },
 
             {
                 path: "admin",
                 element: <ProtectedRoute allowRoles={["admin"]} />,
-                children: [{ index: true, element: <DemoPage /> }]
+                children: [
+                    { path: "dashboard", element: <Dashboard /> },
+                    { path: "dashboard/:id", element: <UpdatePage /> }
+                ]
             }
         ]
     }

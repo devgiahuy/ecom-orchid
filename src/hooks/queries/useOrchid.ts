@@ -1,33 +1,27 @@
-import type { Orchid } from "../../model/orchid"
+import type { Orchid, OrchidReq } from "../../model/orchid"
 import { orchidApi } from "../../service/orchidApi"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { QUERY_KEY } from "../../constants/queryKey"
+import { addToast } from "@heroui/toast"
 
-// export function useGetAllOrchids() {
-//     const [data, setData] = useState<Orchid[] | null>(null)
-//     const [error, setError] = useState<string | null>(null)
-//     const [loading, setLoading] = useState(false)
-
-//     const fetch = useCallback(async () => {
-//         setLoading(true)
-//         const res = await orchidApi.getAll()
-//         setData(res.data)
-//         setError(res.error)
-//         setLoading(false)
-//     }, [])
-
-//     return { data, error, loading, refetch: fetch }
-// }
-
-export const useGetAllOrchids = () => {
+export const useGetAllOrchids = ({ enabled = true }: { enabled?: boolean } = {}) => {
     const queryClient = useQueryClient()
     const query = useQuery({
         queryKey: [...QUERY_KEY.ORCHIDS],
         queryFn: () => orchidApi.getAll(),
         initialData: () => {
             return queryClient.getQueryData<Orchid[]>([...QUERY_KEY.ORCHIDS])
-        }
-        // enabled
+        },
+        enabled
+    })
+    return query
+}
+
+export const useGetOrchidById = (id: string, { enabled = true }: { enabled?: boolean } = {}) => {
+    const query = useQuery({
+        queryKey: [...QUERY_KEY.ORCHIDS, id],
+        queryFn: () => orchidApi.getById(id),
+        enabled
     })
     return query
 }
@@ -35,54 +29,71 @@ export const useGetAllOrchids = () => {
 export const useCreateOrchid = () => {
     const queryClient = useQueryClient()
     return useMutation({
-        mutationFn: orchidApi.create,
+        mutationFn: async (payload: OrchidReq) => {
+            const res = await orchidApi.create(payload)
+            return res
+        },
         onSuccess: async () => {
-            // toast
             await queryClient.invalidateQueries({ queryKey: [...QUERY_KEY.ORCHIDS] })
+            addToast({
+                title: "Create",
+                description: "Create successfully",
+                color: "success"
+            })
         },
         onError: (err: Error) => {
-            // toast.error(err.message)
+            addToast({
+                title: "Error",
+                description: `${err.message}`,
+                color: "danger"
+            })
         }
     })
 }
-// export function useGetOrchidById() {
-//     const [data, setData] = useState<Orchid | null>(null)
-//     const [error, setError] = useState<string | null>(null)
-//     const [loading, setLoading] = useState(false)
 
-//     const fetch = useCallback(async (id: number) => {
-//         setLoading(true)
-//         const res = await orchidApi.getById(id)
-//         setData(res.data)
-//         setError(res.error)
-//         setLoading(false)
-//     }, [])
+export const useUpdateOrchid = () => {
+    const queryClient = useQueryClient()
+    return useMutation({
+        mutationFn: orchidApi.update,
+        onSuccess: async () => {
+            await queryClient.invalidateQueries({ queryKey: [...QUERY_KEY.ORCHIDS] })
+            addToast({
+                title: "Update",
+                description: "Update successfully",
+                color: "success"
+            })
+        },
+        onError: (err: Error) => {
+            addToast({
+                title: "Error",
+                description: `${err.message}`,
+                color: "danger"
+            })
+        }
+    })
+}
 
-//     return { data, error, loading, fetch }
-// }
-
-// ===========Example ===============
-// export const useCreateOrchid = () => {
-//     const queryClient = useQueryClient()
-
-//     return useMutation({
-//         mutationFn: orchidApi.createVoid, // ✅ không cần data
-//         onSuccess: () => {
-//             toast.success("Thêm hoa lan thành công!")
-//             queryClient.invalidateQueries({ queryKey: ["orchids"] })
-//         },
-//         onError: (err: Error) => {
-//             toast.error(err.message)
-//         }
-//     })
-// }
-
-// return useMutation({
-//   mutationFn: orchidApi.create, // ✅ return Orchid
-//   onSuccess: (newOrchid) => {
-//     queryClient.setQueryData(["orchids"], (prev: Orchid[] = []) => [...prev, newOrchid])
-//     toast.success("Thêm hoa lan thành công!")
-//   }
-// })
-
-// ================================
+export const useDeleteOrchid = () => {
+    const queryClient = useQueryClient()
+    return useMutation({
+        mutationFn: async (id: string) => {
+            const res = await orchidApi.delete(id)
+            return res
+        },
+        onSuccess: async () => {
+            await queryClient.invalidateQueries({ queryKey: [...QUERY_KEY.ORCHIDS] })
+            addToast({
+                title: "Delete",
+                description: "Delete successfully",
+                color: "success"
+            })
+        },
+        onError: (err: Error) => {
+            addToast({
+                title: "Error",
+                description: `${err.message}`,
+                color: "danger"
+            })
+        }
+    })
+}

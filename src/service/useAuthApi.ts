@@ -16,6 +16,8 @@ export const authApi = {
                 return { user, token }
             })
         ),
+    // login: (email, password) =>
+    //     wrapper(axiosClient.post<{ user: UserData; token: string }>("/login", { email, password })),
 
     //   Register – Tạo user mới
     register: (payload: UserData) => wrapper(axiosClient.post<UserData>(BASE_URL, payload)),

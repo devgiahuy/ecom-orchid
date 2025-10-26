@@ -8,13 +8,25 @@ export const useAuthStore = create<AuthState>((set) => ({
     token: null,
     loading: false,
 
+    // login: async (email, password) => {
+    //     set({ loading: true })
+    //     const { data, error } = await authApi.login(email, password)
+    //     if (data) {
+    //         setToken(data.token)
+    //         set({ user: data.user, token: data.token, loading: false })
+    //     } else {
+    //         console.log(error)
+    //         set({ loading: false })
+    //     }
+    // },
+
     login: async (email, password) => {
         set({ loading: true })
-        const { data, error } = await authApi.login(email, password)
-        if (data) {
+        try {
+            const data = await authApi.login(email, password)
             setToken(data.token)
             set({ user: data.user, token: data.token, loading: false })
-        } else {
+        } catch (error) {
             console.log(error)
             set({ loading: false })
         }

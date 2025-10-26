@@ -5,19 +5,19 @@ import { CardOrchid } from "../../models/OrchidCard"
 import { Spinner } from "@heroui/react"
 export default function OrchidsCardList() {
     // const orchids = ListOfOrchids
-    const { data: orchids, error, loading, refetch } = useGetAllOrchids()
+    const { data: orchids, error, isLoading, refetch } = useGetAllOrchids()
 
     useEffect(() => {
         refetch()
     }, [refetch])
 
-    if (loading)
+    if (isLoading)
         return (
             <div className="flex justify-center items-center">
                 <Spinner />
             </div>
         )
-    if (error) return <p>Lỗi: {error}</p>
+    if (error) return <p>Lỗi: </p>
 
     return (
         <section className="py-10">

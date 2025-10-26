@@ -1,6 +1,5 @@
 import { Input } from "@heroui/react"
 import { ButtonStyled } from "../styled"
-import CreateOrchid from "./User/CreateOrchid"
 
 export default function DemoPage() {
     return (

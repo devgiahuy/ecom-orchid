@@ -1,5 +1,5 @@
 // import { useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { Card, Image, Button } from "@heroui/react"
 import {
     MapPin,
@@ -13,7 +13,7 @@ import {
 } from "lucide-react"
 import { useItemStore } from "../../hooks/singleton/store/useItemStore"
 export default function DetailPage() {
-    const { id } = useParams()
+    // const { id } = useParams()
     // const idOrchid = id?.toString
     const { selectedItem } = useItemStore()
     // const { data: item } = useGetOrchidById

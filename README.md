@@ -1,4 +1,4 @@
-![CI](https://github.com/<owner>/<repo>/actions/workflows/ci.yml/badge.svg)
+[![CI - React Vite TS](https://github.com/devgiahuy/ecom-orchid/actions/workflows/ci.yml/badge.svg)](https://github.com/devgiahuy/ecom-orchid/actions/workflows/ci.yml)
 
 # React + TypeScript + Vite
 

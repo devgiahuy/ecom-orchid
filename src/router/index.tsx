@@ -1,17 +1,19 @@
 import { createBrowserRouter } from "react-router-dom"
 import App from "../app/App"
-import HomePage from "../components/pages/HomePage"
-import AboutPage from "../components/pages/AboutPage"
-import ContactPage from "../components/pages/ContactPage"
-import DemoPage from "../components/pages/DemoPage"
-import LoginPage from "../components/pages/LoginPage"
 import { ProtectedRoute } from "./ProtectedRoter"
-import DetailPage from "../components/pages/DetailPage"
-import NaturalPage from "../components/pages/NaturalPage"
-import ErrorPage from "../components/pages/ErrorPage"
-import CreateOrchid from "@/components/pages/User/CreateOrchid"
+import CreateOrchid from "@/components/pages/Admin/CreateOrchid"
 import { Dashboard } from "@/components/pages/Admin/Dashboard"
 import { UpdatePage } from "@/components/pages/Admin/UpdatePage"
+import {
+    AboutPage,
+    ContactPage,
+    DemoPage,
+    ErrorPage,
+    HomePage,
+    LoginPage
+} from "@/components/pages"
+import DetailPage from "@/components/pages/User/DetailPage"
+import NaturalPage from "@/components/pages/Gest/NaturalPage"
 
 export const router = createBrowserRouter([
     {

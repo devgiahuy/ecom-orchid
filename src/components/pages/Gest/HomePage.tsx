@@ -1,10 +1,10 @@
+import { CardOrchid } from "@/components/models"
+import { useGetAllOrchids } from "@/hooks/queries/useOrchid"
+import type { Orchid } from "@/model/orchid"
 import { Spinner } from "@heroui/react"
 
 import { motion } from "framer-motion"
-import { useGetAllOrchids } from "../../hooks/queries/useOrchid"
-import { CardOrchid } from "../models/OrchidCard"
-import type { Orchid } from "../../model/orchid"
-export default function HomePage() {
+export function HomePage() {
     const { data: orchids, isLoading } = useGetAllOrchids()
 
     if (isLoading)

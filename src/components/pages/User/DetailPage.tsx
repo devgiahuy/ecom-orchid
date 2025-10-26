@@ -13,7 +13,7 @@ import {
 import { useGetOrchidById } from "@/hooks/queries/useOrchid"
 import { Card, CardBody, Spinner } from "@heroui/react"
 import { Link, useParams } from "react-router-dom"
-import { ButtonStyled } from "../styled"
+import { ButtonStyled } from "@/components/styled"
 export default function DetailPage() {
     const { id } = useParams()
     // const idOrchid = id?.toString

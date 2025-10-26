@@ -1,6 +1,6 @@
 import { Leaf, Flower2, Heart, Flower } from "lucide-react"
 
-export default function AboutPage() {
+export function AboutPage() {
     return (
         <section
             className="

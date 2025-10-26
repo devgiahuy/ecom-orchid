@@ -1,8 +1,8 @@
 import { useGetAllOrchids } from "@/hooks/queries/useOrchid"
 import { motion } from "framer-motion"
-import { CardOrchid } from "../models/OrchidCard"
 import type { Orchid } from "@/model/orchid"
 import { Spinner } from "@heroui/react"
+import { CardOrchid } from "@/components/models"
 export default function NaturalPage() {
     const { data: orchids, isLoading } = useGetAllOrchids()
 

@@ -1,0 +1,7 @@
+export * from "./AboutPage"
+export * from "./ContactPage"
+export * from "./DemoPage"
+export * from "./ErrorPage"
+export * from "./HomePage"
+export * from "./LoginPage"
+export * from "./NaturalPage"

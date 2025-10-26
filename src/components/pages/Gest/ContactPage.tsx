@@ -1,7 +1,7 @@
 import { Input, Textarea, Button, Card, CardBody } from "@heroui/react"
 import { Facebook, Instagram, Youtube, Send, Mail, Phone, MapPin } from "lucide-react"
 
-export default function ContactPage() {
+export function ContactPage() {
     return (
         <section
             className="

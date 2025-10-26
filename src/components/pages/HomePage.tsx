@@ -1,24 +1,19 @@
 import { Spinner } from "@heroui/react"
 
 import { motion } from "framer-motion"
-import { useEffect } from "react"
 import { useGetAllOrchids } from "../../hooks/queries/useOrchid"
 import { CardOrchid } from "../models/OrchidCard"
 import type { Orchid } from "../../model/orchid"
 export default function HomePage() {
-    const { data: orchids, error, loading, refetch } = useGetAllOrchids()
+    const { data: orchids, isLoading, error } = useGetAllOrchids()
 
-    useEffect(() => {
-        refetch()
-    }, [])
-
-    if (loading)
+    if (isLoading)
         return (
             <div className="flex justify-center items-center">
                 <Spinner />
             </div>
         )
-    if (error) return <p>Lỗi: {error}</p>
+    if (error) return <p>Lỗi: </p>
     return (
         <>
             <motion.div

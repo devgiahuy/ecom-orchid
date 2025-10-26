@@ -9,7 +9,7 @@ export default function OrchidsCardList() {
 
     useEffect(() => {
         refetch()
-    }, [])
+    }, [refetch])
 
     if (loading)
         return (

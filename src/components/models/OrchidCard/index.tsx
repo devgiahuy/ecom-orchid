@@ -3,8 +3,10 @@ import { CardStyled } from "../../styled"
 import { Star, MapPin, Sprout, Flower, Rainbow } from "lucide-react"
 import type { Orchid } from "../../../model/orchid"
 import { Link } from "react-router-dom"
+import { useItemStore } from "../../../hooks/singleton/store/useItemStore"
 
 export function CardOrchid({ orchid }: { orchid: Orchid }) {
+    const { setselectedItem } = useItemStore()
     return (
         <Link to={`/detail/${orchid.id}`}>
             <CardStyled
@@ -13,7 +15,7 @@ export function CardOrchid({ orchid }: { orchid: Orchid }) {
                 bg-white/95 backdrop-blur-sm border border-gray-100
                 hover:shadow-lg hover:-translate-y-1
                 transition-all duration-300 ease-out w-[20rem]"
-                onClick={setSele}
+                onClick={() => setselectedItem(orchid) ?? null}
             >
                 {/*Image */}
                 <CardBody className="p-0 relative overflow-hidden">

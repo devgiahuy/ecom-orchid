@@ -11,12 +11,12 @@ import {
     ShoppingCart,
     ArrowLeft
 } from "lucide-react"
-import { useSelectedItemStore } from "../../hooks/singleton/store/useItemStore"
-
+import { useItemStore } from "../../hooks/singleton/store/useItemStore"
 export default function DetailPage() {
     const { id } = useParams()
-
-    const { selectedItem } = useSelectedItemStore()
+    // const idOrchid = id?.toString
+    const { selectedItem } = useItemStore()
+    // const { data: item } = useGetOrchidById
 
     if (!selectedItem) {
         return (

@@ -29,7 +29,7 @@ export function useApiHandle<T>(
 
     useEffect(() => {
         if (auto) execute(...initialArgs)
-    }, [])
+    }, [auto, execute, initialArgs])
 
     return { data, error, loading, execute }
 }

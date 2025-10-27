@@ -1,8 +1,9 @@
 import React, { createContext, useContext, useEffect, useState } from "react"
 import { onAuthStateChanged, signInWithPopup, signOut, type User } from "firebase/auth"
-import type { Role, UserData } from "../model/user"
+import type { Role, UserData, UserDataReq } from "../model/user"
 import { auth, googleProvider } from "../service/firebase"
-import { userApi } from "../service/userApi"
+import { useCreateUser } from "@/hooks/queries/useUser"
+import { userApi } from "@/service/userApi"
 
 type AuthContextType = {
     firebaseUser: User | null
@@ -21,37 +22,59 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [role, setRole] = useState<Role>("guest")
     const [loading, setLoading] = useState(true)
 
+    const createUser = useCreateUser()
+
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (user) => {
+            setLoading(true)
             if (user) {
+                const idToken = await user.getIdToken()
+
+                localStorage.setItem("accessToken", idToken)
                 setFirebaseUser(user)
-                // Lấy user trong MockAPI
-                const existing = await userApi.getByEmail(user.email!)
-                if (existing) {
-                    setUserData(existing)
-                    setRole(existing.role as Role)
-                } else {
-                    // Nếu là user mới, tạo mặc định role user
-                    const newUser: UserData = {
-                        name: user.displayName || "Người dùng mới",
-                        email: user.email!,
-                        avatar: user.photoURL || "",
-                        role: "user"
-                    }
-                    const created = await userApi.createUser(newUser)
-                    setUserData(created)
-                    setRole("user")
-                }
             } else {
                 setFirebaseUser(null)
                 setUserData(null)
                 setRole("guest")
+                localStorage.removeItem("accessToken")
             }
-            setLoading(false)
         })
-
         return () => unsubscribe()
     }, [])
+
+    useEffect(() => {
+        if (!firebaseUser) return
+        const fetchUserFromDB = async () => {
+            if (!firebaseUser) return
+
+            setLoading(true)
+            const email = firebaseUser.email
+            try {
+                const userGetByEmail = await userApi.getByEmail(email!)
+                const user = userGetByEmail
+                if (user) {
+                    setUserData(user)
+                    setRole(user.role as Role)
+                } else {
+                    const newUser: UserDataReq = {
+                        name: firebaseUser.displayName || "Người dùng mới",
+                        email: firebaseUser.email!,
+                        avatar: firebaseUser.photoURL || "",
+                        role: "user"
+                    }
+                    const created = await createUser.mutateAsync(newUser)
+                    setUserData(created)
+                    setRole("user")
+                }
+            } catch (error) {
+                console.log(error)
+            } finally {
+                setLoading(false)
+            }
+        }
+        fetchUserFromDB()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [firebaseUser])
 
     const loginWithGoogle = async () => {
         await signInWithPopup(auth, googleProvider)

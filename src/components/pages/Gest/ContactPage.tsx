@@ -1,7 +1,7 @@
 import { Input, Textarea, Button, Card, CardBody } from "@heroui/react"
-import { Facebook, Instagram, Youtube, Send, Mail, Phone, MapPin } from "lucide-react"
+import { Facebook, Instagram, Youtube, Send, Mail, Phone, MapPin, Flower } from "lucide-react"
 
-export default function ContactPage() {
+export function ContactPage() {
     return (
         <section
             className="
@@ -12,16 +12,17 @@ export default function ContactPage() {
         transition-colors duration-300
       "
         >
-            {/* 🌿 Background texture */}
+            {/* Background texture */}
             <div className="absolute inset-0 opacity-[0.05] bg-[url('https://www.transparenttextures.com/patterns/green-dust-and-scratches.png')] pointer-events-none"></div>
 
-            {/* 🌸 Tiêu đề */}
+            {/* Tiêu đề */}
             <div className="relative text-center mb-14">
                 <h2 className="text-4xl font-extrabold text-green-600 dark:text-green-400 tracking-tight">
                     Liên Hệ Với Orchid Shop
                 </h2>
-                <p className="text-lg text-gray-600 dark:text-gray-400 mt-3">
-                    Hãy để lại thông tin, chúng tôi sẽ phản hồi sớm nhất 🌸
+                <p className=" flex justify-center text-lg text-gray-600 dark:text-gray-400 mt-3">
+                    Hãy để lại thông tin, chúng tôi sẽ phản hồi sớm nhất{" "}
+                    <Flower color="pink" size={22} />
                 </p>
             </div>
 

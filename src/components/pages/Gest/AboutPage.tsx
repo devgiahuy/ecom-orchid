@@ -1,6 +1,6 @@
 import { Leaf, Flower2, Heart, Flower } from "lucide-react"
 
-export default function AboutPage() {
+export function AboutPage() {
     return (
         <section
             className="
@@ -8,13 +8,10 @@ export default function AboutPage() {
         bg-white dark:bg-gray-900
         border border-green-100 dark:border-gray-800
         rounded-3xl shadow-lg relative overflow-hidden
-        transition-colors duration-300
+        transition-colors duration-300 
       "
         >
-            {/* 🌿 Background accent */}
-            <div className="absolute inset-0 opacity-[0.05] bg-[url('https://www.transparenttextures.com/patterns/green-dust-and-scratches.png')] pointer-events-none"></div>
-
-            {/* 🌸 Tiêu đề */}
+            {/* Tiêu đề */}
             <div className="relative text-center mb-14">
                 <h2 className="text-4xl font-extrabold text-green-600 dark:text-green-400">
                     Về Orchid Shop

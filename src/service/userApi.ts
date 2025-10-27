@@ -1,17 +1,17 @@
-import axios from "axios"
-import type { UserData } from "../model/user"
-
-const BASE_URL = "https://68fa6bc0ef8b2e621e7fef06.mockapi.io/users"
+import type { UserData, UserDataReq } from "../model/user"
+import { http } from "@/api/http"
 
 export const userApi = {
-    async getByEmail(email: string): Promise<UserData | null> {
-        const res = await axios.get(`${BASE_URL}?email=${email}`)
+    getAll: () => http.get<UserData[]>("/users"),
+    getById: (id: string) => http.get<UserData>(`/users/${id}`),
+    create: (payload: UserDataReq) => http.post<UserData>("/users", payload),
+    update: ({ id, payload }: { id: string; payload: UserData }) =>
+        http.put<UserData>(`/users/${id}`, payload),
+    delete: (id: string) => http.delete<void>(`/users/${id}`),
 
-        return res.data[0] || null
-    },
-
-    async createUser(data: UserData): Promise<UserData> {
-        const res = await axios.post(BASE_URL, data)
-        return res.data
+    getByEmail: async (email: string) => {
+        const res = await http.get<UserData[]>("/users", { email })
+        const users = (res as any).data || res
+        return users.length > 0 ? users[0] : null
     }
 }

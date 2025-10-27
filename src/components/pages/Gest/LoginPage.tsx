@@ -1,8 +1,8 @@
+import { useAuth } from "@/provider/AuthProvider"
 import { Button, Card, CardBody, CardHeader } from "@heroui/react"
-import { useAuth } from "../../provider/AuthProvider"
-import { Leaf, LogOut, LogIn } from "lucide-react"
+import { LogOut, LogIn } from "lucide-react"
 
-export default function LoginPage() {
+export function LoginPage() {
     const { loginWithGoogle, firebaseUser, logout, role } = useAuth()
 
     return (
@@ -10,24 +10,27 @@ export default function LoginPage() {
             className="
         flex items-center justify-center min-h-[80vh]
         bg-transparent dark:bg-gray-900
-        relative overflow-hidden
+        relative overflow-hidden 
       "
         >
             {/* 🌿 Background accent */}
             <div className="absolute inset-0 opacity-[0.05] bg-[url('https://www.transparenttextures.com/patterns/green-dust-and-scratches.png')] pointer-events-none"></div>
 
-            {/* 🌸 Login Card */}
             <Card
                 shadow="lg"
                 radius="lg"
                 className="
           w-full max-w-md bg-white/95 dark:bg-gray-800/90 
           border border-green-100 dark:border-gray-700 
-          backdrop-blur-sm text-center relative z-10
+          backdrop-blur-sm text-center relative z-10 p-4
         "
             >
                 <CardHeader className="flex flex-col items-center justify-center py-6 border-b border-green-100 dark:border-gray-700">
-                    <Leaf className="text-green-600 mb-2" size={36} />
+                    <img
+                        src="/HYCAT-ORCHID.png"
+                        alt="Orchid Logo"
+                        className="h-40 w-40 object-contain bg-transparent"
+                    />
                     <h1 className="text-3xl font-extrabold text-green-600 dark:text-green-400">
                         Orchide Shop
                     </h1>
@@ -65,7 +68,7 @@ export default function LoginPage() {
                         </>
                     ) : (
                         <>
-                            <p className="text-gray-600 dark:text-gray-400 text-sm">
+                            <p className="text-gray-600 dark:text-gray-400 text-sm flex justify-center">
                                 Đăng nhập nhanh bằng tài khoản Google của bạn
                             </p>
                             <Button

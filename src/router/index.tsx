@@ -27,19 +27,19 @@ export const router = createBrowserRouter([
             { path: "contact", element: <ContactPage /> },
             { path: "demo", element: <DemoPage /> },
             { path: "login", element: <LoginPage /> },
+            { path: "error", element: <ErrorPage /> },
 
             {
                 element: <ProtectedRoute allowRoles={["user", "admin"]} />,
                 children: [
                     { path: "detail/:id", element: <DetailPage /> },
                     { path: "natural", element: <NaturalPage /> },
-                    { path: "natural/detail/:id", element: <DetailPage /> },
-                    { path: "error", element: <ErrorPage /> }
-                ]
+                    { path: "natural/detail/:id", element: <DetailPage /> }
+                ],
+                errorElement: <ErrorPage />
             },
 
             {
-                path: "admin",
                 element: <ProtectedRoute key="admin" allowRoles={["admin"]} />,
                 children: [
                     { path: "dashboard", element: <Dashboard /> },

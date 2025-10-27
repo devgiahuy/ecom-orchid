@@ -1,6 +1,6 @@
 import { useAuth } from "@/provider/AuthProvider"
 import { Button, Card, CardBody, CardHeader } from "@heroui/react"
-import { Leaf, LogOut, LogIn } from "lucide-react"
+import { LogOut, LogIn } from "lucide-react"
 
 export function LoginPage() {
     const { loginWithGoogle, firebaseUser, logout, role } = useAuth()

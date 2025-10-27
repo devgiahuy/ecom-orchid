@@ -1,6 +1,7 @@
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from "@heroui/react"
 import { Link } from "react-router-dom"
 import { ButtonStyled } from "../../styled"
+import ProfileDropdown from "../ProfileDropdown"
 
 export const OrchidLogo = () => (
     <div className="flex items-center gap-2">
@@ -46,7 +47,7 @@ export default function Header() {
                             to={label.to}
                             className="
                 text-gray-700 font-medium relative group
-                after:content-[''] after:absolute after:w-0 after:h-[2px]
+                after:content-[''] after:absolute after:w-0 after:h-0.5
                 after:bg-primary after:bottom-0 after:left-0
                 after:transition-all after:duration-300 group-hover:after:w-full
                 hover:text-primary
@@ -70,6 +71,9 @@ export default function Header() {
                     >
                         <Link to={`/login`}>Login</Link>
                     </ButtonStyled>
+                </NavbarItem>
+                <NavbarItem className="flex ">
+                    <ProfileDropdown />
                 </NavbarItem>
             </NavbarContent>
         </Navbar>

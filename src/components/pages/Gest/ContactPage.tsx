@@ -1,9 +1,26 @@
 import { Input, Textarea, Button, Card, CardBody } from "@heroui/react"
 import { Facebook, Instagram, Youtube, Send, Mail, Phone, MapPin, Flower } from "lucide-react"
+import { motion, useReducedMotion } from "framer-motion"
+
+const fadeUp = (delay = 0) => ({
+    hidden: { opacity: 0, y: 24 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, delay } }
+})
+
+const container = (stagger = 0.08) => ({
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: stagger } }
+})
 
 export function ContactPage() {
+    const prefersReducedMotion = useReducedMotion()
+
     return (
-        <section
+        <motion.section
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={container()}
             className="
         max-w-7xl mx-auto my-16 px-6 lg:px-10 py-12
         bg-white dark:bg-gray-900
@@ -13,107 +30,195 @@ export function ContactPage() {
       "
         >
             {/* Background texture */}
-            <div className="absolute inset-0 opacity-[0.05] bg-[url('https://www.transparenttextures.com/patterns/green-dust-and-scratches.png')] pointer-events-none"></div>
+            <motion.div
+                aria-hidden
+                className="absolute inset-0 opacity-[0.05] bg-[url('https://www.transparenttextures.com/patterns/green-dust-and-scratches.png')] pointer-events-none"
+            />
+            {/* Accent blob rất nhẹ */}
+            <motion.div
+                aria-hidden
+                className="pointer-events-none absolute -bottom-24 -left-24 w-72 h-72 rounded-full bg-green-100/50 dark:bg-green-900/30 blur-3xl"
+                {...(!prefersReducedMotion && {
+                    animate: { opacity: [0.4, 0.55, 0.4], scale: [1, 1.06, 1] },
+                    transition: { duration: 6, repeat: Infinity }
+                })}
+            />
 
             {/* Tiêu đề */}
             <div className="relative text-center mb-14">
-                <h2 className="text-4xl font-extrabold text-green-600 dark:text-green-400 tracking-tight">
+                <motion.h2
+                    variants={fadeUp(0)}
+                    className="text-4xl font-extrabold text-green-600 dark:text-green-400 tracking-tight"
+                >
                     Liên Hệ Với Orchid Shop
-                </h2>
-                <p className=" flex justify-center text-lg text-gray-600 dark:text-gray-400 mt-3">
-                    Hãy để lại thông tin, chúng tôi sẽ phản hồi sớm nhất{" "}
-                    <Flower color="pink" size={22} />
-                </p>
+                </motion.h2>
+
+                <motion.p
+                    variants={fadeUp(0.08)}
+                    className="text-lg text-gray-600 dark:text-gray-400 mt-3 flex justify-center items-center gap-2"
+                >
+                    Hãy để lại thông tin, chúng tôi sẽ phản hồi sớm nhất
+                    <motion.span
+                        variants={{
+                            initial: { y: 0 },
+                            animate: {
+                                y: [0, -6, 0],
+                                transition: { duration: 3, repeat: Infinity, ease: "easeInOut" }
+                            }
+                        }}
+                        initial="initial"
+                        animate="animate"
+                        className="inline-flex"
+                    >
+                        <Flower size={22} color="pink" />
+                    </motion.span>
+                </motion.p>
             </div>
 
-            {/* 🪴 Nội dung chính */}
-            <div className="relative grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
-                {/* 🌿 Form liên hệ */}
-                <Card
-                    shadow="sm"
-                    radius="lg"
-                    className="border border-green-100 dark:border-gray-800 bg-white/90 dark:bg-gray-800/70 backdrop-blur-sm"
+            {/* Nội dung chính */}
+            <motion.div
+                variants={container(0.06)}
+                className="relative grid grid-cols-1 md:grid-cols-2 gap-10 items-start"
+            >
+                {/* Form liên hệ */}
+                <motion.div
+                    variants={{
+                        hidden: { opacity: 0, scale: 0.98 },
+                        visible: {
+                            opacity: 1,
+                            scale: 1,
+                            transition: { duration: 0.45, ease: "easeOut" }
+                        }
+                    }}
                 >
-                    <CardBody className="p-8 space-y-5">
-                        <form
-                            onSubmit={(e) => {
-                                e.preventDefault()
-                                alert("Gửi liên hệ thành công 🌿")
-                            }}
-                            className="flex flex-col gap-5"
-                        >
-                            <Input
-                                label="Họ và tên"
-                                placeholder="Nhập họ tên của bạn"
-                                radius="full"
-                                variant="bordered"
-                                color="success"
-                                required
-                            />
-                            <Input
-                                type="email"
-                                label="Email"
-                                placeholder="name@gmail.com"
-                                radius="full"
-                                variant="bordered"
-                                color="success"
-                                required
-                            />
-                            <Textarea
-                                label="Nội dung liên hệ"
-                                placeholder="Hãy để lại lời nhắn cho chúng tôi..."
-                                minRows={4}
-                                radius="lg"
-                                variant="bordered"
-                                color="success"
-                            />
-                            <Button
-                                type="submit"
-                                color="success"
-                                radius="full"
-                                className="mt-2 font-semibold text-white text-base bg-green-600 hover:bg-green-700"
-                                startContent={<Send size={18} />}
+                    <Card
+                        shadow="sm"
+                        radius="lg"
+                        className="border border-green-100 dark:border-gray-800 bg-white/90 dark:bg-gray-800/70 backdrop-blur-sm"
+                    >
+                        <CardBody className="p-8 space-y-5">
+                            <motion.form
+                                variants={container(0.05)}
+                                onSubmit={(e) => {
+                                    e.preventDefault()
+                                    alert("Gửi liên hệ thành công 🌿")
+                                }}
+                                className="flex flex-col gap-5"
                             >
-                                Gửi Liên Hệ
-                            </Button>
-                        </form>
-                    </CardBody>
-                </Card>
+                                <motion.div variants={fadeUp(0)}>
+                                    <Input
+                                        label="Họ và tên"
+                                        placeholder="Nhập họ tên của bạn"
+                                        radius="full"
+                                        variant="bordered"
+                                        color="success"
+                                        required
+                                    />
+                                </motion.div>
 
-                {/* 🌼 Thông tin liên hệ */}
-                <Card
-                    shadow="sm"
-                    radius="lg"
-                    className="border border-green-100 dark:border-gray-800 bg-green-50/60 dark:bg-gray-800/70 backdrop-blur-sm"
+                                <motion.div variants={fadeUp(0.02)}>
+                                    <Input
+                                        type="email"
+                                        label="Email"
+                                        placeholder="name@gmail.com"
+                                        radius="full"
+                                        variant="bordered"
+                                        color="success"
+                                        required
+                                    />
+                                </motion.div>
+
+                                <motion.div variants={fadeUp(0.04)}>
+                                    <Textarea
+                                        label="Nội dung liên hệ"
+                                        placeholder="Hãy để lại lời nhắn cho chúng tôi..."
+                                        minRows={4}
+                                        radius="lg"
+                                        variant="bordered"
+                                        color="success"
+                                    />
+                                </motion.div>
+
+                                <motion.div variants={fadeUp(0.06)}>
+                                    <Button
+                                        type="submit"
+                                        color="success"
+                                        radius="full"
+                                        className="mt-2 font-semibold text-white text-base bg-green-600 hover:bg-green-700"
+                                        startContent={<Send size={18} />}
+                                    >
+                                        Gửi Liên Hệ
+                                    </Button>
+                                </motion.div>
+                            </motion.form>
+                        </CardBody>
+                    </Card>
+                </motion.div>
+
+                {/* Thông tin liên hệ */}
+                <motion.div
+                    variants={{
+                        hidden: { opacity: 0, scale: 0.98 },
+                        visible: {
+                            opacity: 1,
+                            scale: 1,
+                            transition: { duration: 0.45, ease: "easeOut" }
+                        }
+                    }}
                 >
-                    <CardBody className="p-8 flex flex-col justify-center space-y-4">
-                        <h5 className="text-green-600 dark:text-green-400 font-bold text-xl mb-3 flex items-center gap-2">
-                            🌿 Thông Tin Liên Hệ
-                        </h5>
+                    <Card
+                        shadow="sm"
+                        radius="lg"
+                        className="border border-green-100 dark:border-gray-800 bg-green-50/60 dark:bg-gray-800/70 backdrop-blur-sm"
+                    >
+                        <CardBody className="p-8 flex flex-col justify-center space-y-4">
+                            <motion.h5
+                                variants={fadeUp(0)}
+                                className="text-green-600 dark:text-green-400 font-bold text-xl mb-3 flex items-center gap-2"
+                            >
+                                🌿 Thông Tin Liên Hệ
+                            </motion.h5>
 
-                        <ContactItem
-                            icon={<MapPin className="text-green-500" size={20} />}
-                            text="123 FPT, TP. Hồ Chí Minh"
-                        />
-                        <ContactItem
-                            icon={<Phone className="text-green-500" size={20} />}
-                            text="(+84) 123 456 789"
-                        />
-                        <ContactItem
-                            icon={<Mail className="text-green-500" size={20} />}
-                            text="orchid.support@gmail.com"
-                        />
+                            <motion.div variants={container(0.04)} className="space-y-3">
+                                <motion.div variants={fadeUp(0.02)}>
+                                    <ContactItem
+                                        icon={<MapPin className="text-green-500" size={20} />}
+                                        text="123 FPT, TP. Hồ Chí Minh"
+                                    />
+                                </motion.div>
+                                <motion.div variants={fadeUp(0.04)}>
+                                    <ContactItem
+                                        icon={<Phone className="text-green-500" size={20} />}
+                                        text="(+84) 123 456 789"
+                                    />
+                                </motion.div>
+                                <motion.div variants={fadeUp(0.06)}>
+                                    <ContactItem
+                                        icon={<Mail className="text-green-500" size={20} />}
+                                        text="orchid.support@gmail.com"
+                                    />
+                                </motion.div>
+                            </motion.div>
 
-                        {/* Mạng xã hội */}
-                        <div className="flex gap-6 mt-6">
-                            <SocialIcon href="#" title="Facebook" icon={<Facebook size={22} />} />
-                            <SocialIcon href="#" title="Instagram" icon={<Instagram size={22} />} />
-                            <SocialIcon href="#" title="YouTube" icon={<Youtube size={22} />} />
-                        </div>
-                    </CardBody>
-                </Card>
-            </div>
-        </section>
+                            {/* Mạng xã hội */}
+                            <motion.div variants={fadeUp(0.08)} className="flex gap-6 mt-6">
+                                <SocialIcon
+                                    href="#"
+                                    title="Facebook"
+                                    icon={<Facebook size={22} />}
+                                />
+                                <SocialIcon
+                                    href="#"
+                                    title="Instagram"
+                                    icon={<Instagram size={22} />}
+                                />
+                                <SocialIcon href="#" title="YouTube" icon={<Youtube size={22} />} />
+                            </motion.div>
+                        </CardBody>
+                    </Card>
+                </motion.div>
+            </motion.div>
+        </motion.section>
     )
 }
 
@@ -128,16 +233,14 @@ function ContactItem({ icon, text }: { icon: React.ReactNode; text: string }) {
 
 function SocialIcon({ href, title, icon }: { href: string; title: string; icon: React.ReactNode }) {
     return (
-        <a
+        <motion.a
             href={href}
             title={title}
-            className="
-        text-green-600 dark:text-green-400 hover:scale-110 
-        hover:text-green-700 dark:hover:text-green-300 
-        transition-transform duration-200
-      "
+            whileHover={{ y: -2 }}
+            transition={{ duration: 0.18 }}
+            className="text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300"
         >
             {icon}
-        </a>
+        </motion.a>
     )
 }

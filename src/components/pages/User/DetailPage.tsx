@@ -13,13 +13,16 @@ import {
 import { useGetOrchidById } from "@/hooks/queries/useOrchid"
 import { Card, CardBody, Spinner } from "@heroui/react"
 import { Link, useParams } from "react-router-dom"
-import { ButtonStyled } from "@/components/styled"
+import { ButtonStyled, DetailItem } from "@/components/styled"
+import { useCartStore } from "@/hooks/singleton/store/useCartStore"
+import { motion } from "framer-motion"
+
 export default function DetailPage() {
     const { id } = useParams()
     // const idOrchid = id?.toString
     // const { selectedItem } = useItemStore()
     const { data: selectedItem } = useGetOrchidById(id!)
-
+    const add = useCartStore((s) => s.add)
     if (!selectedItem) {
         return (
             <div className="flex flex-col justify-center items-center py-20 text-center">
@@ -40,30 +43,59 @@ export default function DetailPage() {
         )
     }
 
+    const fadeUp = (delay = 0) => ({
+        hidden: { opacity: 0, y: 24 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.5, delay } }
+    })
+
     return (
         <section
             className="
         max-w-7xl mx-auto my-16 px-6 lg:px-10 py-12 
         bg-white dark:bg-gray-900 
         rounded-3xl shadow-lg border border-green-100 dark:border-gray-800
-        relative overflow-hidden
+        relative overflow-hidden 
       "
         >
-            {/* 🌿 Background accent */}
-            <div className="absolute inset-0 opacity-[0.05] bg-[url('https://www.transparenttextures.com/patterns/green-dust-and-scratches.png')] pointer-events-none"></div>
-
             {/* Header */}
             <div className="relative text-center mb-14">
                 <h2 className="text-4xl font-extrabold text-green-600 dark:text-green-400 tracking-tight">
                     {selectedItem.name}
                 </h2>
-                <p className="text-gray-600 dark:text-gray-400 mt-2">
-                    <span className="flex justify-center items-center">
-                        <Flower color="pink" size={30} />
-                        Tất cả những gì bạn cần biết về loài lan này
-                        <Flower color="pink" size={30} />
-                    </span>
-                </p>
+                <motion.p
+                    variants={fadeUp(0.08)}
+                    className="text-lg text-gray-600 dark:text-gray-400 mt-3 flex justify-center items-center gap-2"
+                >
+                    <motion.span
+                        variants={{
+                            initial: { y: 0 },
+                            animate: {
+                                y: [0, -6, 0],
+                                transition: { duration: 3, repeat: Infinity, ease: "easeInOut" }
+                            }
+                        }}
+                        initial="initial"
+                        animate="animate"
+                        className="inline-flex"
+                    >
+                        <Flower size={30} color="pink" />
+                    </motion.span>
+                    Tất cả những gì bạn cần biết về loài lan này
+                    <motion.span
+                        variants={{
+                            initial: { y: 0 },
+                            animate: {
+                                y: [0, -6, 0],
+                                transition: { duration: 3, repeat: Infinity, ease: "easeInOut" }
+                            }
+                        }}
+                        initial="initial"
+                        animate="animate"
+                        className="inline-flex"
+                    >
+                        <Flower size={30} color="pink" />
+                    </motion.span>
+                </motion.p>
                 <div className="mt-4 flex justify-center items-center gap-1 text-yellow-500">
                     {Array.from({ length: Math.round(selectedItem.rating ?? 1) }).map((_, i) => (
                         <Star key={i} size={18} fill="currentColor" />
@@ -140,8 +172,9 @@ export default function DetailPage() {
                         <ButtonStyled
                             color="success"
                             radius="full"
-                            className="flex-1 font-semibold text-white text-base bg-green-600 hover:bg-green-700"
+                            className="flex-1 font-semibold text-white text-base bg-green-600 hover:bg-green-700 hover:text-black"
                             startContent={<ShoppingCart size={18} />}
+                            onPress={() => add(selectedItem)}
                         >
                             Đặt Mua Ngay
                         </ButtonStyled>
@@ -149,9 +182,9 @@ export default function DetailPage() {
                             to="/home"
                             className="
                 flex items-center justify-center gap-2
-                border border-green-500 text-green-600 dark:text-green-400
-                rounded-full px-5 py-2 font-semibold hover:bg-green-50 dark:hover:bg-gray-800
-                transition-colors
+                border border-gray-500 text-green-600 dark:text-green-400
+                rounded-full px-5 py-2 font-semibold hover:bg-white dark:hover:bg-gray-800
+                transition-colors hover:text-black
               "
                         >
                             <ArrowLeft size={18} /> Quay lại
@@ -188,23 +221,5 @@ export default function DetailPage() {
                 </div>
             )}
         </section>
-    )
-}
-
-function DetailItem({
-    icon,
-    label,
-    value
-}: {
-    icon: React.ReactNode
-    label: string
-    value: string | number
-}) {
-    return (
-        <div className="flex items-center gap-2">
-            <span className="text-green-500">{icon}</span>
-            <b>{label}:</b>
-            <span className="ml-1 text-gray-800 dark:text-gray-200">{value}</span>
-        </div>
     )
 }

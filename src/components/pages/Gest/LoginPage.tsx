@@ -1,6 +1,7 @@
+import { GoogleLoginButton } from "@/components/styled"
 import { useAuth } from "@/provider/AuthProvider"
 import { Button, Card, CardBody, CardHeader } from "@heroui/react"
-import { LogOut, LogIn } from "lucide-react"
+import { LogOut } from "lucide-react"
 
 export function LoginPage() {
     const { loginWithGoogle, firebaseUser, logout, role } = useAuth()
@@ -13,7 +14,7 @@ export function LoginPage() {
         relative overflow-hidden 
       "
         >
-            {/* 🌿 Background accent */}
+            {/* Background accent */}
             <div className="absolute inset-0 opacity-[0.05] bg-[url('https://www.transparenttextures.com/patterns/green-dust-and-scratches.png')] pointer-events-none"></div>
 
             <Card
@@ -35,7 +36,7 @@ export function LoginPage() {
                         Orchide Shop
                     </h1>
                     <p className="text-gray-500 dark:text-gray-400 mt-1 text-sm">
-                        Đăng nhập để trải nghiệm mua sắm xanh 🌿
+                        Đăng nhập để trải nghiệm mua sắm xanh
                     </p>
                 </CardHeader>
 
@@ -71,15 +72,7 @@ export function LoginPage() {
                             <p className="text-gray-600 dark:text-gray-400 text-sm flex justify-center">
                                 Đăng nhập nhanh bằng tài khoản Google của bạn
                             </p>
-                            <Button
-                                onPress={loginWithGoogle}
-                                color="success"
-                                radius="full"
-                                startContent={<LogIn size={18} />}
-                                className="font-semibold bg-green-600 hover:bg-green-700 text-white"
-                            >
-                                Đăng nhập với Google
-                            </Button>
+                            <GoogleLoginButton onPress={loginWithGoogle} />
                         </>
                     )}
                 </CardBody>

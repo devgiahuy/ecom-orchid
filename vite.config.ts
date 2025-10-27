@@ -5,7 +5,7 @@ import path from "path"
 
 export default defineConfig({
     plugins: [tailwindcss(), react()],
-    base: "/ecom-orchid/",
+    // base: "/ecom-orchid/",
     resolve: {
         alias: {
             "@": path.resolve(__dirname, "./src")

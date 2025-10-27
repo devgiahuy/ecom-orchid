@@ -7,3 +7,10 @@ export interface UserData {
     role: Role
     avatar?: string
 }
+
+export interface UserDataReq {
+    name: string
+    email: string
+    role: Role
+    avatar?: string
+}

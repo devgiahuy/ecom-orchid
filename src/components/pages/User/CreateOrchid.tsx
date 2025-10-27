@@ -6,7 +6,7 @@ import { Flower2, Image as ImageIcon, Palette, Tag, Sprout, DollarSign, Star } f
 import { FormField } from "@/components/models"
 
 export default function CreateOrchid() {
-    const createOrchidMutation = useCreateOrchid()
+    const createOrchid = useCreateOrchid()
 
     const formik = useFormik({
         initialValues: {
@@ -29,7 +29,7 @@ export default function CreateOrchid() {
             category: Yup.string().required("Phân loại là bắt buộc")
         }),
         onSubmit: (values) => {
-            createOrchidMutation.mutateAsync(values)
+            createOrchid.mutateAsync(values)
         }
     })
 
@@ -137,11 +137,11 @@ export default function CreateOrchid() {
                             type="submit"
                             color="success"
                             radius="full"
-                            isLoading={createOrchidMutation.isPending}
-                            disabled={createOrchidMutation.isPending}
+                            isLoading={createOrchid.isPending}
+                            disabled={createOrchid.isPending}
                             className="font-semibold text-white text-base bg-green-600 hover:bg-green-700 transition-colors"
                         >
-                            {createOrchidMutation.isPending ? "Đang tạo..." : "Tạo mới"}
+                            {createOrchid.isPending ? "Đang tạo..." : "Tạo mới"}
                         </Button>
                     </form>
                 </CardBody>

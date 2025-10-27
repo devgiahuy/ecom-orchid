@@ -1,8 +1,9 @@
 import React, { createContext, useContext, useEffect, useState } from "react"
 import { onAuthStateChanged, signInWithPopup, signOut, type User } from "firebase/auth"
-import type { Role, UserData } from "../model/user"
+import type { Role, UserData, UserDataReq } from "../model/user"
 import { auth, googleProvider } from "../service/firebase"
-import { userApi } from "../service/userApi"
+import { useCreateUser } from "@/hooks/queries/useUser"
+import { userApi } from "@/service/userApi"
 
 type AuthContextType = {
     firebaseUser: User | null
@@ -21,37 +22,49 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [role, setRole] = useState<Role>("guest")
     const [loading, setLoading] = useState(true)
 
+    const createUser = useCreateUser()
+
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (user) => {
+            setLoading(true)
             if (user) {
+                const idToken = await user.getIdToken()
+
+                localStorage.setItem("accessToken", idToken)
                 setFirebaseUser(user)
-                // Lấy user trong MockAPI
-                const existing = await userApi.getByEmail(user.email!)
+
+                // check user trong db
+                const email = user.email!
+
+                const existing = await userApi.getByEmail(email)
+
                 if (existing) {
                     setUserData(existing)
                     setRole(existing.role as Role)
                 } else {
-                    // Nếu là user mới, tạo mặc định role user
-                    const newUser: UserData = {
+                    // nếu chưa tồn tại => create new
+                    const newUser: UserDataReq = {
                         name: user.displayName || "Người dùng mới",
                         email: user.email!,
                         avatar: user.photoURL || "",
                         role: "user"
                     }
-                    const created = await userApi.createUser(newUser)
+                    const created = await createUser.mutateAsync(newUser)
                     setUserData(created)
                     setRole("user")
                 }
             } else {
+                // signout
                 setFirebaseUser(null)
                 setUserData(null)
                 setRole("guest")
+                localStorage.removeItem("accessToken")
             }
             setLoading(false)
         })
 
         return () => unsubscribe()
-    }, [])
+    }, [createUser])
 
     const loginWithGoogle = async () => {
         await signInWithPopup(auth, googleProvider)

@@ -1,5 +1,4 @@
 export * from "./DarkOrWhite"
 export * from "./Footer"
 export * from "./Navbar"
-export * from "./NavbarV1"
 export * from "./OrchidCardList"

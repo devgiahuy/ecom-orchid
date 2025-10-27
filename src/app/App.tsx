@@ -7,16 +7,17 @@ export default function App() {
         <>
             {/* Navbar */}
             <Header />
-            <div className="min-h-dvh flex flex-col items-center justify-between bg-texture text-gray-800 transition-colors duration-300">
-                {/* Hero title */}
-
+            <div
+                className="bg-texture 
+                          min-h-dvh flex flex-col items-center justify-between  
+                             text-gray-800 transition-colors duration-300"
+            >
                 {/* Main content */}
                 <main className="flex-1 w-full max-w-360 mx-auto px-4 py-2">
                     <Outlet />
                 </main>
-
-                {/* Footer */}
             </div>
+            {/* Footer */}
             <Footer />
         </>
     )

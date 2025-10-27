@@ -68,7 +68,7 @@ export function LoginPage() {
                         </>
                     ) : (
                         <>
-                            <p className="text-gray-600 dark:text-gray-400 text-sm">
+                            <p className="text-gray-600 dark:text-gray-400 text-sm flex justify-center">
                                 Đăng nhập nhanh bằng tài khoản Google của bạn
                             </p>
                             <Button

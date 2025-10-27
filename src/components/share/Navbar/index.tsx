@@ -2,6 +2,7 @@ import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from "@heroui/react"
 import { Link } from "react-router-dom"
 import { ButtonStyled } from "../../styled"
 import ProfileDropdown from "../ProfileDropdown"
+import { useAuth } from "@/provider/AuthProvider"
 
 export const OrchidLogo = () => (
     <div className="flex items-center gap-2">
@@ -11,12 +12,14 @@ export const OrchidLogo = () => (
             className="h-30 w-30 object-contain bg-transparent"
         />
         <span className="font-semibold text-xl text-gray-900">
-            <span className="text-primary">Ecom</span> Orchid
+            <span className="text-primary">HYCAT</span> Shop
         </span>
     </div>
 )
 
 export default function Header() {
+    const { firebaseUser } = useAuth()
+
     const labels = [
         { name: "Home", to: "/home" },
         { name: "Natural", to: "/natural" },
@@ -61,20 +64,23 @@ export default function Header() {
 
             {/* Login Button */}
             <NavbarContent justify="end">
-                <NavbarItem className="hidden lg:flex">
-                    <ButtonStyled
-                        className="
+                {firebaseUser ? (
+                    <NavbarItem className="flex ">
+                        <ProfileDropdown />
+                    </NavbarItem>
+                ) : (
+                    <NavbarItem className="hidden lg:flex">
+                        <ButtonStyled
+                            className="
               btn-primary px-5 py-2 rounded-xl font-semibold
               bg-primary text-white hover:brightness-95 active:brightness-90
               shadow-[0_4px_12px_rgba(50,205,50,0.25)]
             "
-                    >
-                        <Link to={`/login`}>Login</Link>
-                    </ButtonStyled>
-                </NavbarItem>
-                <NavbarItem className="flex ">
-                    <ProfileDropdown />
-                </NavbarItem>
+                        >
+                            <Link to={`/login`}>Login</Link>
+                        </ButtonStyled>
+                    </NavbarItem>
+                )}
             </NavbarContent>
         </Navbar>
     )

@@ -1,4 +1,3 @@
-"use client"
 import { Link } from "react-router-dom"
 import { Facebook, Instagram, Youtube } from "lucide-react"
 
@@ -15,7 +14,7 @@ export default function Footer() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
                     {/* 🌿 Logo + mô tả */}
                     <div>
-                        <div className="flex items-center mt-[-40px]">
+                        <div className="flex items-center -mt-10">
                             <img
                                 src="/HYCAT-ORCHID.png"
                                 alt="Orchid Logo"

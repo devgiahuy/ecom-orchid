@@ -32,39 +32,49 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
                 localStorage.setItem("accessToken", idToken)
                 setFirebaseUser(user)
+            } else {
+                setFirebaseUser(null)
+                setUserData(null)
+                setRole("guest")
+                localStorage.removeItem("accessToken")
+            }
+        })
+        return () => unsubscribe()
+    }, [])
 
-                // check user trong db
-                const email = user.email!
+    useEffect(() => {
+        if (!firebaseUser) return
+        const fetchUserFromDB = async () => {
+            if (!firebaseUser) return
 
-                const existing = await userApi.getByEmail(email)
-
-                if (existing) {
-                    setUserData(existing)
-                    setRole(existing.role as Role)
+            setLoading(true)
+            const email = firebaseUser.email
+            try {
+                const userGetByEmail = await userApi.getByEmail(email!)
+                const user = userGetByEmail
+                if (user) {
+                    setUserData(user)
+                    setRole(user.role as Role)
                 } else {
-                    // nếu chưa tồn tại => create new
                     const newUser: UserDataReq = {
-                        name: user.displayName || "Người dùng mới",
-                        email: user.email!,
-                        avatar: user.photoURL || "",
+                        name: firebaseUser.displayName || "Người dùng mới",
+                        email: firebaseUser.email!,
+                        avatar: firebaseUser.photoURL || "",
                         role: "user"
                     }
                     const created = await createUser.mutateAsync(newUser)
                     setUserData(created)
                     setRole("user")
                 }
-            } else {
-                // signout
-                setFirebaseUser(null)
-                setUserData(null)
-                setRole("guest")
-                localStorage.removeItem("accessToken")
+            } catch (error) {
+                console.log(error)
+            } finally {
+                setLoading(false)
             }
-            setLoading(false)
-        })
-
-        return () => unsubscribe()
-    }, [createUser])
+        }
+        fetchUserFromDB()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [firebaseUser])
 
     const loginWithGoogle = async () => {
         await signInWithPopup(auth, googleProvider)

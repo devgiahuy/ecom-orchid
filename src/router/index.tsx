@@ -44,9 +44,9 @@ export const router = createBrowserRouter([
             {
                 element: <ProtectedRoute key="admin" allowRoles={["admin"]} />,
                 children: [
-                    { path: "dashboard", element: <Dashboard /> },
-                    { path: "dashboard/:id", element: <UpdatePage /> },
-                    { path: "dashboard/create", element: <CreateOrchid /> }
+                    { path: "admin/dashboard", element: <Dashboard /> },
+                    { path: "admin/dashboard/:id", element: <UpdatePage /> },
+                    { path: "admin/dashboard/create", element: <CreateOrchid /> }
                 ]
             }
         ]

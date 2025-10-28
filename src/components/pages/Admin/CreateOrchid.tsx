@@ -2,7 +2,16 @@ import { useFormik } from "formik"
 import * as Yup from "yup"
 import { useCreateOrchid } from "../../../hooks/queries/useOrchid"
 import { Button, Card, CardBody, Checkbox } from "@heroui/react"
-import { Flower2, Image as ImageIcon, Palette, Tag, Sprout, DollarSign, Star } from "lucide-react"
+import {
+    Flower2,
+    Image as ImageIcon,
+    Palette,
+    Tag,
+    Sprout,
+    DollarSign,
+    Star,
+    Video
+} from "lucide-react"
 import { FormField } from "@/components/models"
 
 export default function CreateOrchid() {
@@ -23,10 +32,11 @@ export default function CreateOrchid() {
         validationSchema: Yup.object({
             name: Yup.string().required("Tên hoa lan là bắt buộc"),
             image: Yup.string().url("Phải là URL hợp lệ").required("Hình ảnh là bắt buộc"),
-            price: Yup.number().positive("Giá phải là số dương").required("Giá là bắt buộc"),
+            price: Yup.number().positive("Giá phải là số dương").required("Giá là bắt buộc").min(0),
             origin: Yup.string().required("Nguồn gốc là bắt buộc"),
             color: Yup.string().required("Màu sắc là bắt buộc"),
-            category: Yup.string().required("Phân loại là bắt buộc")
+            category: Yup.string().required("Phân loại là bắt buộc"),
+            rating: Yup.number().min(0).max(5).required("Đánh giá là bắt buộc")
         }),
         onSubmit: (values) => {
             createOrchid.mutateAsync(values)
@@ -43,7 +53,7 @@ export default function CreateOrchid() {
         transition-colors duration-300
       "
         >
-            {/* Background pattern nhẹ */}
+            {/* Background pattern */}
             <div className="absolute inset-0 opacity-[0.05] bg-[url('https://www.transparenttextures.com/patterns/green-dust-and-scratches.png')] pointer-events-none"></div>
 
             <div className="relative text-center mb-12">
@@ -107,7 +117,14 @@ export default function CreateOrchid() {
                             formik={formik}
                         />
 
-                        {/* 🌿 Checkbox nhóm */}
+                        <FormField
+                            icon={<Video />}
+                            label="Link video"
+                            name="linkVideo"
+                            formik={formik}
+                        />
+
+                        {/* Checkbox nhóm */}
                         <div className="flex gap-6 mt-2">
                             <Checkbox
                                 name="isNatural"
@@ -132,7 +149,7 @@ export default function CreateOrchid() {
                             </Checkbox>
                         </div>
 
-                        {/* Button tạo */}
+                        {/* Button */}
                         <Button
                             type="submit"
                             color="success"

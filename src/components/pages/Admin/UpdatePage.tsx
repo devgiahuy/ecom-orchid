@@ -42,7 +42,8 @@ export function UpdatePage() {
             price: Yup.number().positive("Giá phải là số dương").required("Giá là bắt buộc"),
             origin: Yup.string().required("Nguồn gốc là bắt buộc"),
             color: Yup.string().required("Màu sắc là bắt buộc"),
-            category: Yup.string().required("Phân loại là bắt buộc")
+            category: Yup.string().required("Phân loại là bắt buộc"),
+            rating: Yup.number().min(0).max(5).required("Đánh giá là bắt buộc")
         }),
         onSubmit: (values) => {
             updateOrchid.mutateAsync({ id: id!, req: values })
@@ -58,7 +59,7 @@ export function UpdatePage() {
         rounded-3xl shadow-lg relative overflow-hidden
       "
         >
-            {/* Background texture nhẹ */}
+            {/* Background texture */}
             <div className="absolute inset-0 opacity-[0.05] bg-[url('https://www.transparenttextures.com/patterns/green-dust-and-scratches.png')] pointer-events-none"></div>
 
             <div className="relative text-center mb-12">
@@ -135,7 +136,7 @@ export function UpdatePage() {
                             formik={formik}
                         />
 
-                        {/* 🌱 Checkbox nhóm */}
+                        {/* Checkbox nhóm */}
                         <div className="flex flex-wrap gap-6 mt-2">
                             <Checkbox
                                 name="isNatural"
@@ -159,7 +160,7 @@ export function UpdatePage() {
                             </Checkbox>
                         </div>
 
-                        {/* 🌸 Nút cập nhật */}
+                        {/* Nút cập nhật */}
                         <Button
                             type="submit"
                             color="success"

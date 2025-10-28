@@ -27,13 +27,11 @@ export function Dashboard() {
         <div
             className="
     overflow-x-auto rounded-3xl border border-green-100 dark:border-gray-800 
-    bg-white dark:bg-gray-900 shadow-lg relative overflow-hidden
+    bg-white dark:bg-gray-900 shadow-lg relative overflow-hidden m-10
   "
         >
-            {/* 🌿 Background texture nhẹ */}
             <div className="absolute inset-0 opacity-[0.04] bg-[url('https://www.transparenttextures.com/patterns/green-dust-and-scratches.png')] pointer-events-none"></div>
 
-            {/* 🌸 Header Section */}
             <div
                 className="
       relative flex flex-col md:flex-row items-start md:items-center 
@@ -62,7 +60,7 @@ export function Dashboard() {
                 </ButtonStyled>
             </div>
 
-            {/* 🌿 Bảng */}
+            {/*table */}
             <TableStyled className="min-w-full text-sm md:text-base relative z-10" removeWrapper>
                 <TableHeader>
                     <TableColumn className="text-center text-gray-800 dark:text-gray-200 font-semibold py-4 bg-green-50/70 dark:bg-gray-800/70">
@@ -114,7 +112,15 @@ export function Dashboard() {
                             </TableCell>
 
                             <TableCell className="text-center text-gray-600 dark:text-gray-300">
-                                {item.isNatural ? "Yes" : "No"}
+                                {item.isNatural ? (
+                                    <span className="inline-block px-3 py-1 text-sm font-semibold text-green-700 bg-green-100 rounded-full">
+                                        Yes
+                                    </span>
+                                ) : (
+                                    <span className="inline-block px-3 py-1 text-sm font-semibold text-red-700 bg-red-100 rounded-full">
+                                        No
+                                    </span>
+                                )}
                             </TableCell>
 
                             {/*  Action Buttons */}

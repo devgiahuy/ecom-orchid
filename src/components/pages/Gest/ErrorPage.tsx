@@ -9,7 +9,7 @@ export function ErrorPage() {
         <section
             className="
         flex flex-col items-center justify-center min-h-[80vh]
-        bg-white dark:bg-gray-900
+        bg-transparent dark:bg-gray-900
         relative overflow-hidden px-6 text-center
       "
         >

@@ -31,7 +31,7 @@ export default function ProfileDropdown() {
                         <Link to="/login">Profile</Link>
                     </DropdownItem>
                     <DropdownItem key="dashboard">
-                        <Link to="/dashboard">Dasshboard</Link>
+                        <Link to="admin/dashboard">Dasshboard</Link>
                     </DropdownItem>
                     <DropdownItem key="logout" color="danger" onPress={logout}>
                         Log Out

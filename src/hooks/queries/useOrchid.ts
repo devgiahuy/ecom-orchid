@@ -3,6 +3,7 @@ import { orchidApi } from "../../service/orchidApi"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { QUERY_KEY } from "../../constants/queryKey"
 import { addToast } from "@heroui/toast"
+import { useNavigate } from "react-router-dom"
 
 export const useGetAllOrchids = ({ enabled = true }: { enabled?: boolean } = {}) => {
     const queryClient = useQueryClient()
@@ -28,6 +29,7 @@ export const useGetOrchidById = (id: string, { enabled = true }: { enabled?: boo
 
 export const useCreateOrchid = () => {
     const queryClient = useQueryClient()
+    const navigate = useNavigate()
     return useMutation({
         mutationFn: async (payload: OrchidReq) => {
             const res = await orchidApi.create(payload)
@@ -40,6 +42,7 @@ export const useCreateOrchid = () => {
                 description: "Create successfully",
                 color: "success"
             })
+            navigate("/dashboard")
         },
         onError: (err: Error) => {
             addToast({

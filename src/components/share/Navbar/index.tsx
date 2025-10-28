@@ -60,7 +60,7 @@ export default function Header() {
                                             : "text-gray-700 dark:text-gray-300 hover:text-primary"
                                     }
                                     after:content-[''] after:absolute after:left-0 after:bottom-0
-                                    after:h-[2px] after:w-0 hover:after:w-full
+                                    after:h-0.5 after:w-0 hover:after:w-full
                                     after:bg-primary after:transition-all after:duration-200
                                 `}
                             >

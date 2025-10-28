@@ -141,7 +141,7 @@ export default function CartPage() {
                 </div>
                 <Link
                     to="/checkout"
-                    className="px-8 py-3 rounded-2xl bg-primary text-white font-semibold hover:opacity-90 transition-all shadow-md"
+                    className="px-8 py-3 rounded-2xl bg-primary text-white font-semibold hover:opacity-90 transition-all shadow-md hover:text-black"
                 >
                     Thanh toán
                 </Link>

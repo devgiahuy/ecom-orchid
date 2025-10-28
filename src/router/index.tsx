@@ -37,8 +37,7 @@ export const router = createBrowserRouter([
                     { path: "natural", element: <NaturalPage /> },
                     { path: "natural/detail/:id", element: <DetailPage /> },
                     { path: "cart", element: <CartPage /> }
-                ],
-                errorElement: <ErrorPage />
+                ]
             },
 
             {

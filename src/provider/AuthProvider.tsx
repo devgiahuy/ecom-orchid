@@ -45,7 +45,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     useEffect(() => {
         if (!firebaseUser) return
         const fetchUserFromDB = async () => {
-            if (!firebaseUser) return
+            // if (!firebaseUser) return
 
             setLoading(true)
             const email = firebaseUser.email

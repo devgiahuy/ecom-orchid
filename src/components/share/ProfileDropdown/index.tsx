@@ -2,11 +2,12 @@ import { DropdownStyled } from "@/components/styled"
 import { useAuth } from "@/provider/AuthProvider"
 import { DropdownTrigger, DropdownMenu, DropdownItem, Avatar } from "@heroui/react"
 import { getAuth } from "firebase/auth"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 export default function ProfileDropdown() {
     const { logout, role } = useAuth()
     const user = getAuth().currentUser
+    const navigate = useNavigate()
 
     return (
         <div className="flex items-center gap-4">
@@ -33,7 +34,14 @@ export default function ProfileDropdown() {
                     <DropdownItem key="dashboard">
                         <Link to="admin/dashboard">Dasshboard</Link>
                     </DropdownItem>
-                    <DropdownItem key="logout" color="danger" onPress={logout}>
+                    <DropdownItem
+                        key="logout"
+                        color="danger"
+                        onPress={async () => {
+                            await logout()
+                            navigate("/login")
+                        }}
+                    >
                         Log Out
                     </DropdownItem>
                 </DropdownMenu>

@@ -54,7 +54,7 @@ export function Dashboard() {
         mt-4 md:mt-0 text-white bg-green-600 hover:bg-green-700
         px-5 py-2 font-semibold rounded-full shadow-sm transition-all
       "
-                    onPress={() => navigate("/dashboard/create")}
+                    onPress={() => navigate("/admin/dashboard/create")}
                 >
                     + Thêm Hoa Lan
                 </ButtonStyled>
@@ -145,7 +145,7 @@ export function Dashboard() {
                   h-8 w-24 border border-green-500 text-green-600
                   hover:bg-green-600 hover:text-white transition-colors font-medium rounded-full
                 "
-                                        onPress={() => navigate(`/dashboard/${item.id}`)}
+                                        onPress={() => navigate(`/admin/dashboard/${item.id}`)}
                                     >
                                         Update
                                     </ButtonStyled>

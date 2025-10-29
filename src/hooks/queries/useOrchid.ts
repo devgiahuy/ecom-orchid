@@ -42,7 +42,7 @@ export const useCreateOrchid = () => {
                 description: "Create successfully",
                 color: "success"
             })
-            navigate("/dashboard")
+            navigate("admin/dashboard")
         },
         onError: (err: Error) => {
             addToast({

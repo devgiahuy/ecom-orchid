@@ -133,7 +133,8 @@
             "category": "Cattleya",
             "price": 500000,
             "linkVideo": "https://www.youtube.com/embed/VVQ0p-9PdWM?si=8XakEDEJp0bD4K_N",
-            "id": "1"
+            "id": "1",
+            "stock": 15
         },
         {
             "id": "2",
@@ -147,7 +148,8 @@
             "origin": "Thailand",
             "category": "Phalaenopsis",
             "price": 100000,
-            "linkVideo": "https://www.youtube.com/embed/mX28JywhTkE?si=ZmiCGisIsmF6a-07"
+            "linkVideo": "https://www.youtube.com/embed/mX28JywhTkE?si=ZmiCGisIsmF6a-07",
+            "stock": 35
         },
         {
             "id": "3",
@@ -161,7 +163,8 @@
             "origin": "Japan",
             "category": "Dendrobium",
             "price": 300000,
-            "linkVideo": "https://www.youtube.com/embed/TzvMcbYfEO8?si=a022JnxzoX50__jW"
+            "linkVideo": "https://www.youtube.com/embed/TzvMcbYfEO8?si=a022JnxzoX50__jW",
+            "stock": 10
         },
         {
             "id": "4",
@@ -175,7 +178,8 @@
             "origin": "India",
             "category": "Vanda",
             "price": 700000,
-            "linkVideo": "https://www.youtube.com/embed/ugm_u_JFelI?si=3Xoyk9o330JghB4P"
+            "linkVideo": "https://www.youtube.com/embed/ugm_u_JFelI?si=3Xoyk9o330JghB4P",
+            "stock": 8
         },
         {
             "id": "5",
@@ -189,7 +193,8 @@
             "origin": "China",
             "category": "Cymbidium",
             "price": 900000,
-            "linkVideo": "https://www.youtube.com/embed/mX28JywhTkE?si=ZmiCGisIsmF6a-07"
+            "linkVideo": "https://www.youtube.com/embed/mX28JywhTkE?si=ZmiCGisIsmF6a-07",
+            "stock": 20
         },
         {
             "id": "6",
@@ -203,7 +208,8 @@
             "origin": "Brazil",
             "category": "Miltonia",
             "price": 1500000,
-            "linkVideo": "https://www.youtube.com/embed/TzvMcbYfEO8?si=a022JnxzoX50__jW"
+            "linkVideo": "https://www.youtube.com/embed/TzvMcbYfEO8?si=a022JnxzoX50__jW",
+            "stock": 5
         },
         {
             "id": "7",
@@ -217,7 +223,8 @@
             "origin": "Mexico",
             "category": "Oncidium",
             "price": 5400000,
-            "linkVideo": "https://www.youtube.com/embed/VVQ0p-9PdWM?si=8XakEDEJp0bD4K_N"
+            "linkVideo": "https://www.youtube.com/embed/VVQ0p-9PdWM?si=8XakEDEJp0bD4K_N",
+            "stock": 12
         },
         {
             "id": "8",
@@ -231,7 +238,8 @@
             "origin": "Vietnam",
             "category": "Paphiopedilum",
             "price": 1100000,
-            "linkVideo": "https://www.youtube.com/embed/ugm_u_JFelI?si=3Xoyk9o330JghB4P"
+            "linkVideo": "https://www.youtube.com/embed/ugm_u_JFelI?si=3Xoyk9o330JghB4P",
+            "stock": 7
         },
         {
             "id": "9",
@@ -245,7 +253,8 @@
             "origin": "Central America",
             "category": "Brassavola",
             "price": 1300000,
-            "linkVideo": "https://www.youtube.com/embed/TzvMcbYfEO8?si=a022JnxzoX50__jW"
+            "linkVideo": "https://www.youtube.com/embed/TzvMcbYfEO8?si=a022JnxzoX50__jW",
+            "stock": 18
         },
         {
             "id": "10",
@@ -259,7 +268,8 @@
             "origin": "Brazil",
             "category": "Cattleya",
             "price": 500000,
-            "linkVideo": "https://www.youtube.com/embed/mX28JywhTkE?si=ZmiCGisIsmF6a-07"
+            "linkVideo": "https://www.youtube.com/embed/mX28JywhTkE?si=ZmiCGisIsmF6a-07",
+            "stock": 14
         },
         {
             "id": "11",
@@ -273,7 +283,8 @@
             "origin": "Caribbean",
             "category": "Encyclia",
             "price": 2500000,
-            "linkVideo": "https://www.youtube.com/embed/VVQ0p-9PdWM?si=8XakEDEJp0bD4K_N"
+            "linkVideo": "https://www.youtube.com/embed/VVQ0p-9PdWM?si=8XakEDEJp0bD4K_N",
+            "stock": 6
         },
         {
             "id": "12",
@@ -287,7 +298,8 @@
             "origin": "Brazil",
             "category": "Laelia",
             "price": 6500000,
-            "linkVideo": "https://www.youtube.com/embed/ugm_u_JFelI?si=3Xoyk9o330JghB4P"
+            "linkVideo": "https://www.youtube.com/embed/ugm_u_JFelI?si=3Xoyk9o330JghB4P",
+            "stock": 4
         },
         {
             "id": "13",
@@ -301,7 +313,8 @@
             "origin": "South America",
             "category": "Zygopetalum",
             "price": 1500000,
-            "linkVideo": "https://www.youtube.com/embed/TzvMcbYfEO8?si=a022JnxzoX50__jW"
+            "linkVideo": "https://www.youtube.com/embed/TzvMcbYfEO8?si=a022JnxzoX50__jW",
+            "stock": 11
         },
         {
             "id": "14",
@@ -315,7 +328,8 @@
             "origin": "Himalaya",
             "category": "Coelogyne",
             "price": 2500000,
-            "linkVideo": "https://www.youtube.com/embed/VVQ0p-9PdWM?si=8XakEDEJp0bD4K_N"
+            "linkVideo": "https://www.youtube.com/embed/VVQ0p-9PdWM?si=8XakEDEJp0bD4K_N",
+            "stock": 9
         },
         {
             "id": "15",
@@ -329,7 +343,8 @@
             "origin": "Peru",
             "category": "Masdevallia",
             "price": 4500000,
-            "linkVideo": "https://www.youtube.com/embed/mX28JywhTkE?si=ZmiCGisIsmF6a-07"
+            "linkVideo": "https://www.youtube.com/embed/mX28JywhTkE?si=ZmiCGisIsmF6a-07",
+            "stock": 3
         },
         {
             "id": "16",
@@ -343,7 +358,8 @@
             "origin": "Guatemala",
             "category": "Lycaste",
             "price": 2000000,
-            "linkVideo": "https://www.youtube.com/embed/ugm_u_JFelI?si=3Xoyk9o330JghB4P"
+            "linkVideo": "https://www.youtube.com/embed/ugm_u_JFelI?si=3Xoyk9o330JghB4P",
+            "stock": 17
         }
     ]
 }

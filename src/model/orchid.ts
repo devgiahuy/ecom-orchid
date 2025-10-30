@@ -11,6 +11,8 @@ export type Orchid = {
     category?: string
     price: number
     linkVideo?: string
+    stock?: number
+    createdAt: string
 }
 
 export type OrchidReq = {
@@ -25,4 +27,5 @@ export type OrchidReq = {
     category?: string
     price: number
     linkVideo?: string
+    stock?: number
 }

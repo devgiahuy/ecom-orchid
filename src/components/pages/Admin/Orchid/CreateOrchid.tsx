@@ -1,52 +1,51 @@
 import { useFormik } from "formik"
 import * as Yup from "yup"
-import { useParams } from "react-router-dom"
-import { useGetOrchidById, useUpdateOrchid } from "@/hooks/queries/useOrchid"
-import { Checkbox, Button, Card, CardBody } from "@heroui/react"
+import { useCreateOrchid } from "../../../../hooks/queries/useOrchid"
+import { AutocompleteItem, Card, CardBody, Checkbox } from "@heroui/react"
 import {
     Flower2,
-    Palette,
-    Tag,
-    Sprout,
     Image as ImageIcon,
+    Palette,
+    Sprout,
+    DollarSign,
     Star,
-    Heart,
     Video,
-    DollarSign
+    TagIcon
 } from "lucide-react"
 import { FormField } from "@/components/models"
+import { useGetAllCategories } from "@/hooks/queries/useCategory"
+import { AutocompleteStyled, ButtonStyled } from "@/components"
+import { useState } from "react"
 
-export function UpdatePage() {
-    const { id } = useParams()
-    const { data: orchid } = useGetOrchidById(id!)
-    const updateOrchid = useUpdateOrchid()
+export default function CreateOrchid() {
+    const createOrchid = useCreateOrchid()
+    const { data: categories } = useGetAllCategories()
+    const [selectCategory, setSelectCategory] = useState<string>("")
 
     const formik = useFormik({
-        enableReinitialize: true,
         initialValues: {
-            name: orchid?.name ?? "",
-            rating: orchid?.rating ?? 0,
-            isNatural: orchid?.isNatural ?? false,
-            isSpecial: orchid?.isSpecial ?? false,
-            image: orchid?.image ?? "",
-            color: orchid?.color ?? "",
-            numberOfLike: orchid?.numberOfLike ?? 0,
-            origin: orchid?.origin ?? "",
-            category: orchid?.category ?? "",
-            price: orchid?.price ?? 0,
-            linkVideo: orchid?.linkVideo ?? ""
+            name: "",
+            image: "",
+            price: 0,
+            isNatural: false,
+            isSpecial: false,
+            origin: "",
+            color: "",
+            category: selectCategory,
+            rating: 0
         },
         validationSchema: Yup.object({
             name: Yup.string().required("Tên hoa lan là bắt buộc"),
-            image: Yup.string().url("Phải là một URL hợp lệ").required("Hình ảnh là bắt buộc"),
-            price: Yup.number().positive("Giá phải là số dương").required("Giá là bắt buộc"),
+            image: Yup.string().url("Phải là URL hợp lệ").required("Hình ảnh là bắt buộc"),
+            price: Yup.number().positive("Giá phải là số dương").required("Giá là bắt buộc").min(0),
             origin: Yup.string().required("Nguồn gốc là bắt buộc"),
             color: Yup.string().required("Màu sắc là bắt buộc"),
-            category: Yup.string().required("Phân loại là bắt buộc"),
+            // category: Yup.string().required("Phân loại là bắt buộc"),
             rating: Yup.number().min(0).max(5).required("Đánh giá là bắt buộc")
         }),
         onSubmit: (values) => {
-            updateOrchid.mutateAsync({ id: id!, req: values })
+            console.log(values)
+            createOrchid.mutateAsync(values)
         }
     })
 
@@ -57,17 +56,18 @@ export function UpdatePage() {
         bg-white dark:bg-gray-900
         border border-green-100 dark:border-gray-800
         rounded-3xl shadow-lg relative overflow-hidden
+        transition-colors duration-300
       "
         >
-            {/* Background texture */}
+            {/* Background pattern */}
             <div className="absolute inset-0 opacity-[0.05] bg-[url('https://www.transparenttextures.com/patterns/green-dust-and-scratches.png')] pointer-events-none"></div>
 
             <div className="relative text-center mb-12">
                 <h2 className="text-4xl font-extrabold text-green-600 dark:text-green-400">
-                    Cập Nhật Hoa Lan
+                    Thêm Hoa Lan Mới
                 </h2>
                 <p className="text-gray-600 dark:text-gray-400 mt-2">
-                    Sửa đổi thông tin chi tiết của sản phẩm hiện có
+                    Điền thông tin chi tiết về sản phẩm của bạn để thêm vào cửa hàng
                 </p>
             </div>
 
@@ -79,56 +79,82 @@ export function UpdatePage() {
                 <CardBody>
                     <form onSubmit={formik.handleSubmit} className="flex flex-col gap-8">
                         <FormField
-                            icon={<Flower2 />}
+                            icon={<Flower2 size={18} />}
                             label="Tên hoa lan"
                             name="name"
                             formik={formik}
                         />
                         <FormField
-                            icon={<ImageIcon />}
-                            label="URL Hình ảnh"
+                            icon={<ImageIcon size={18} />}
+                            label="URL hình ảnh"
                             name="image"
                             formik={formik}
                         />
                         <FormField
-                            icon={<DollarSign />}
+                            icon={<DollarSign size={18} />}
                             label="Giá (VNĐ)"
                             name="price"
                             type="number"
                             formik={formik}
                         />
-                        <FormField
-                            icon={<Tag />}
+
+                        <AutocompleteStyled
+                            label={"Phân loại"}
+                            items={categories ?? []}
+                            name="category"
+                            startContent={<TagIcon className="text-xl" />}
+                            selectedKey={selectCategory}
+                            onSelectionChange={(key) => {
+                                setSelectCategory(key as string)
+                            }}
+                            className="max-w-60 h-20 mr-0"
+                        >
+                            {(categories ?? []).map((item) => (
+                                <AutocompleteItem key={item.id}>{item.id}</AutocompleteItem>
+                            ))}
+                        </AutocompleteStyled>
+                        {/* <FormField
+                            icon={<Tag size={18} />}
                             label="Phân loại"
                             name="category"
                             formik={formik}
-                        />
+                        /> */}
+
+                        {/* <AutocompleteStyled
+                        label={t("vehicle_model.station")}
+                        items={stationDispatch ?? []}
+                        startContent={<MapPinAreaIcon className="text-xl" />}
+                        selectedKey={selecedSation}
+                        onSelectionChange={(key) => {
+                            setSelecedSation(key as string)
+                        }}
+                        className="max-w-60 h-20 mr-0"
+                    >
+                        {(stationDispatch ?? []).map((item) => (
+                            <AutocompleteItem key={item.id}>{item.name}</AutocompleteItem>
+                        ))}
+                    </AutocompleteStyled> */}
+
                         <FormField
-                            icon={<Palette />}
+                            icon={<Palette size={18} />}
                             label="Màu sắc"
                             name="color"
                             formik={formik}
                         />
                         <FormField
-                            icon={<Sprout />}
+                            icon={<Sprout size={18} />}
                             label="Nguồn gốc"
                             name="origin"
                             formik={formik}
                         />
                         <FormField
-                            icon={<Star />}
+                            icon={<Star size={18} />}
                             label="Đánh giá (0 - 5)"
                             name="rating"
                             type="number"
                             formik={formik}
                         />
-                        <FormField
-                            icon={<Heart />}
-                            label="Lượt thích"
-                            name="numberOfLike"
-                            type="number"
-                            formik={formik}
-                        />
+
                         <FormField
                             icon={<Video />}
                             label="Link video"
@@ -137,7 +163,7 @@ export function UpdatePage() {
                         />
 
                         {/* Checkbox nhóm */}
-                        <div className="flex flex-wrap gap-6 mt-2">
+                        <div className="flex gap-6 mt-2">
                             <Checkbox
                                 name="isNatural"
                                 color="success"
@@ -148,6 +174,7 @@ export function UpdatePage() {
                             >
                                 Hoa tự nhiên
                             </Checkbox>
+
                             <Checkbox
                                 name="isSpecial"
                                 color="success"
@@ -160,17 +187,17 @@ export function UpdatePage() {
                             </Checkbox>
                         </div>
 
-                        {/* Nút cập nhật */}
-                        <Button
+                        {/* Button */}
+                        <ButtonStyled
                             type="submit"
                             color="success"
                             radius="full"
-                            isLoading={updateOrchid.isPending}
-                            disabled={updateOrchid.isPending}
+                            isLoading={createOrchid.isPending}
+                            disabled={createOrchid.isPending}
                             className="font-semibold text-white text-base bg-green-600 hover:bg-green-700 transition-colors"
                         >
-                            {updateOrchid.isPending ? "Đang cập nhật..." : "Cập nhật"}
-                        </Button>
+                            {createOrchid.isPending ? "Đang tạo..." : "Tạo mới"}
+                        </ButtonStyled>
                     </form>
                 </CardBody>
             </Card>

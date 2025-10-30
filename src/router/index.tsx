@@ -1,6 +1,4 @@
 import App from "../app/App"
-import { Dashboard } from "@/components/pages/Admin/Dashboard"
-import { UpdatePage } from "@/components/pages/Admin/UpdatePage"
 import {
     AboutPage,
     ContactPage,
@@ -13,8 +11,14 @@ import DetailPage from "@/components/pages/User/DetailPage"
 import NaturalPage from "@/components/pages/Gest/NaturalPage"
 import { createBrowserRouter } from "react-router-dom"
 import { ProtectedRoute } from "./ProtectedRote"
-import CreateOrchid from "@/components/pages/Admin/CreateOrchid"
+import CreateOrchid from "@/components/pages/Admin/Orchid/CreateOrchid"
 import CartPage from "@/components/pages/User/CartPage"
+import { AdminLayout } from "@/app/AdminLayout"
+import { Orchids } from "@/components/pages/Admin/Orchid/TableOrchids"
+import { CreateCategory, TableCategory } from "@/components/pages/Admin/Category"
+import UpdateCategory from "@/components/pages/Admin/Category/UpdateCategory"
+import TableCart from "@/components/pages/Admin/Cart/TableCart"
+import { UpdateOrchid } from "@/components/pages/Admin/Orchid/UpdateOrchid"
 
 export const router = createBrowserRouter([
     {
@@ -41,56 +45,22 @@ export const router = createBrowserRouter([
             },
 
             {
-                element: <ProtectedRoute key="admin" allowRoles={["admin"]} />,
+                path: "admin",
+                element: (
+                    <ProtectedRoute key="admin" allowRoles={["admin"]}>
+                        <AdminLayout />
+                    </ProtectedRoute>
+                ),
                 children: [
-                    { path: "admin/dashboard", element: <Dashboard /> },
-                    { path: "admin/dashboard/:id", element: <UpdatePage /> },
-                    { path: "admin/dashboard/create", element: <CreateOrchid /> }
+                    { path: "orchids", element: <Orchids /> },
+                    { path: "orchids/:id", element: <UpdateOrchid /> },
+                    { path: "orchids/create", element: <CreateOrchid /> },
+                    { path: "categories", element: <TableCategory /> },
+                    { path: "category/:id", element: <UpdateCategory /> },
+                    { path: "category/create", element: <CreateCategory /> },
+                    { path: "cart", element: <TableCart /> }
                 ]
             }
         ]
     }
 ])
-
-// const routes: RouteObject[] = [
-//     {
-//         path: "/",
-//         element: <App />,
-//         errorElement: <ErrorPage />,
-//         children: [
-//             // --- Public routes ---
-//             { index: true, element: <HomePage /> },
-//             { path: "home", element: <HomePage /> },
-//             { path: "about", element: <AboutPage /> },
-//             { path: "contact", element: <ContactPage /> },
-//             { path: "demo", element: <DemoPage /> },
-//             { path: "login", element: <LoginPage /> },
-//             { path: "error", element: <ErrorPage /> },
-
-//             // --- User routes ---
-//             {
-//                 element: <ProtectedRoute allowRoles={["user", "admin"]} />,
-//                 children: [
-//                     { path: "detail/:id", element: <DetailPage /> },
-//                     { path: "natural", element: <NaturalPage /> },
-//                     { path: "natural/detail/:id", element: <DetailPage /> }
-//                 ],
-//                 errorElement: <ErrorPage />
-//             },
-
-//             // --- Admin routes ---
-//             {
-//                 element: <ProtectedRoute key="admin" allowRoles={["admin"]} />,
-//                 children: [
-//                     { path: "dashboard", element: <Dashboard /> },
-//                     { path: "dashboard/:id", element: <UpdatePage /> },
-//                     { path: "dashboard/create", element: <CreateOrchid /> }
-//                 ],
-//                 errorElement: <ErrorPage />
-//             }
-//         ]
-//     }
-// ]
-
-// // ✅ HashRouter để deploy GitHub Pages
-// export const router = createHashRouter(routes)

@@ -1,3 +1,9 @@
+import { CreateCategory } from "../Admin/Category"
+
 export function DemoPage() {
-    return <div>DemoPage</div>
+    return (
+        <div>
+            <CreateCategory />
+        </div>
+    )
 }

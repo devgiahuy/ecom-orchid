@@ -31,8 +31,8 @@ export default function ProfileDropdown() {
                     <DropdownItem key="profile">
                         <Link to="/login">Profile</Link>
                     </DropdownItem>
-                    <DropdownItem key="dashboard">
-                        <Link to="admin/dashboard">Dasshboard</Link>
+                    <DropdownItem key="orchids">
+                        <Link to="admin/orchids">Dashboard</Link>
                     </DropdownItem>
                     <DropdownItem
                         key="logout"

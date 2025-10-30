@@ -5,7 +5,7 @@ import { TableHeader, TableColumn, TableBody, TableRow, TableCell, Spinner } fro
 import { useCallback } from "react"
 import { useNavigate } from "react-router-dom"
 
-export function Dashboard() {
+export function Orchids() {
     const navigate = useNavigate()
     const { data: orchids, isLoading } = useGetAllOrchids()
     const deleted = useDeleteOrchid()
@@ -54,7 +54,7 @@ export function Dashboard() {
         mt-4 md:mt-0 text-white bg-green-600 hover:bg-green-700
         px-5 py-2 font-semibold rounded-full shadow-sm transition-all
       "
-                    onPress={() => navigate("/admin/dashboard/create")}
+                    onPress={() => navigate("/admin/orchids/create")}
                 >
                     + Thêm Hoa Lan
                 </ButtonStyled>
@@ -98,7 +98,7 @@ export function Dashboard() {
 
                             <TableCell
                                 className="text-center font-semibold text-green-700 dark:text-green-400"
-                                onClick={() => navigate(`/dashboard/${item.id}`)}
+                                onClick={() => navigate(`/orchids/${item.id}`)}
                             >
                                 {item.name}
                             </TableCell>
@@ -145,7 +145,7 @@ export function Dashboard() {
                   h-8 w-24 border border-green-500 text-green-600
                   hover:bg-green-600 hover:text-white transition-colors font-medium rounded-full
                 "
-                                        onPress={() => navigate(`/admin/dashboard/${item.id}`)}
+                                        onPress={() => navigate(`/admin/orchids/${item.id}`)}
                                     >
                                         Update
                                     </ButtonStyled>

@@ -1,48 +1,45 @@
-import type { Orchid, OrchidReq } from "../../model/orchid"
-import { orchidApi } from "../../service/orchidApi"
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { QUERY_KEY } from "../../constants/queryKey"
+import { QUERY_KEY } from "@/constants/queryKey"
+import type { Category, CategoryReq } from "@/model/category"
+import { categoryApi } from "@/service/categoryApi"
 import { addToast } from "@heroui/toast"
-import { useNavigate } from "react-router-dom"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 
-export const useGetAllOrchids = ({ enabled = true }: { enabled?: boolean } = {}) => {
+export const useGetAllCategories = ({ enabled = true }: { enabled?: boolean } = {}) => {
     const queryClient = useQueryClient()
     const query = useQuery({
-        queryKey: [...QUERY_KEY.ORCHIDS],
-        queryFn: () => orchidApi.getAll(),
+        queryKey: [...QUERY_KEY.CATEGORIES],
+        queryFn: () => categoryApi.getAll(),
         initialData: () => {
-            return queryClient.getQueryData<Orchid[]>([...QUERY_KEY.ORCHIDS])
+            return queryClient.getQueryData<Category[]>([...QUERY_KEY.CATEGORIES])
         },
         enabled
     })
     return query
 }
 
-export const useGetOrchidById = (id: string, { enabled = true }: { enabled?: boolean } = {}) => {
+export const useGetCategoryById = (id: string, { enabled = true }: { enabled?: boolean } = {}) => {
     const query = useQuery({
-        queryKey: [...QUERY_KEY.ORCHIDS, id],
-        queryFn: () => orchidApi.getById(id),
+        queryKey: [...QUERY_KEY.CATEGORIES, id],
+        queryFn: () => categoryApi.getById(id),
         enabled
     })
     return query
 }
 
-export const useCreateOrchid = () => {
+export const useCreateCategory = () => {
     const queryClient = useQueryClient()
-    const navigate = useNavigate()
     return useMutation({
-        mutationFn: async (payload: OrchidReq) => {
-            const res = await orchidApi.create(payload)
+        mutationFn: async (payload: CategoryReq) => {
+            const res = await categoryApi.create(payload)
             return res
         },
         onSuccess: async () => {
-            await queryClient.invalidateQueries({ queryKey: [...QUERY_KEY.ORCHIDS] })
+            await queryClient.invalidateQueries({ queryKey: ["categories"] })
             addToast({
                 title: "Create",
                 description: "Create successfully",
                 color: "success"
             })
-            navigate("/admin/orchids")
         },
         onError: (err: Error) => {
             addToast({
@@ -54,12 +51,12 @@ export const useCreateOrchid = () => {
     })
 }
 
-export const useUpdateOrchid = () => {
+export const useUpdateCategory = () => {
     const queryClient = useQueryClient()
     return useMutation({
-        mutationFn: orchidApi.update,
-        onSuccess: async () => {
-            await queryClient.invalidateQueries({ queryKey: [...QUERY_KEY.ORCHIDS] })
+        mutationFn: categoryApi.update,
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["categories"] })
             addToast({
                 title: "Update",
                 description: "Update successfully",
@@ -76,15 +73,14 @@ export const useUpdateOrchid = () => {
     })
 }
 
-export const useDeleteOrchid = () => {
+export const useDeleteCategory = () => {
     const queryClient = useQueryClient()
     return useMutation({
         mutationFn: async (id: string) => {
-            const res = await orchidApi.delete(id)
-            return res
+            await categoryApi.delete(id)
         },
         onSuccess: async () => {
-            await queryClient.invalidateQueries({ queryKey: [...QUERY_KEY.ORCHIDS] })
+            await queryClient.invalidateQueries({ queryKey: ["categories"] })
             addToast({
                 title: "Delete",
                 description: "Delete successfully",

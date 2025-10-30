@@ -1,12 +1,19 @@
 import { CardOrchid } from "@/components/models"
-import { useGetAllOrchids } from "@/hooks/queries/useOrchid"
+import { InputStyled } from "@/components/styled"
+import { useSearchOrchids } from "@/hooks/queries/useOrchid"
+import { useDebounce } from "@/hooks/singleton/useDebounce"
 import type { Orchid } from "@/model/orchid"
 import { Spinner } from "@heroui/react"
 
 import { motion } from "framer-motion"
+import { Search } from "lucide-react"
 import { useEffect, useState } from "react"
 export function HomePage() {
-    const { data: orchids, isLoading } = useGetAllOrchids()
+    const [keyword, setKeyword] = useState("")
+    const debouncedKeyword = useDebounce(keyword, 1000)
+    const { data: orchids, isFetching } = useSearchOrchids(debouncedKeyword)
+
+    // ====================================================
 
     const fullText = "Ecommerce Orchid — HYCAT"
     const [displayText, setDisplayText] = useState("")
@@ -22,7 +29,7 @@ export function HomePage() {
         }
     }, [index])
 
-    if (isLoading)
+    if (isFetching)
         return (
             <div className="flex justify-center items-center">
                 <Spinner />
@@ -43,6 +50,22 @@ export function HomePage() {
                                 {displayText}
                                 <span className="border-r-4 border-[#32CD32] ml-1 animate-cursor" />
                             </h1>
+                        </div>
+
+                        {/* create search */}
+                        <div className="mb-6 relative max-w-3xl mx-auto">
+                            <InputStyled
+                                label="Search"
+                                variant="bordered"
+                                type="text"
+                                placeholder="Tìm kiếm hoa lan..."
+                                value={keyword}
+                                onChange={(e) => setKeyword(e.target.value)}
+                                startContent={<Search size={18} className="text-gray-400 " />}
+                                radius="lg"
+                                color="success"
+                                className="bg-white rounded-2xl p-2"
+                            />
                         </div>
 
                         {/* list */}

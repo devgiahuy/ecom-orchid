@@ -19,6 +19,7 @@ import { CreateCategory, TableCategory } from "@/components/pages/Admin/Category
 import UpdateCategory from "@/components/pages/Admin/Category/UpdateCategory"
 import TableCart from "@/components/pages/Admin/Cart/TableCart"
 import { UpdateOrchid } from "@/components/pages/Admin/Orchid/UpdateOrchid"
+import { UserProfile } from "@/components"
 
 export const router = createBrowserRouter([
     {
@@ -37,6 +38,7 @@ export const router = createBrowserRouter([
             {
                 element: <ProtectedRoute allowRoles={["user", "admin"]} />,
                 children: [
+                    { path: "profile", element: <UserProfile /> },
                     { path: "detail/:id", element: <DetailPage /> },
                     { path: "natural", element: <NaturalPage /> },
                     { path: "natural/detail/:id", element: <DetailPage /> },

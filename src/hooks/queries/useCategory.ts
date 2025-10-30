@@ -3,12 +3,26 @@ import type { Category, CategoryReq } from "@/model/category"
 import { categoryApi } from "@/service/categoryApi"
 import { addToast } from "@heroui/toast"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import { useNavigate } from "react-router-dom"
 
 export const useGetAllCategories = ({ enabled = true }: { enabled?: boolean } = {}) => {
     const queryClient = useQueryClient()
     const query = useQuery({
         queryKey: [...QUERY_KEY.CATEGORIES],
         queryFn: () => categoryApi.getAll(),
+        initialData: () => {
+            return queryClient.getQueryData<Category[]>([...QUERY_KEY.CATEGORIES])
+        },
+        enabled
+    })
+    return query
+}
+
+export const useSortedCategories = ({ enabled = true }: { enabled?: boolean } = {}) => {
+    const queryClient = useQueryClient()
+    const query = useQuery({
+        queryKey: [...QUERY_KEY.CATEGORIES],
+        queryFn: () => categoryApi.sorted(),
         initialData: () => {
             return queryClient.getQueryData<Category[]>([...QUERY_KEY.CATEGORIES])
         },
@@ -28,6 +42,7 @@ export const useGetCategoryById = (id: string, { enabled = true }: { enabled?: b
 
 export const useCreateCategory = () => {
     const queryClient = useQueryClient()
+    const navigate = useNavigate()
     return useMutation({
         mutationFn: async (payload: CategoryReq) => {
             const res = await categoryApi.create(payload)
@@ -40,6 +55,7 @@ export const useCreateCategory = () => {
                 description: "Create successfully",
                 color: "success"
             })
+            navigate("/admin/categories")
         },
         onError: (err: Error) => {
             addToast({
@@ -56,7 +72,7 @@ export const useUpdateCategory = () => {
     return useMutation({
         mutationFn: categoryApi.update,
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ["categories"] })
+            queryClient.invalidateQueries({ queryKey: [...QUERY_KEY.CATEGORIES] })
             addToast({
                 title: "Update",
                 description: "Update successfully",
@@ -75,12 +91,13 @@ export const useUpdateCategory = () => {
 
 export const useDeleteCategory = () => {
     const queryClient = useQueryClient()
+
     return useMutation({
         mutationFn: async (id: string) => {
             await categoryApi.delete(id)
         },
         onSuccess: async () => {
-            await queryClient.invalidateQueries({ queryKey: ["categories"] })
+            await queryClient.invalidateQueries({ queryKey: [...QUERY_KEY.CATEGORIES] })
             addToast({
                 title: "Delete",
                 description: "Delete successfully",

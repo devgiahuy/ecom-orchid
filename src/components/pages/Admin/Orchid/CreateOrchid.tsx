@@ -32,7 +32,8 @@ export default function CreateOrchid() {
             origin: "",
             color: "",
             category: selectCategory,
-            rating: 0
+            rating: 0,
+            createdAt: new Date().toISOString()
         },
         validationSchema: Yup.object({
             name: Yup.string().required("Tên hoa lan là bắt buộc"),

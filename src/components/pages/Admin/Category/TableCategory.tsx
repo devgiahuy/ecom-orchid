@@ -1,7 +1,6 @@
 import { ButtonStyled } from "@/components/styled"
 import { TableStyled } from "@/components/styled/TableStyled"
-import { useGetAllCategories } from "@/hooks/queries/useCategory"
-import { useDeleteOrchid } from "@/hooks/queries/useOrchid"
+import { useDeleteCategory, useSortedCategories } from "@/hooks/queries/useCategory"
 import { Spinner, TableBody, TableCell, TableColumn, TableHeader, TableRow } from "@heroui/react"
 import { useCallback } from "react"
 
@@ -9,8 +8,12 @@ import { useNavigate } from "react-router-dom"
 
 export function TableCategory() {
     const navigate = useNavigate()
-    const { data: categories, isLoading } = useGetAllCategories()
-    const deleted = useDeleteOrchid()
+    const { data: categories, isLoading } = useSortedCategories()
+    console.log("categories unsorted", categories)
+
+    // console.log(sorted!.map((c) => `${c.name} — ${c.createdAt}`))
+
+    const deleted = useDeleteCategory()
 
     const handleDelete = useCallback(
         async (id: string) => {
@@ -18,6 +21,7 @@ export function TableCategory() {
         },
         [deleted]
     )
+    console.log("categories", categories)
 
     if (isLoading)
         return (
@@ -54,7 +58,7 @@ export function TableCategory() {
         mt-4 md:mt-0 text-white bg-green-600 hover:bg-green-700
         px-5 py-2 font-semibold rounded-full shadow-sm transition-all
       "
-                    onPress={() => navigate("/admin/orchids/create")}
+                    onPress={() => navigate("/admin/category/create")}
                 >
                     + Thêm Loại Hoa
                 </ButtonStyled>
@@ -71,7 +75,7 @@ export function TableCategory() {
                     </TableColumn>
 
                     <TableColumn className="text-center text-gray-800 dark:text-gray-200 font-semibold py-4 bg-green-50/70 dark:bg-gray-800/70">
-                        Natural
+                        Description
                     </TableColumn>
                     <TableColumn className="text-center text-gray-800 dark:text-gray-200 font-semibold py-4 bg-green-50/70 dark:bg-gray-800/70">
                         Action

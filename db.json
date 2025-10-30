@@ -167,15 +167,18 @@
   "categories": [
     {
       "id": "1",
-      "name": "Cattleya"
+      "name": "Cattleya",
+      "createdAt": "2025-10-30T17:18:07.704Z"
     },
     {
       "id": "2",
-      "name": "Dendrobium"
+      "name": "Dendrobium",
+      "createdAt": "2025-10-30T08:00:00.000Z"
     },
     {
       "id": "3",
-      "name": "Phalaenopsis"
+      "name": "Phalaenopsis",
+      "createdAt": "2025-10-29T10:00:00.000Z"
     }
   ],
   "origins": [
@@ -210,7 +213,8 @@
       "price": 500000,
       "linkVideo": "https://www.youtube.com/embed/VVQ0p-9PdWM?si=8XakEDEJp0bD4K_N",
       "id": "1",
-      "stock": 15
+      "stock": 15,
+      "createdAt": "2023-10-01T10:00:00Z"
     },
     {
       "id": "2",
@@ -225,7 +229,8 @@
       "category": "Phalaenopsis",
       "price": 100000,
       "linkVideo": "https://www.youtube.com/embed/mX28JywhTkE?si=ZmiCGisIsmF6a-07",
-      "stock": 35
+      "stock": 35,
+      "createdAt": "2023-10-01T10:00:00Z"
     },
     {
       "id": "3",
@@ -240,7 +245,8 @@
       "category": "Dendrobium",
       "price": 300000,
       "linkVideo": "https://www.youtube.com/embed/TzvMcbYfEO8?si=a022JnxzoX50__jW",
-      "stock": 10
+      "stock": 10,
+      "createdAt": "2023-10-01T10:00:00Z"
     },
     {
       "id": "4",
@@ -255,7 +261,8 @@
       "category": "Vanda",
       "price": 700000,
       "linkVideo": "https://www.youtube.com/embed/ugm_u_JFelI?si=3Xoyk9o330JghB4P",
-      "stock": 8
+      "stock": 8,
+      "createdAt": "2023-10-01T10:00:00Z"
     },
     {
       "id": "5",
@@ -270,7 +277,8 @@
       "category": "Cymbidium",
       "price": 900000,
       "linkVideo": "https://www.youtube.com/embed/mX28JywhTkE?si=ZmiCGisIsmF6a-07",
-      "stock": 20
+      "stock": 20,
+      "createdAt": "2023-10-01T10:00:00Z"
     },
     {
       "id": "6",
@@ -285,7 +293,8 @@
       "category": "Miltonia",
       "price": 1500000,
       "linkVideo": "https://www.youtube.com/embed/TzvMcbYfEO8?si=a022JnxzoX50__jW",
-      "stock": 5
+      "stock": 5,
+      "createdAt": "2023-10-01T10:00:00Z"
     },
     {
       "id": "7",
@@ -300,7 +309,8 @@
       "category": "Oncidium",
       "price": 5400000,
       "linkVideo": "https://www.youtube.com/embed/VVQ0p-9PdWM?si=8XakEDEJp0bD4K_N",
-      "stock": 12
+      "stock": 12,
+      "createdAt": "2023-10-01T10:00:00Z"
     },
     {
       "id": "8",
@@ -315,7 +325,8 @@
       "category": "Paphiopedilum",
       "price": 1100000,
       "linkVideo": "https://www.youtube.com/embed/ugm_u_JFelI?si=3Xoyk9o330JghB4P",
-      "stock": 7
+      "stock": 7,
+      "createdAt": "2023-10-01T10:00:00Z"
     },
     {
       "id": "9",
@@ -330,7 +341,8 @@
       "category": "Brassavola",
       "price": 1300000,
       "linkVideo": "https://www.youtube.com/embed/TzvMcbYfEO8?si=a022JnxzoX50__jW",
-      "stock": 18
+      "stock": 18,
+      "createdAt": "2023-10-01T10:00:00Z"
     },
     {
       "id": "10",
@@ -345,7 +357,8 @@
       "category": "Cattleya",
       "price": 500000,
       "linkVideo": "https://www.youtube.com/embed/mX28JywhTkE?si=ZmiCGisIsmF6a-07",
-      "stock": 14
+      "stock": 14,
+      "createdAt": "2023-10-01T10:00:00Z"
     },
     {
       "id": "11",
@@ -360,7 +373,8 @@
       "category": "Encyclia",
       "price": 2500000,
       "linkVideo": "https://www.youtube.com/embed/VVQ0p-9PdWM?si=8XakEDEJp0bD4K_N",
-      "stock": 6
+      "stock": 6,
+      "createdAt": "2023-10-01T10:00:00Z"
     },
     {
       "id": "12",
@@ -375,7 +389,8 @@
       "category": "Laelia",
       "price": 6500000,
       "linkVideo": "https://www.youtube.com/embed/ugm_u_JFelI?si=3Xoyk9o330JghB4P",
-      "stock": 4
+      "stock": 4,
+      "createdAt": "2023-10-01T10:00:00Z"
     },
     {
       "id": "13",
@@ -390,7 +405,8 @@
       "category": "Zygopetalum",
       "price": 1500000,
       "linkVideo": "https://www.youtube.com/embed/TzvMcbYfEO8?si=a022JnxzoX50__jW",
-      "stock": 11
+      "stock": 11,
+      "createdAt": "2025-10-21T10:00:00Z"
     },
     {
       "id": "14",
@@ -405,7 +421,8 @@
       "category": "Coelogyne",
       "price": 2500000,
       "linkVideo": "https://www.youtube.com/embed/VVQ0p-9PdWM?si=8XakEDEJp0bD4K_N",
-      "stock": 9
+      "stock": 9,
+      "createdAt": "2024-10-12T10:00:00Z"
     },
     {
       "id": "15",
@@ -420,7 +437,8 @@
       "category": "Masdevallia",
       "price": 4500000,
       "linkVideo": "https://www.youtube.com/embed/mX28JywhTkE?si=ZmiCGisIsmF6a-07",
-      "stock": 3
+      "stock": 3,
+      "createdAt": "2023-10-01T10:00:00Z"
     },
     {
       "id": "16",
@@ -435,33 +453,8 @@
       "category": "Lycaste",
       "price": 2000000,
       "linkVideo": "https://www.youtube.com/embed/ugm_u_JFelI?si=3Xoyk9o330JghB4P",
-      "stock": 17
-    },
-    {
-      "id": "6f49",
-      "name": "1",
-      "image": "https://i.pinimg.com/736x/61/62/2e/61622ec8899cffaa687a8342a84ea525.jpg",
-      "price": 1,
-      "isNatural": true,
-      "isSpecial": false,
-      "origin": "1",
-      "color": "1",
-      "category": "",
-      "rating": 1,
-      "linkVideo": "https://www.youtube.com/embed/VVQ0p-9PdWM?si=8XakEDEJp0bD4K_N"
-    },
-    {
-      "id": "a331",
-      "name": "1",
-      "image": "https://i.pinimg.com/736x/61/62/2e/61622ec8899cffaa687a8342a84ea525.jpg",
-      "price": 1,
-      "isNatural": false,
-      "isSpecial": false,
-      "origin": "Thailand",
-      "color": "1",
-      "category": "",
-      "rating": 1,
-      "linkVideo": "https://www.youtube.com/embed/VVQ0p-9PdWM?si=8XakEDEJp0bD4K_N"
+      "stock": 17,
+      "createdAt": "2023-10-01T10:00:00Z"
     }
   ]
 }

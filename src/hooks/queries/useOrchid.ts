@@ -100,3 +100,74 @@ export const useDeleteOrchid = () => {
         }
     })
 }
+
+// export const useSearchOrchids = (
+//     keyword: string,
+//     { enabled = true }: { enabled?: boolean } = {}
+// ) => {
+//     const queryClient = useQueryClient()
+
+//     const query = useQuery({
+//         queryKey: ["orchids", "search", keyword],
+//         queryFn: async () => {
+//             // 🟢 Không có keyword → load tất cả
+//             if (!keyword.trim()) {
+//                 const res = await orchidApi.getAll()
+//                 return res
+//             }
+
+//             // 🟢 Gọi API tìm theo name (substring)
+//             const res = await orchidApi.search(keyword)
+//             const orchids = res
+
+//             // 🟢 Fuzzy nhẹ: "tai" -> match "Taichung", "tchng" -> vẫn match "Taichung"
+//             const pattern = keyword
+//                 .split("") // t, a, i, c, h
+//                 .join(".*") // t.*a.*i.*c.*h
+//             const regex = new RegExp(pattern, "i")
+
+//             const fuzzyMatched = orchids.filter((item) => regex.test(item.name))
+
+//             return fuzzyMatched
+//         },
+//         initialData: () => queryClient.getQueryData<Orchid[]>(["orchids", "search", keyword]),
+//         enabled
+//     })
+
+//     return query
+// }
+
+export const useSearchOrchids = (
+    keyword: string,
+    { enabled = true }: { enabled?: boolean } = {}
+) => {
+    const queryClient = useQueryClient()
+
+    const query = useQuery({
+        queryKey: ["orchids", "search", keyword],
+        queryFn: async () => {
+            // 🟢 Không nhập gì → trả tất cả
+            if (!keyword.trim()) {
+                const res = await orchidApi.getAll()
+                return res
+            }
+
+            // 🟢 Gọi API tìm sơ bộ (lọc substring)
+            const res = await orchidApi.search(keyword)
+            const orchids = res
+
+            // 🟢 Word-based search (chỉ match nguyên từ)
+            // ví dụ: "tai" match "Taichung Beauty" ✅, không match "Metallic" ❌
+            const pattern = `\\b${keyword}\\b`
+            const regex = new RegExp(pattern, "i")
+
+            const filtered = orchids.filter((item) => regex.test(item.name))
+
+            return filtered
+        },
+        initialData: () => queryClient.getQueryData<Orchid[]>(["orchids", "search", keyword]),
+        enabled
+    })
+
+    return query
+}

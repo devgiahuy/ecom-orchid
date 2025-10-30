@@ -29,7 +29,7 @@ export default function ProfileDropdown() {
 
                     {/* actions  */}
                     <DropdownItem key="profile">
-                        <Link to="/login">Profile</Link>
+                        <Link to="/profile">Profile</Link>
                     </DropdownItem>
                     <DropdownItem key="orchids">
                         <Link to="admin/orchids">Dashboard</Link>

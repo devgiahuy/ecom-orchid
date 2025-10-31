@@ -2,7 +2,6 @@ import { QUERY_KEY } from "@/constants/queryKey"
 import { feedbackApi } from "@/service/feedbackApi"
 import { addToast } from "@heroui/toast"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { useNavigate } from "react-router-dom"
 
 export const useGetAllFeedbacks = ({ enabled = true }: { enabled?: boolean } = {}) => {
     const query = useQuery({

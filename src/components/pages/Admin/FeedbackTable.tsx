@@ -1,6 +1,5 @@
 import { ButtonStyled } from "@/components/styled"
 import { TableStyled } from "@/components/styled/TableStyled"
-import { useDeleteCategory, useSortedCategories } from "@/hooks/queries/useCategory"
 import { useDeleteFeedback, useGetAllFeedbacks } from "@/hooks/queries/useFeedback"
 import { Spinner, TableBody, TableCell, TableColumn, TableHeader, TableRow } from "@heroui/react"
 import { useCallback } from "react"

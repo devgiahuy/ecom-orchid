@@ -8,18 +8,18 @@
       "role": "admin"
     },
     {
-      "id": "d869",
-      "name": "Ngo Gia Huy (K18 HCM)",
-      "email": "huyngse183274@fpt.edu.vn",
-      "avatar": "https://lh3.googleusercontent.com/a/ACg8ocKhKpF9xkYozJTk3dK5ac5lh8l7HiIud-tHeV43akXGIwi_AQ=s96-c",
-      "role": "admin"
-    },
-    {
       "id": "10ea",
       "name": "Huy Gia",
       "email": "ngogiahuy3978@gmail.com",
       "avatar": "https://lh3.googleusercontent.com/a/ACg8ocJeh4H992zvc0iRL4ZYeO6p6bUofDH4CLlr_Jnsj7sgBwhtjGx2=s96-c",
       "role": "user"
+    },
+    {
+      "id": "9e80",
+      "name": "Ngo Gia Huy (K18 HCM)",
+      "email": "huyngse183274@fpt.edu.vn",
+      "avatar": "https://lh3.googleusercontent.com/a/ACg8ocKhKpF9xkYozJTk3dK5ac5lh8l7HiIud-tHeV43akXGIwi_AQ=s96-c",
+      "role": "admin"
     }
   ],
   "carts": [
@@ -103,7 +103,7 @@
       "comment": "Hoa rất đẹp, màu tươi như hình. Giao nhanh trong ngày!",
       "rating": 5,
       "author": "Lê Hoàng Anh",
-      "date": "2025-10-30T09:00:00Z"
+      "createdAt": "2025-10-30T09:00:00Z"
     },
     {
       "id": "f2",
@@ -112,7 +112,7 @@
       "comment": "Mùi thơm nhẹ, nhưng bông nhỏ hơn mong đợi.",
       "rating": 4,
       "author": "Ngô Gia Huy",
-      "date": "2025-10-29T16:30:00Z"
+      "createdAt": "2025-10-29T16:30:00Z"
     },
     {
       "id": "f3",
@@ -121,7 +121,7 @@
       "comment": "Đóng gói cẩn thận, rất đáng tiền. Sẽ mua lại!",
       "rating": 5,
       "author": "Minh Nhật",
-      "date": "2025-10-28T13:45:00Z"
+      "createdAt": "2025-10-28T13:45:00Z"
     },
     {
       "id": "f4",
@@ -130,7 +130,17 @@
       "comment": "Hoa hơi héo nhẹ khi nhận, nhưng hồi lại sau 1 ngày.",
       "rating": 3,
       "author": "Trần Phương",
-      "date": "2025-10-25T10:15:00Z"
+      "createdAt": "2025-10-25T10:15:00Z"
+    },
+    {
+      "id": "7dd8",
+      "userId": "10ea",
+      "author": "ngogiahuy3978@gmail.com",
+      "orchidId": "1",
+      "title": "1",
+      "comment": "hahaha",
+      "rating": 2,
+      "createdAt": "2025-10-31T05:26:54.361Z"
     }
   ],
   "wishlist": [
@@ -171,9 +181,9 @@
       "createdAt": "2025-10-30T17:18:07.704Z"
     },
     {
-      "id": "2",
       "name": "Dendrobium",
-      "createdAt": "2025-10-30T08:00:00.000Z"
+      "description": "Dendrobium",
+      "id": "2"
     },
     {
       "id": "3",
@@ -209,51 +219,44 @@
       "color": "pink",
       "numberOfLike": 192,
       "origin": "Taiwan",
-      "category": "Cattleya",
-      "price": 500000,
+      "category": "2",
+      "price": 400000,
       "linkVideo": "https://www.youtube.com/embed/VVQ0p-9PdWM?si=8XakEDEJp0bD4K_N",
-      "id": "1",
-      "stock": 15,
-      "createdAt": "2023-10-01T10:00:00Z"
+      "id": "1"
     },
     {
-      "id": "2",
       "name": "Phalaenopsis White Swan",
       "rating": 4,
-      "isSpecial": false,
       "isNatural": true,
+      "isSpecial": false,
       "image": "https://api.floriday.io/images/bbca2bfd-49c7-4cd4-a684-335c88cf46e8.jpg",
       "color": "white",
       "numberOfLike": 250,
       "origin": "Thailand",
-      "category": "Phalaenopsis",
+      "category": "2",
       "price": 100000,
       "linkVideo": "https://www.youtube.com/embed/mX28JywhTkE?si=ZmiCGisIsmF6a-07",
-      "stock": 35,
-      "createdAt": "2023-10-01T10:00:00Z"
+      "id": "2"
     },
     {
-      "id": "3",
       "name": "Dendrobium Stardust",
       "rating": 5,
-      "isSpecial": true,
       "isNatural": false,
+      "isSpecial": true,
       "image": "https://thumbs.dreamstime.com/b/blooming-orange-orchid-dendrobium-stardust-pot-window-blooming-orange-orchid-dendrobium-stardust-pot-window-200927493.jpg",
       "color": "orange",
       "numberOfLike": 310,
       "origin": "Japan",
-      "category": "Dendrobium",
+      "category": "3",
       "price": 300000,
       "linkVideo": "https://www.youtube.com/embed/TzvMcbYfEO8?si=a022JnxzoX50__jW",
-      "stock": 10,
-      "createdAt": "2023-10-01T10:00:00Z"
+      "id": "3"
     },
     {
-      "id": "4",
       "name": "Vanda Blue Magic",
       "rating": 4,
-      "isSpecial": true,
       "isNatural": true,
+      "isSpecial": true,
       "image": "https://orchids-shop.com/cdn/shop/products/20091022_mh189_-_kopie_-_kopie.jpg?v=1681289882&width=1577",
       "color": "blue",
       "numberOfLike": 145,
@@ -261,120 +264,105 @@
       "category": "Vanda",
       "price": 700000,
       "linkVideo": "https://www.youtube.com/embed/ugm_u_JFelI?si=3Xoyk9o330JghB4P",
-      "stock": 8,
-      "createdAt": "2023-10-01T10:00:00Z"
+      "id": "4"
     },
     {
-      "id": "5",
       "name": "Cymbidium Golden Elf",
       "rating": 5,
-      "isSpecial": false,
       "isNatural": true,
+      "isSpecial": false,
       "image": "https://tse2.mm.bing.net/th/id/OIP.2WWi720xaSs00X4faB2NggHaFj?rs=1&pid=ImgDetMain&o=7&rm=3",
       "color": "yellow",
       "numberOfLike": 280,
       "origin": "China",
-      "category": "Cymbidium",
+      "category": "1",
       "price": 900000,
       "linkVideo": "https://www.youtube.com/embed/mX28JywhTkE?si=ZmiCGisIsmF6a-07",
-      "stock": 20,
-      "createdAt": "2023-10-01T10:00:00Z"
+      "id": "5"
     },
     {
-      "id": "6",
       "name": "Miltonia Sunset",
       "rating": 3,
-      "isSpecial": false,
       "isNatural": false,
+      "isSpecial": false,
       "image": "https://tse1.mm.bing.net/th/id/OIP.EhiJlnKMolKQUef_oYucBAHaFj?rs=1&pid=ImgDetMain&o=7&rm=3",
       "color": "red",
       "numberOfLike": 98,
       "origin": "Brazil",
-      "category": "Miltonia",
+      "category": "2",
       "price": 1500000,
       "linkVideo": "https://www.youtube.com/embed/TzvMcbYfEO8?si=a022JnxzoX50__jW",
-      "stock": 5,
-      "createdAt": "2023-10-01T10:00:00Z"
+      "id": "6"
     },
     {
-      "id": "7",
       "name": "Oncidium Sharry Baby",
       "rating": 5,
-      "isSpecial": true,
       "isNatural": true,
+      "isSpecial": true,
       "image": "https://cdn.awsli.com.br/600x700/1520/1520689/produto/343741871/b34da2d986955757105d162d90d251b6-yu0x27ixn5.jpg",
       "color": "brown",
       "numberOfLike": 400,
       "origin": "Mexico",
-      "category": "Oncidium",
+      "category": "3",
       "price": 5400000,
       "linkVideo": "https://www.youtube.com/embed/VVQ0p-9PdWM?si=8XakEDEJp0bD4K_N",
-      "stock": 12,
-      "createdAt": "2023-10-01T10:00:00Z"
+      "id": "7"
     },
     {
-      "id": "8",
       "name": "Paphiopedilum Maudiae",
       "rating": 4,
-      "isSpecial": true,
       "isNatural": false,
+      "isSpecial": true,
       "image": "https://orhidaria.com/wp-content/uploads/2020/02/460Paph_Maudie_green-7.png",
       "color": "green",
       "numberOfLike": 210,
       "origin": "Vietnam",
-      "category": "Paphiopedilum",
+      "category": "3",
       "price": 1100000,
       "linkVideo": "https://www.youtube.com/embed/ugm_u_JFelI?si=3Xoyk9o330JghB4P",
-      "stock": 7,
-      "createdAt": "2023-10-01T10:00:00Z"
+      "id": "8"
     },
     {
-      "id": "9",
       "name": "Brassavola Nodosa",
       "rating": 3,
-      "isSpecial": false,
       "isNatural": true,
+      "isSpecial": false,
       "image": "https://tse2.mm.bing.net/th/id/OIP.MpF19U7TuIw3hLJ3nmAzMwHaFj?rs=1&pid=ImgDetMain&o=7&rm=3",
       "color": "white",
       "numberOfLike": 175,
       "origin": "Central America",
-      "category": "Brassavola",
+      "category": "2",
       "price": 1300000,
       "linkVideo": "https://www.youtube.com/embed/TzvMcbYfEO8?si=a022JnxzoX50__jW",
-      "stock": 18,
-      "createdAt": "2023-10-01T10:00:00Z"
+      "id": "9"
     },
     {
-      "id": "10",
       "name": "Cattleya Walkeriana",
       "rating": 5,
-      "isSpecial": true,
       "isNatural": true,
+      "isSpecial": true,
       "image": "https://th.bing.com/th/id/R.7ddea6c51316ba816c7ec523c1e01297?rik=3klv%2fXlywIIxuQ&pid=ImgRaw&r=0",
       "color": "purple",
       "numberOfLike": 500,
       "origin": "Brazil",
-      "category": "Cattleya",
+      "category": "2",
       "price": 500000,
       "linkVideo": "https://www.youtube.com/embed/mX28JywhTkE?si=ZmiCGisIsmF6a-07",
-      "stock": 14,
-      "createdAt": "2023-10-01T10:00:00Z"
+      "id": "10"
     },
     {
-      "id": "11",
       "name": "Encyclia Cochleata",
       "rating": 4,
-      "isSpecial": false,
       "isNatural": false,
+      "isSpecial": false,
       "image": "https://tse4.mm.bing.net/th/id/OIP.mC0yzCQVGNBdyAo_QjkcXQHaLH?rs=1&pid=ImgDetMain&o=7&rm=3",
       "color": "black-purple",
       "numberOfLike": 122,
       "origin": "Caribbean",
-      "category": "Encyclia",
+      "category": "1",
       "price": 2500000,
       "linkVideo": "https://www.youtube.com/embed/VVQ0p-9PdWM?si=8XakEDEJp0bD4K_N",
-      "stock": 6,
-      "createdAt": "2023-10-01T10:00:00Z"
+      "id": "11"
     },
     {
       "id": "12",
@@ -455,6 +443,20 @@
       "linkVideo": "https://www.youtube.com/embed/ugm_u_JFelI?si=3Xoyk9o330JghB4P",
       "stock": 17,
       "createdAt": "2023-10-01T10:00:00Z"
+    },
+    {
+      "name": "1",
+      "rating": 3,
+      "isNatural": true,
+      "isSpecial": false,
+      "image": "https://api.floriday.io/images/bbca2bfd-49c7-4cd4-a684-335c88cf46e8.jpg",
+      "color": "1",
+      "numberOfLike": 1,
+      "origin": "1",
+      "category": "3",
+      "price": 1,
+      "linkVideo": "https://www.youtube.com/embed/VVQ0p-9PdWM?si=8XakEDEJp0bD4K_N",
+      "id": "d273"
     }
   ]
 }

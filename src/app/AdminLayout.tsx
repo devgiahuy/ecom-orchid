@@ -1,11 +1,12 @@
 import { Outlet, NavLink } from "react-router-dom"
-import { Tag, ShoppingCart, Shield, Flower } from "lucide-react"
+import { Tag, ShoppingCart, Shield, Flower, Star } from "lucide-react"
 
 export function AdminLayout() {
     //Sidebar
     const navItems = [
         { to: "/admin/orchids", label: "Hoa Lan", icon: <Flower size={18} /> },
         { to: "/admin/categories", label: "Loại Hoa", icon: <Tag size={18} /> },
+        { to: "/admin/feedback", label: "Đánh Giá", icon: <Star size={18} /> },
         { to: "/admin/cart", label: "Đơn hàng", icon: <ShoppingCart size={18} /> }
     ]
     return (

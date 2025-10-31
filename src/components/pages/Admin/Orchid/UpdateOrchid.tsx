@@ -1,25 +1,33 @@
 import { useFormik } from "formik"
 import * as Yup from "yup"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { useGetOrchidById, useUpdateOrchid } from "@/hooks/queries/useOrchid"
-import { Checkbox, Button, Card, CardBody } from "@heroui/react"
+import { Checkbox, Button, Card, CardBody, AutocompleteItem } from "@heroui/react"
 import {
     Flower2,
     Palette,
-    Tag,
     Sprout,
     Image as ImageIcon,
     Star,
     Heart,
     Video,
-    DollarSign
+    DollarSign,
+    TagIcon
 } from "lucide-react"
 import { FormField } from "@/components/models"
+import { useState } from "react"
+import { useGetAllCategories } from "@/hooks/queries/useCategory"
+import { AutocompleteStyled, ButtonStyled } from "@/components/styled"
 
 export function UpdateOrchid() {
     const { id } = useParams()
+    const navigation = useNavigate()
     const { data: orchid } = useGetOrchidById(id!)
     const updateOrchid = useUpdateOrchid()
+
+    const [hovered, setHovered] = useState<number>(0)
+    const { data: categories } = useGetAllCategories()
+    const [selectCategory, setSelectCategory] = useState(orchid?.category || "")
 
     const formik = useFormik({
         enableReinitialize: true,
@@ -32,7 +40,7 @@ export function UpdateOrchid() {
             color: orchid?.color ?? "",
             numberOfLike: orchid?.numberOfLike ?? 0,
             origin: orchid?.origin ?? "",
-            category: orchid?.category ?? "",
+            category: selectCategory ?? "",
             price: orchid?.price ?? 0,
             linkVideo: orchid?.linkVideo ?? ""
         },
@@ -97,12 +105,24 @@ export function UpdateOrchid() {
                             type="number"
                             formik={formik}
                         />
-                        <FormField
-                            icon={<Tag />}
-                            label="Phân loại"
+
+                        <AutocompleteStyled
+                            label={"Phân loại"}
+                            items={categories ?? []}
                             name="category"
-                            formik={formik}
-                        />
+                            startContent={<TagIcon className="text-xl" />}
+                            selectedKey={selectCategory}
+                            onSelectionChange={(key) => {
+                                const value = key as string
+                                setSelectCategory(value)
+                                formik.setFieldValue("category", value)
+                            }}
+                            className="max-w-60 h-20 mr-0"
+                        >
+                            {(categories ?? []).map((item) => (
+                                <AutocompleteItem key={item.id}>{item.name}</AutocompleteItem>
+                            ))}
+                        </AutocompleteStyled>
                         <FormField
                             icon={<Palette />}
                             label="Màu sắc"
@@ -115,13 +135,43 @@ export function UpdateOrchid() {
                             name="origin"
                             formik={formik}
                         />
-                        <FormField
+                        {/* <FormField
                             icon={<Star />}
                             label="Đánh giá (0 - 5)"
                             name="rating"
                             type="number"
                             formik={formik}
-                        />
+                        /> */}
+                        <div className="flex flex-col gap-2">
+                            <label className="font-medium text-gray-700">Rating</label>
+
+                            <div className="flex gap-2 justify-center md:justify-start">
+                                {[1, 2, 3, 4, 5].map((val) => {
+                                    const isActive = (hovered || formik.values.rating) >= val
+                                    return (
+                                        <Star
+                                            key={val}
+                                            size={36}
+                                            strokeWidth={1.5}
+                                            className={`cursor-pointer transition-colors duration-300 ${
+                                                isActive
+                                                    ? "text-yellow-400 fill-yellow-400"
+                                                    : "text-gray-300"
+                                            }`}
+                                            fill={isActive ? "currentColor" : "none"}
+                                            onMouseEnter={() => setHovered(val)}
+                                            onMouseLeave={() => setHovered(0)}
+                                            onClick={() => formik.setFieldValue("rating", val)}
+                                        />
+                                    )
+                                })}
+                            </div>
+
+                            {formik.touched.rating && formik.errors.rating && (
+                                <p className="text-red-500 text-sm">{formik.errors.rating}</p>
+                            )}
+                        </div>
+
                         <FormField
                             icon={<Heart />}
                             label="Lượt thích"
@@ -161,16 +211,17 @@ export function UpdateOrchid() {
                         </div>
 
                         {/* Nút cập nhật */}
-                        <Button
+                        <ButtonStyled
                             type="submit"
                             color="success"
                             radius="full"
                             isLoading={updateOrchid.isPending}
                             disabled={updateOrchid.isPending}
                             className="font-semibold text-white text-base bg-green-600 hover:bg-green-700 transition-colors"
+                            onPress={() => navigation("/admin/orchids")}
                         >
                             {updateOrchid.isPending ? "Đang cập nhật..." : "Cập nhật"}
-                        </Button>
+                        </ButtonStyled>
                     </form>
                 </CardBody>
             </Card>

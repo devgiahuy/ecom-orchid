@@ -18,7 +18,7 @@ export function UserProfile() {
       "
         >
             <div className="flex flex-col items-center text-center space-y-4">
-                {/* 🪴 Avatar */}
+                {/*  Avatar */}
                 <Avatar
                     src={
                         userData?.avatar || "https://cdn-icons-png.flaticon.com/512/149/149071.png"

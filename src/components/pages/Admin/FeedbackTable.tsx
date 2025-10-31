@@ -1,19 +1,19 @@
 import { ButtonStyled } from "@/components/styled"
 import { TableStyled } from "@/components/styled/TableStyled"
 import { useDeleteCategory, useSortedCategories } from "@/hooks/queries/useCategory"
+import { useDeleteFeedback, useGetAllFeedbacks } from "@/hooks/queries/useFeedback"
 import { Spinner, TableBody, TableCell, TableColumn, TableHeader, TableRow } from "@heroui/react"
 import { useCallback } from "react"
 
-import { useNavigate } from "react-router-dom"
+export function FeedbackTable() {
+    // const navigate = useNavigate()
+    // const { data: categories, isLoading } = useSortedCategories()
 
-export function TableCategory() {
-    const navigate = useNavigate()
-    const { data: categories, isLoading } = useSortedCategories()
-    console.log("categories unsorted", categories)
+    const { data: feedbacks, isLoading } = useGetAllFeedbacks()
 
     // console.log(sorted!.map((c) => `${c.name} — ${c.createdAt}`))
 
-    const deleted = useDeleteCategory()
+    const deleted = useDeleteFeedback()
 
     const handleDelete = useCallback(
         async (id: string) => {
@@ -21,7 +21,7 @@ export function TableCategory() {
         },
         [deleted]
     )
-    console.log("categories", categories)
+    // console.log("categories", categories)
 
     if (isLoading)
         return (
@@ -51,17 +51,6 @@ export function TableCategory() {
                         Quản lý, chỉnh sửa hoặc xóa các sản phẩm có trong cửa hàng
                     </p>
                 </div>
-
-                <ButtonStyled
-                    color="success"
-                    className="
-        mt-4 md:mt-0 text-white bg-green-600 hover:bg-green-700
-        px-5 py-2 font-semibold rounded-full shadow-sm transition-all
-      "
-                    onPress={() => navigate("/admin/category/create")}
-                >
-                    + Thêm Loại Hoa
-                </ButtonStyled>
             </div>
 
             {/*table */}
@@ -78,12 +67,15 @@ export function TableCategory() {
                         Description
                     </TableColumn>
                     <TableColumn className="text-center text-gray-800 dark:text-gray-200 font-semibold py-4 bg-green-50/70 dark:bg-gray-800/70">
+                        Rating
+                    </TableColumn>
+                    <TableColumn className="text-center text-gray-800 dark:text-gray-200 font-semibold py-4 bg-green-50/70 dark:bg-gray-800/70">
                         Action
                     </TableColumn>
                 </TableHeader>
 
                 <TableBody>
-                    {categories!.map((item, index) => (
+                    {feedbacks!.map((item, index) => (
                         <TableRow
                             key={item.id}
                             className="
@@ -97,13 +89,16 @@ export function TableCategory() {
 
                             <TableCell
                                 className="text-center font-semibold text-green-700 dark:text-green-400"
-                                // onClick={() => navigate(`/detail/${item.id}`)}
+                                // onClick={() => navigate(`/orchids/${item.id}`)}
                             >
-                                {item.name}
+                                {item.author}
                             </TableCell>
 
                             <TableCell className="text-center text-gray-600 dark:text-gray-300">
-                                {item.description}
+                                {item.comment}
+                            </TableCell>
+                            <TableCell className="text-center text-gray-600 dark:text-gray-300">
+                                {item.rating}
                             </TableCell>
 
                             {/*  Action Buttons */}
@@ -119,18 +114,6 @@ export function TableCategory() {
                                         onPress={() => handleDelete(item.id)}
                                     >
                                         Delete
-                                    </ButtonStyled>
-
-                                    <ButtonStyled
-                                        color="success"
-                                        variant="bordered"
-                                        className="
-                  h-8 w-24 border border-green-500 text-green-600
-                  hover:bg-green-600 hover:text-white transition-colors font-medium rounded-full
-                "
-                                        onPress={() => navigate(`/admin/category/${item.id}`)}
-                                    >
-                                        Update
                                     </ButtonStyled>
                                 </div>
                             </TableCell>

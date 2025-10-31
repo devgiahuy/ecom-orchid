@@ -31,9 +31,12 @@ export default function ProfileDropdown() {
                     <DropdownItem key="profile">
                         <Link to="/profile">Profile</Link>
                     </DropdownItem>
+
                     <DropdownItem key="orchids">
-                        <Link to="admin/orchids">Dashboard</Link>
+                        {role === "admin" && <Link to="admin/orchids">Dashboard</Link>}
+                        {/* {role !== "admin" && <Link to="/feedback">Feedback</Link>} */}
                     </DropdownItem>
+
                     <DropdownItem
                         key="logout"
                         color="danger"

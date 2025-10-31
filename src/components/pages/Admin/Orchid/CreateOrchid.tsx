@@ -19,8 +19,9 @@ import { useState } from "react"
 
 export default function CreateOrchid() {
     const createOrchid = useCreateOrchid()
+    const [hovered, setHovered] = useState<number>(0)
     const { data: categories } = useGetAllCategories()
-    const [selectCategory, setSelectCategory] = useState<string>("")
+    const [selectCategory, setSelectCategory] = useState("")
 
     const formik = useFormik({
         initialValues: {
@@ -106,35 +107,16 @@ export default function CreateOrchid() {
                             startContent={<TagIcon className="text-xl" />}
                             selectedKey={selectCategory}
                             onSelectionChange={(key) => {
-                                setSelectCategory(key as string)
+                                const value = key as string
+                                setSelectCategory(value)
+                                formik.setFieldValue("category", value) // ✅ cập nhật Formik
                             }}
                             className="max-w-60 h-20 mr-0"
                         >
                             {(categories ?? []).map((item) => (
-                                <AutocompleteItem key={item.id}>{item.id}</AutocompleteItem>
+                                <AutocompleteItem key={item.id}>{item.name}</AutocompleteItem>
                             ))}
                         </AutocompleteStyled>
-                        {/* <FormField
-                            icon={<Tag size={18} />}
-                            label="Phân loại"
-                            name="category"
-                            formik={formik}
-                        /> */}
-
-                        {/* <AutocompleteStyled
-                        label={t("vehicle_model.station")}
-                        items={stationDispatch ?? []}
-                        startContent={<MapPinAreaIcon className="text-xl" />}
-                        selectedKey={selecedSation}
-                        onSelectionChange={(key) => {
-                            setSelecedSation(key as string)
-                        }}
-                        className="max-w-60 h-20 mr-0"
-                    >
-                        {(stationDispatch ?? []).map((item) => (
-                            <AutocompleteItem key={item.id}>{item.name}</AutocompleteItem>
-                        ))}
-                    </AutocompleteStyled> */}
 
                         <FormField
                             icon={<Palette size={18} />}
@@ -148,13 +130,42 @@ export default function CreateOrchid() {
                             name="origin"
                             formik={formik}
                         />
-                        <FormField
+                        {/* <FormField
                             icon={<Star size={18} />}
                             label="Đánh giá (0 - 5)"
                             name="rating"
                             type="number"
                             formik={formik}
-                        />
+                        /> */}
+                        <div className="flex flex-col gap-2">
+                            <label className="font-medium text-gray-700">Rating</label>
+
+                            <div className="flex gap-2 justify-center md:justify-start">
+                                {[1, 2, 3, 4, 5].map((val) => {
+                                    const isActive = (hovered || formik.values.rating) >= val
+                                    return (
+                                        <Star
+                                            key={val}
+                                            size={36}
+                                            strokeWidth={1.5}
+                                            className={`cursor-pointer transition-colors duration-300 ${
+                                                isActive
+                                                    ? "text-yellow-400 fill-yellow-400"
+                                                    : "text-gray-300"
+                                            }`}
+                                            fill={isActive ? "currentColor" : "none"}
+                                            onMouseEnter={() => setHovered(val)}
+                                            onMouseLeave={() => setHovered(0)}
+                                            onClick={() => formik.setFieldValue("rating", val)}
+                                        />
+                                    )
+                                })}
+                            </div>
+
+                            {formik.touched.rating && formik.errors.rating && (
+                                <p className="text-red-500 text-sm">{formik.errors.rating}</p>
+                            )}
+                        </div>
 
                         <FormField
                             icon={<Video />}

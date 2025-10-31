@@ -2,7 +2,7 @@ import { useGetCategoryById, useUpdateCategory } from "@/hooks/queries/useCatego
 import { useFormik } from "formik"
 import * as Yup from "yup"
 import { ButtonStyled, InputStyled } from "@/components/styled"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { Spinner } from "@heroui/react"
 
 export default function UpdateCategory() {
@@ -10,12 +10,13 @@ export default function UpdateCategory() {
     const categoryId = id!
     const { data: category, isLoading } = useGetCategoryById(categoryId)
     const updateCategory = useUpdateCategory()
+    const navigate = useNavigate()
 
-    // 🪴 Khởi tạo form
+    // Khởi tạo form
     const formik = useFormik({
         initialValues: {
-            name: "",
-            description: ""
+            name: category?.name || "",
+            description: category?.description || ""
         },
         validationSchema: Yup.object({
             name: Yup.string().required("Tên danh mục là bắt buộc."),

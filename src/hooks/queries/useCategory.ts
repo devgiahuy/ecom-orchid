@@ -69,6 +69,7 @@ export const useCreateCategory = () => {
 
 export const useUpdateCategory = () => {
     const queryClient = useQueryClient()
+    const navigate = useNavigate()
     return useMutation({
         mutationFn: categoryApi.update,
         onSuccess: () => {
@@ -78,6 +79,7 @@ export const useUpdateCategory = () => {
                 description: "Update successfully",
                 color: "success"
             })
+            navigate("/admin/categories")
         },
         onError: (err: Error) => {
             addToast({

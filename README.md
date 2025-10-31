@@ -9,18 +9,41 @@ Dự án áp dụng các công nghệ mới như Zustand, Axios, TailwindCSS, He
 
 ## ⚙️ Công nghệ sử dụng
 
-| 🧩 Công nghệ | 📝 Mô tả |
-|--------------|----------|
-| ⚛️ **React + TypeScript + Vite** | Nền tảng phát triển SPA với HMR và build cực nhanh |
-| 🧠 **Zustand** | Quản lý state toàn cục nhẹ, dễ mở rộng |
-| 🌐 **Axios** | Gọi API với interceptor và cấu hình tùy chỉnh |
-| 🎨 **TailwindCSS** | Xây dựng giao diện nhanh, hỗ trợ responsive & dark mode |
-| 💎 **HeroUI / ShadCN** | Bộ component UI hiện đại, tương thích Tailwind |
-| 🔥 **Firebase Auth** | Đăng nhập, xác thực người dùng |
-| 🧰 **MockAPI.io** | Giả lập backend phục vụ thử nghiệm dữ liệu |
-| 🧪 **ESLint + Prettier** | Chuẩn hóa và định dạng code tự động |
-| 🧭 **React Router DOM** | Điều hướng trang & bảo vệ route người dùng |
-| ⚙️ **GitHub Actions (CI)** | Tự động lint + build + test khi commit |
+### 🧠 **Ngôn ngữ & Nền tảng**
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=FFD62E)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+
+### ⚙️ **Frontend Framework & UI**
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![HeroUI](https://img.shields.io/badge/HeroUI-00A97F?style=for-the-badge&logo=vercel&logoColor=white)
+![ShadCN](https://img.shields.io/badge/ShadCN-18181B?style=for-the-badge&logo=nextdotjs&logoColor=white)
+![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
+
+### 💾 **State & API**
+![Zustand](https://img.shields.io/badge/Zustand-443E38?style=for-the-badge&logo=react&logoColor=white)
+![Axios](https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white)
+![React Query](https://img.shields.io/badge/React_Query-FF4154?style=for-the-badge&logo=react-query&logoColor=white)
+
+### 🔥 **Backend & Auth**
+![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)
+![MockAPI.io](https://img.shields.io/badge/MockAPI.io-8A2BE2?style=for-the-badge&logo=json&logoColor=white)
+![JSON Server](https://img.shields.io/badge/JSON_Server-000000?style=for-the-badge&logo=json&logoColor=white)
+
+### 🧹 **Linting & Format**
+![ESLint](https://img.shields.io/badge/ESLint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white)
+![Prettier](https://img.shields.io/badge/Prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=black)
+
+### 🧪 **CI/CD**
+![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)
+![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)
+
+---
+
+Ngo Gia Huy
+📧 ngogiahuy.dev@gmail.com
+🌐 github.com/devgiahuy
 
 ---
 
@@ -93,7 +116,7 @@ src/
 ├── 💎 lib
 │   └── heroUI/
 │       ├── hero.ts
-│       └── them.css
+│       └── theme.css
 │
 ├── 🧾 model
 │   ├── authState.ts
@@ -107,7 +130,7 @@ src/
 │
 ├── 🧭 router
 │   ├── index.tsx
-│   └── ProtectedRote.tsx
+│   └── ProtectedRoute.tsx
 │
 ├── 🔧 service
 │   ├── firebase.ts

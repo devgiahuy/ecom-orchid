@@ -1,12 +1,28 @@
-import { useGetAllOrchids } from "@/hooks/queries/useOrchid"
+import { useSearchOrchids } from "@/hooks/queries/useOrchid"
 import { motion } from "framer-motion"
 import type { Orchid } from "@/model/orchid"
 import { Spinner } from "@heroui/react"
 import { CardOrchid } from "@/components/models"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
+import { InputStyled } from "@/components/styled"
+import { useDebounce } from "@/hooks/singleton/useDebounce"
+import { Search } from "lucide-react"
 export default function NaturalPage() {
-    const { data: orchids, isLoading } = useGetAllOrchids()
+    const { data: orchids = [], isFetching } = useSearchOrchids("")
+    const [search, setSearch] = useState("")
+    const debouncedKeyword = useDebounce(search, 400)
+    const filteredOrchids = useMemo(() => {
+        const keyword = debouncedKeyword.toLowerCase().trim()
+        if (!keyword) return orchids
+        return orchids.filter(
+            (item) =>
+                item.name.toLowerCase().includes(keyword) ||
+                item.color.toLowerCase().includes(keyword) ||
+                item.origin.toLowerCase().includes(keyword)
+        )
+    }, [debouncedKeyword, orchids])
 
+    // ===========Start Title=====================================
     const fullText = "Ecommerce Orchid — HYCAT"
     const [displayText, setDisplayText] = useState("")
     const [index, setIndex] = useState(0)
@@ -20,7 +36,9 @@ export default function NaturalPage() {
             return () => clearTimeout(timeout)
         }
     }, [index])
-    if (isLoading)
+    // ===========End Title=====================================
+
+    if (isFetching)
         return (
             <div className="flex justify-center items-center">
                 <Spinner />
@@ -42,9 +60,24 @@ export default function NaturalPage() {
                         </h1>
                     </div>
 
+                    <div className="mb-6 relative max-w-3xl mx-auto">
+                        <InputStyled
+                            label="Search"
+                            variant="bordered"
+                            type="text"
+                            placeholder="Tìm kiếm hoa lan..."
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                            startContent={<Search size={18} className="text-gray-400 " />}
+                            radius="lg"
+                            color="success"
+                            className="bg-white rounded-2xl p-2"
+                        />
+                    </div>
+
                     {/* list */}
                     <div className="grid gap-6  sm:grid-cols-2 lg:grid-cols-4 items-center">
-                        {orchids?.map(
+                        {filteredOrchids?.map(
                             (orchid: Orchid) =>
                                 orchid!.isNatural && <CardOrchid key={orchid.id} orchid={orchid} />
                         )}

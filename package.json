@@ -23,6 +23,7 @@
         "framer-motion": "^12.23.24",
         "lucide-react": "^0.545.0",
         "motion": "^12.23.24",
+        "phosphor-icons": "^1.4.2",
         "react": "^19.2.0",
         "react-dom": "^19.2.0",
         "react-router-dom": "^7.9.4",
@@ -32,6 +33,7 @@
     },
     "devDependencies": {
         "@eslint/js": "^9.38.0",
+        "@iconify/react": "^6.0.2",
         "@tailwindcss/language-server": "^0.14.29",
         "@types/node": "^24.6.0",
         "@types/react": "^19.1.16",

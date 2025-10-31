@@ -1,15 +1,33 @@
 import { CardOrchid } from "@/components/models"
-import { useGetAllOrchids } from "@/hooks/queries/useOrchid"
+import { InputStyled } from "@/components/styled"
+import { useSearchOrchids } from "@/hooks/queries/useOrchid"
+import { useDebounce } from "@/hooks/singleton/useDebounce"
 import type { Orchid } from "@/model/orchid"
-import { Spinner } from "@heroui/react"
 
 import { motion } from "framer-motion"
-import { useEffect, useState } from "react"
-export function HomePage() {
-    const { data: orchids, isLoading } = useGetAllOrchids()
+import { Search } from "lucide-react"
+import { useEffect, useMemo, useState } from "react"
 
+export function HomePage() {
+    // ======Search=========================================
+    const { data: orchids = [] } = useSearchOrchids("")
+    const [search, setSearch] = useState("")
+    const debouncedKeyword = useDebounce(search, 400)
+    const filteredOrchids = useMemo(() => {
+        const keyword = debouncedKeyword.toLowerCase().trim()
+        if (!keyword) return orchids
+        return orchids.filter(
+            (o) =>
+                o.name.toLowerCase().includes(keyword) ||
+                o.color.toLowerCase().includes(keyword) ||
+                o.origin.toLowerCase().includes(keyword)
+        )
+    }, [debouncedKeyword, orchids])
+
+    // ====Title=============================================
     const fullText = "Ecommerce Orchid — HYCAT"
     const [displayText, setDisplayText] = useState("")
+
     const [index, setIndex] = useState(0)
 
     useEffect(() => {
@@ -22,12 +40,14 @@ export function HomePage() {
         }
     }, [index])
 
-    if (isLoading)
-        return (
-            <div className="flex justify-center items-center">
-                <Spinner />
-            </div>
-        )
+    // =====================================================
+
+    // if (isFetching)
+    //     return (
+    //         <div className="flex justify-center items-center">
+    //             <Spinner />
+    //         </div>
+    //     )
     return (
         <>
             <motion.div
@@ -45,9 +65,25 @@ export function HomePage() {
                             </h1>
                         </div>
 
+                        {/* create search */}
+                        <div className="mb-6 relative max-w-3xl mx-auto">
+                            <InputStyled
+                                label="Search"
+                                variant="bordered"
+                                type="text"
+                                placeholder="Tìm kiếm hoa lan..."
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
+                                startContent={<Search size={18} className="text-gray-400 " />}
+                                radius="lg"
+                                color="success"
+                                className="bg-white rounded-2xl p-2"
+                            />
+                        </div>
+
                         {/* list */}
                         <div className="grid gap-6  sm:grid-cols-2 lg:grid-cols-4 items-center">
-                            {orchids?.map((orchid: Orchid) => (
+                            {filteredOrchids?.map((orchid: Orchid) => (
                                 <CardOrchid key={orchid.id} orchid={orchid} />
                             ))}
                         </div>

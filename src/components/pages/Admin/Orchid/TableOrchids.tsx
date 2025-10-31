@@ -98,7 +98,7 @@ export function Orchids() {
 
                             <TableCell
                                 className="text-center font-semibold text-green-700 dark:text-green-400"
-                                onClick={() => navigate(`/orchids/${item.id}`)}
+                                onClick={() => navigate(`/detail/${item.id}`)}
                             >
                                 {item.name}
                             </TableCell>

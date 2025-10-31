@@ -2,10 +2,11 @@ import { GoogleLoginButton } from "@/components/styled"
 import { useAuth } from "@/provider/AuthProvider"
 import { Button, Card, CardBody, CardHeader } from "@heroui/react"
 import { LogOut } from "lucide-react"
+import { useNavigate } from "react-router-dom"
 
 export function LoginPage() {
     const { loginWithGoogle, firebaseUser, logout, role } = useAuth()
-
+    const navigate = useNavigate()
     return (
         <section
             className="
@@ -72,7 +73,12 @@ export function LoginPage() {
                             <p className="text-gray-600 dark:text-gray-400 text-sm flex justify-center">
                                 Đăng nhập nhanh bằng tài khoản Google của bạn
                             </p>
-                            <GoogleLoginButton onPress={loginWithGoogle} />
+                            <GoogleLoginButton
+                                onPress={async () => {
+                                    await loginWithGoogle()
+                                    navigate("/")
+                                }}
+                            />
                         </>
                     )}
                 </CardBody>

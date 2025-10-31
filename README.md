@@ -1,6 +1,6 @@
 [![CI - React Vite TS](https://github.com/devgiahuy/ecom-orchid/actions/workflows/ci.yml/badge.svg)](https://github.com/devgiahuy/ecom-orchid/actions/workflows/ci.yml)
-
-# 🪴 Ecom Orchid
+[![Author: Ngo Gia Huy](https://img.shields.io/badge/Author-Ngo%20Gia%20Huy-00A86B?style=for-the-badge)](https://github.com/devgiahuy)
+# 🌿 Ecom Orchid
 
 Ecom Orchid là dự án thương mại điện tử mini bán **hoa lan**, được xây dựng bằng **React + TypeScript + Vite** với cấu trúc hiện đại, tối ưu và dễ mở rộng.  
 Dự án áp dụng các công nghệ mới như Zustand, Axios, TailwindCSS, HeroUI và Firebase để tạo nên trải nghiệm mua sắm mượt mà, nhanh và dễ bảo trì.
@@ -18,7 +18,6 @@ Dự án áp dụng các công nghệ mới như Zustand, Axios, TailwindCSS, He
 ### ⚙️ **Frontend Framework & UI**
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 ![HeroUI](https://img.shields.io/badge/HeroUI-00A97F?style=for-the-badge&logo=vercel&logoColor=white)
-![ShadCN](https://img.shields.io/badge/ShadCN-18181B?style=for-the-badge&logo=nextdotjs&logoColor=white)
 ![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
 
 ### 💾 **State & API**
@@ -41,105 +40,14 @@ Dự án áp dụng các công nghệ mới như Zustand, Axios, TailwindCSS, He
 
 ---
 
-Ngo Gia Huy
-📧 ngogiahuy.dev@gmail.com
-🌐 github.com/devgiahuy
+## 🧑‍💻 Tác giả
+
+**Ngo Gia Huy**  
+📧 [ngogiahuy.dev@gmail.com](mailto:ngogiahuy.dev@gmail.com)  
+🌐 [github.com/devgiahuy](https://github.com/devgiahuy)
 
 ---
 
-## 🗂️ Cấu trúc thư mục
+⭐ *Nếu bạn thấy dự án hữu ích, hãy cho 1 star để ủng hộ nhé!*
 
-```bash
-src/
-├── 📦 api
-│   ├── axiosClient.ts
-│   ├── http.ts
-│   └── wrapper.ts
-│
-├── ⚙️ app
-│   ├── App.tsx
-│   ├── main.tsx
-│   ├── App.css
-│   └── index.css
-│
-├── 🖼️ assets
-│   └── react.svg
-│
-├── 🧩 components
-│   ├── modals/
-│   ├── models/
-│   │   ├── AddToCartButton/
-│   │   ├── FormField/
-│   │   └── OrchidCard/
-│   │
-│   ├── pages/
-│   │   ├── Admin/
-│   │   ├── Gest/
-│   │   └── User/
-│   │
-│   ├── share/
-│   │   ├── DarkOrWhite/
-│   │   ├── Footer/
-│   │   ├── Navbar/
-│   │   ├── OrchidCardList/
-│   │   └── ProfileDropdown/
-│   │
-│   └── styled/
-│       ├── AutocompleteStyle/
-│       ├── ButtonStyled/
-│       ├── CardStyled/
-│       ├── DetailItem/
-│       ├── Dropdown/
-│       ├── GoogleLoginButton/
-│       ├── InputStyled/
-│       ├── SectionStyled/
-│       ├── SpinnerStyled/
-│       ├── SwitchStyled/
-│       └── TableStyled/
-│
-├── 🧱 constants
-│   ├── apiKey.ts
-│   └── queryKey.ts
-│
-├── 🌸 data
-│   └── ListOfOrchids.ts
-│
-├── 🪝 hooks
-│   ├── queries/
-│   └── singleton/
-│       ├── useApiHandler.ts
-│       └── store/
-│           ├── useAuthStore.ts
-│           ├── useCartStore.ts
-│           └── useItemStore.ts
-│
-├── 💎 lib
-│   └── heroUI/
-│       ├── hero.ts
-│       └── theme.css
-│
-├── 🧾 model
-│   ├── authState.ts
-│   ├── cart.ts
-│   ├── orchid.ts
-│   └── user.ts
-│
-├── 🧩 provider
-│   ├── AppProvider.tsx
-│   └── AuthProvider.tsx
-│
-├── 🧭 router
-│   ├── index.tsx
-│   └── ProtectedRoute.tsx
-│
-├── 🔧 service
-│   ├── firebase.ts
-│   ├── firebaseAuthService.ts
-│   ├── orchidApi.ts
-│   ├── useAuthApi.ts
-│   └── userApi.ts
-│
-└── 🪄 utils
-    ├── tokent.ts
-    └── helper/
-        └── currency.ts
+

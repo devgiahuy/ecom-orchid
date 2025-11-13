@@ -36,7 +36,6 @@ Dự án áp dụng các công nghệ mới như Zustand, Axios, TailwindCSS, He
 
 ### 🧪 **CI/CD**
 ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)
-![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)
 
 ---
 

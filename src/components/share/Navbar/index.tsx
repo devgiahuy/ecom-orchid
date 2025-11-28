@@ -37,21 +37,21 @@ export default function Header() {
                 px-6 py-1 sticky top-0 z-50
             "
         >
-            {/* 🌸 Logo thương hiệu */}
+            {/* Logo thương hiệu */}
             <NavbarBrand>
                 <Link to={"/home"}>
                     <OrchidLogo />
                 </Link>
             </NavbarBrand>
 
-            {/* 🌿 Navigation links */}
+            {/* Navigation links */}
             <NavbarContent className="hidden sm:flex gap-8" justify="center">
                 {labels.map((label) => {
                     const isActive = location.pathname === label.to
                     return (
                         <NavbarItem key={label.name}>
                             <Link
-                                to={label.to}
+                                to={!firebaseUser && label.to === "/natural" ? "/login" : label.to}
                                 className={`
                                     relative font-medium
                                     ${
@@ -71,7 +71,7 @@ export default function Header() {
                 })}
             </NavbarContent>
 
-            {/* 🌼 User Actions */}
+            {/* User Actions */}
             <NavbarContent justify="end" className="gap-3">
                 {firebaseUser ? (
                     <>

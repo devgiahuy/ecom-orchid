@@ -4,11 +4,14 @@ import { Star, MapPin, Sprout, Flower, Rainbow } from "lucide-react"
 import type { Orchid } from "../../../model/orchid"
 import { Link } from "react-router-dom"
 import { useItemStore } from "../../../hooks/singleton/store/useItemStore"
+import { useAuth } from "@/provider/AuthProvider"
 
 export function CardOrchid({ orchid }: { orchid: Orchid }) {
     const { setSelectedItem } = useItemStore()
+    const { firebaseUser } = useAuth()
+
     return (
-        <Link to={`/detail/${orchid.id}`}>
+        <Link to={firebaseUser ? `/detail/${orchid.id}` : `/login`}>
             <CardStyled
                 shadow="sm"
                 className="group relative overflow-hidden rounded-3xl
@@ -22,7 +25,7 @@ export function CardOrchid({ orchid }: { orchid: Orchid }) {
                     <div className="relative w-full h-60 overflow-hidden">
                         <img
                             alt={orchid.name}
-                            src={orchid.image}
+                            src={orchid.imageUrl}
                             className="absolute inset-0 w-full h-full object-cover object-center
                                     transition-transform duration-500 rounded-xl"
                         />

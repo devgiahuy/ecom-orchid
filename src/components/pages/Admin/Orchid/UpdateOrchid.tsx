@@ -2,7 +2,7 @@ import { useFormik } from "formik"
 import * as Yup from "yup"
 import { useNavigate, useParams } from "react-router-dom"
 import { useGetOrchidById, useUpdateOrchid } from "@/hooks/queries/useOrchid"
-import { Checkbox, Card, CardBody, AutocompleteItem } from "@heroui/react"
+import { Checkbox, Card, CardBody, AutocompleteItem, image, Spinner } from "@heroui/react"
 import {
     Flower2,
     Palette,
@@ -18,12 +18,14 @@ import { FormField } from "@/components/models"
 import { useState } from "react"
 import { useGetAllCategories } from "@/hooks/queries/useCategory"
 import { AutocompleteStyled, ButtonStyled } from "@/components/styled"
+import { useUploadImage } from "@/hooks/queries/useCloudinary"
 
 export function UpdateOrchid() {
     const { id } = useParams()
     const navigation = useNavigate()
     const { data: orchid } = useGetOrchidById(id!)
     const updateOrchid = useUpdateOrchid()
+    const uploadImage = useUploadImage()
 
     const [hovered, setHovered] = useState<number>(0)
     const { data: categories } = useGetAllCategories()
@@ -36,17 +38,18 @@ export function UpdateOrchid() {
             rating: orchid?.rating ?? 0,
             isNatural: orchid?.isNatural ?? false,
             isSpecial: orchid?.isSpecial ?? false,
-            image: orchid?.image ?? "",
+            imageUrl: orchid?.imageUrl ?? "",
             color: orchid?.color ?? "",
             numberOfLike: orchid?.numberOfLike ?? 0,
             origin: orchid?.origin ?? "",
             category: selectCategory ?? "",
             price: orchid?.price ?? 0,
-            linkVideo: orchid?.linkVideo ?? ""
+            linkVideo: orchid?.linkVideo ?? "",
+            public_id: orchid?.public_id ?? ""
         },
         validationSchema: Yup.object({
             name: Yup.string().required("Tên hoa lan là bắt buộc"),
-            image: Yup.string().url("Phải là một URL hợp lệ").required("Hình ảnh là bắt buộc"),
+            imageUrl: Yup.string().url("Phải là một URL hợp lệ").required("Hình ảnh là bắt buộc"),
             price: Yup.number().positive("Giá phải là số dương").required("Giá là bắt buộc"),
             origin: Yup.string().required("Nguồn gốc là bắt buộc"),
             color: Yup.string().required("Màu sắc là bắt buộc"),
@@ -92,12 +95,12 @@ export function UpdateOrchid() {
                             name="name"
                             formik={formik}
                         />
-                        <FormField
+                        {/* <FormField
                             icon={<ImageIcon />}
                             label="URL Hình ảnh"
                             name="image"
                             formik={formik}
-                        />
+                        /> */}
                         <FormField
                             icon={<DollarSign />}
                             label="Giá (VNĐ)"
@@ -210,17 +213,64 @@ export function UpdateOrchid() {
                             </Checkbox>
                         </div>
 
+                        {/* Upload ảnh bằng Cloudinary */}
+                        <div className="flex flex-col gap-2">
+                            <label className="font-medium text-gray-700 flex items-center gap-2">
+                                <ImageIcon size={18} />
+                                Hình ảnh hoa lan
+                            </label>
+
+                            <input
+                                type="file"
+                                accept="image/*"
+                                onChange={(e) => {
+                                    const file = e.target.files?.[0]
+                                    if (!file) return
+
+                                    uploadImage.mutate(file, {
+                                        onSuccess: (data) => {
+                                            formik.setFieldValue("imageUrl", data.secure_url)
+                                            formik.setFieldValue("public_id", data.public_id)
+                                        }
+                                    })
+                                }}
+                                className="file:mr-3 file:py-2 file:px-4 file:rounded-full file:border-0
+                   file:text-sm file:font-semibold
+                   file:bg-green-50 file:text-green-700
+                   hover:file:bg-green-100"
+                            />
+
+                            {/* Loading + error */}
+                            {uploadImage.isPending && (
+                                <div>
+                                    <Spinner />
+                                </div>
+                            )}
+
+                            {formik.values.imageUrl && (
+                                <img
+                                    src={formik.values.imageUrl}
+                                    alt="Preview"
+                                    className="mt-2 w-32 h-32 object-cover rounded-xl border border-green-100"
+                                />
+                            )}
+
+                            {formik.touched.imageUrl && formik.errors.imageUrl && (
+                                <p className="text-red-500 text-sm">{formik.errors.imageUrl}</p>
+                            )}
+                        </div>
+
                         {/* Nút cập nhật */}
                         <ButtonStyled
                             type="submit"
                             color="success"
                             radius="full"
                             isLoading={updateOrchid.isPending}
-                            disabled={updateOrchid.isPending}
+                            disabled={updateOrchid.isPending || uploadImage.isPending}
                             className="font-semibold text-white text-base bg-green-600 hover:bg-green-700 transition-colors"
                             onPress={() => navigation("/admin/orchids")}
                         >
-                            {updateOrchid.isPending ? "Đang cập nhật..." : "Cập nhật"}
+                            {updateOrchid.isPending ? <Spinner /> : "Cập nhật"}
                         </ButtonStyled>
                     </form>
                 </CardBody>

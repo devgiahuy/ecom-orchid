@@ -17,7 +17,7 @@ export default function ProfileDropdown() {
                         isBordered
                         as="button"
                         className="transition-transform"
-                        // src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+                        src={user?.photoURL || "https://i.pravatar.cc/150?u=a042581f4e29026704d"}
                     />
                 </DropdownTrigger>
                 <DropdownMenu aria-label="Profile Actions" variant="flat">

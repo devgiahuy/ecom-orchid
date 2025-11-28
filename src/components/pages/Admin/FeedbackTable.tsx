@@ -32,7 +32,7 @@ export function FeedbackTable() {
         <div
             className="
     overflow-x-auto rounded-3xl border border-green-100 dark:border-gray-800 
-    bg-white dark:bg-gray-900 shadow-lg relative overflow-hidden m-10
+    bg-white dark:bg-gray-900 shadow-lg relative overflow-hidden m-10 
   "
         >
             <div

@@ -34,6 +34,7 @@ export function AboutPage() {
         border border-green-100 dark:border-gray-800
         rounded-3xl shadow-lg relative overflow-hidden
         transition-colors duration-300
+        flex-1 w-full 
       "
         >
             {/* background accent nhẹ */}

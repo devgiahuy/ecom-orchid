@@ -19,9 +19,9 @@ import { CreateCategory, TableCategory } from "@/components/pages/Admin/Category
 import UpdateCategory from "@/components/pages/Admin/Category/UpdateCategory"
 import TableCart from "@/components/pages/Admin/Cart/TableCart"
 import { UpdateOrchid } from "@/components/pages/Admin/Orchid/UpdateOrchid"
-import { UserProfile } from "@/components"
 import CreateFeedbackPage from "@/components/pages/User/CreateFeedbackPage"
 import { FeedbackTable } from "@/components/pages/Admin/FeedbackTable"
+import { Profile } from "@/components/pages/User/Profile"
 
 export const router = createBrowserRouter([
     {
@@ -40,7 +40,7 @@ export const router = createBrowserRouter([
             {
                 element: <ProtectedRoute allowRoles={["user", "admin"]} />,
                 children: [
-                    { path: "profile", element: <UserProfile /> },
+                    { path: "profile", element: <Profile /> },
                     { path: "detail/:id", element: <DetailPage /> },
                     { path: "detail/feedback/:id", element: <CreateFeedbackPage /> },
                     { path: "natural", element: <NaturalPage /> },

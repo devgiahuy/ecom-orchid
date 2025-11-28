@@ -1,24 +1,17 @@
 import { useFormik } from "formik"
 import * as Yup from "yup"
 import { useCreateOrchid } from "../../../../hooks/queries/useOrchid"
-import { AutocompleteItem, Card, CardBody, Checkbox } from "@heroui/react"
-import {
-    Flower2,
-    Image as ImageIcon,
-    Palette,
-    Sprout,
-    DollarSign,
-    Star,
-    Video,
-    TagIcon
-} from "lucide-react"
+import { AutocompleteItem, Card, CardBody, Checkbox, Input, Spinner } from "@heroui/react"
+import { Flower2, Palette, Sprout, DollarSign, Star, Video, TagIcon, ImageIcon } from "lucide-react"
 import { FormField } from "@/components/models"
 import { useGetAllCategories } from "@/hooks/queries/useCategory"
 import { AutocompleteStyled, ButtonStyled } from "@/components"
 import { useState } from "react"
+import { useUploadImage } from "@/hooks/queries/useCloudinary"
 
 export default function CreateOrchid() {
     const createOrchid = useCreateOrchid()
+    const uploadImage = useUploadImage()
     const [hovered, setHovered] = useState<number>(0)
     const { data: categories } = useGetAllCategories()
     const [selectCategory, setSelectCategory] = useState("")
@@ -26,7 +19,6 @@ export default function CreateOrchid() {
     const formik = useFormik({
         initialValues: {
             name: "",
-            image: "",
             price: 0,
             isNatural: false,
             isSpecial: false,
@@ -34,16 +26,18 @@ export default function CreateOrchid() {
             color: "",
             category: selectCategory,
             rating: 0,
-            createdAt: new Date().toISOString()
+            createdAt: new Date().toISOString(),
+            imageUrl: "",
+            public_id: ""
         },
         validationSchema: Yup.object({
             name: Yup.string().required("Tên hoa lan là bắt buộc"),
-            image: Yup.string().url("Phải là URL hợp lệ").required("Hình ảnh là bắt buộc"),
             price: Yup.number().positive("Giá phải là số dương").required("Giá là bắt buộc").min(0),
             origin: Yup.string().required("Nguồn gốc là bắt buộc"),
             color: Yup.string().required("Màu sắc là bắt buộc"),
             // category: Yup.string().required("Phân loại là bắt buộc"),
-            rating: Yup.number().min(0).max(5).required("Đánh giá là bắt buộc")
+            rating: Yup.number().min(0).max(5).required("Đánh giá là bắt buộc"),
+            imageUrl: Yup.string().url("Phải là URL hợp lệ").required("URL hình ảnh là bắt buộc")
         }),
         onSubmit: (values) => {
             console.log(values)
@@ -59,6 +53,7 @@ export default function CreateOrchid() {
         border border-green-100 dark:border-gray-800
         rounded-3xl shadow-lg relative overflow-hidden
         transition-colors duration-300
+         
       "
         >
             {/* Background pattern */}
@@ -86,12 +81,12 @@ export default function CreateOrchid() {
                             name="name"
                             formik={formik}
                         />
-                        <FormField
+                        {/* <FormField
                             icon={<ImageIcon size={18} />}
                             label="URL hình ảnh"
                             name="image"
                             formik={formik}
-                        />
+                        /> */}
                         <FormField
                             icon={<DollarSign size={18} />}
                             label="Giá (VNĐ)"
@@ -109,7 +104,7 @@ export default function CreateOrchid() {
                             onSelectionChange={(key) => {
                                 const value = key as string
                                 setSelectCategory(value)
-                                formik.setFieldValue("category", value) // ✅ cập nhật Formik
+                                formik.setFieldValue("category", value)
                             }}
                             className="max-w-60 h-20 mr-0"
                         >
@@ -199,16 +194,62 @@ export default function CreateOrchid() {
                             </Checkbox>
                         </div>
 
+                        {/* Upload ảnh bằng Cloudinary */}
+                        <div className="flex flex-col gap-2">
+                            <label className="font-medium text-gray-700 flex items-center gap-2">
+                                <ImageIcon size={18} />
+                                Hình ảnh hoa lan
+                            </label>
+
+                            <Input
+                                type="file"
+                                accept="image/*"
+                                onChange={(e) => {
+                                    const file = e.target.files?.[0]
+                                    if (!file) return
+
+                                    uploadImage.mutate(file, {
+                                        onSuccess: (data) => {
+                                            formik.setFieldValue("imageUrl", data.secure_url)
+                                            formik.setFieldValue("public_id", data.public_id)
+                                        }
+                                    })
+                                }}
+                                className="file:mr-3 file:py-2 file:px-4 file:rounded-full file:border-0
+                   file:text-sm file:font-semibold
+                   file:bg-green-50 file:text-green-700
+                   hover:file:bg-green-100"
+                            />
+                            {/* Loading + error */}
+                            {uploadImage.isPending && (
+                                <div>
+                                    <Spinner />
+                                </div>
+                            )}
+
+                            {formik.values.imageUrl && (
+                                <img
+                                    src={formik.values.imageUrl}
+                                    alt="Preview"
+                                    className="mt-2 w-32 h-32 object-cover rounded-xl border border-green-100"
+                                />
+                            )}
+
+                            {formik.touched.imageUrl && formik.errors.imageUrl && (
+                                <p className="text-red-500 text-sm">{formik.errors.imageUrl}</p>
+                            )}
+                        </div>
+
                         {/* Button */}
                         <ButtonStyled
                             type="submit"
                             color="success"
                             radius="full"
                             isLoading={createOrchid.isPending}
-                            disabled={createOrchid.isPending}
+                            disabled={createOrchid.isPending || uploadImage.isPending}
                             className="font-semibold text-white text-base bg-green-600 hover:bg-green-700 transition-colors"
                         >
-                            {createOrchid.isPending ? "Đang tạo..." : "Tạo mới"}
+                            {createOrchid.isPending ? <Spinner /> : "Tạo mới"}
                         </ButtonStyled>
                     </form>
                 </CardBody>

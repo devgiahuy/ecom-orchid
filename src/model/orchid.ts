@@ -4,7 +4,9 @@ export type Orchid = {
     rating: number
     isSpecial?: boolean
     isNatural?: boolean
-    image: string
+    // image: string
+    imageUrl: string
+    public_id?: string
     color: string
     numberOfLike?: number
     origin: string
@@ -20,7 +22,9 @@ export type OrchidReq = {
     rating: number
     isSpecial?: boolean
     isNatural?: boolean
-    image: string
+    // image: string
+    imageUrl: string
+    imagePublicId?: string
     color: string
     numberOfLike?: number
     origin: string

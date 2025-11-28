@@ -122,7 +122,7 @@ export default function DetailPage() {
                 >
                     <CardBody className="p-4">
                         <img
-                            src={selectedItem.image}
+                            src={selectedItem.imageUrl}
                             alt={selectedItem.name}
                             // radius="lg"
                             className="w-full h-[420px] object-contain transition-transform duration-500 hover:scale-[1.05] rounded-2xl"

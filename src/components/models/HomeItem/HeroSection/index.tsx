@@ -1,14 +1,9 @@
-import { CategoriesSection } from "@/components/models/HomeItem/CategoriesSection"
-import { FeaturesSection } from "@/components/models/HomeItem/FeaturesSection"
-import { TrendingSection } from "@/components/models/HomeItem/TrendingSection"
-import HeroSection from "@/components/share/HeroSection"
 import { ButtonStyled } from "@/components/styled"
 import { ArrowRight, Droplets, Plus } from "lucide-react"
 
-export function HomePage() {
+export function HeroSection() {
     return (
-        <div className="bg-texter text-slate-600 antialiased selection:bg-emerald-200 selection:text-emerald-900">
-            {/* Custom animations + scrollbar helper */}
+        <div className="bg-slate-50 text-slate-600 antialiased selection:bg-emerald-200 selection:text-emerald-900 bg-texture">
             <style>{`
         @keyframes fade-in-up {
           0% { opacity: 0; transform: translateY(20px); }
@@ -31,16 +26,15 @@ export function HomePage() {
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
       `}</style>
 
-            {/* Hero Section */}
-            <header className="relative pt-16 pb-20 lg:pt-24 lg:pb-32 overflow-hidden w-full">
+            <header className="relative pt-16 pb-20 lg:pt-30 lg:pb-32 overflow-hidden w-full">
                 {/* Background Gradients */}
                 <div className="absolute inset-0 -z-10">
-                    <div className="absolute top-0 left-0 w-full h-full bg-linear-to-b from-emerald-50/50 via-white to-white" />
-                    <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-lime-100 rounded-full blur-3xl opacity-40" />
-                    <div className="absolute bottom-[10%] left-[-10%] w-[400px] h-[400px] bg-emerald-100 rounded-full blur-3xl opacity-40" />
+                    <div className="absolute top-0 left-0 w-full h-full bg-linear-to-b from-emerald-50/50 via-white to-white"></div>
+                    <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-lime-100 rounded-full blur-3xl opacity-40"></div>
+                    <div className="absolute bottom-[10%] left-[-10%] w-[400px] h-[400px] bg-emerald-100 rounded-full blur-3xl opacity-40"></div>
                 </div>
 
-                <div className="max-w-7xl mx-auto px-6 py-8 grid lg:grid-cols-2 gap-12 items-center">
+                <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
                     {/* Hero Content */}
                     <div className="max-w-xl animate-fade-in z-10">
                         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-slate-200 shadow-sm mb-6">
@@ -52,7 +46,7 @@ export function HomePage() {
 
                         <h1 className="text-5xl lg:text-6xl font-semibold text-slate-900 tracking-tight leading-[1.1] mb-6">
                             Discover the Beauty of{" "}
-                            <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-600 to-lime-500">
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-lime-500">
                                 Premium Orchids
                             </span>
                         </h1>
@@ -64,11 +58,11 @@ export function HomePage() {
                         </p>
 
                         <div className="flex flex-wrap items-center gap-4">
-                            <ButtonStyled className="group relative px-8 py-3.5 bg-slate-900 text-white text-sm font-medium rounded-full shadow-lg hover:shadow-xl hover:bg-slate-800 transition-all duration-300 flex items-center gap-2">
+                            <ButtonStyled className="h-15 group relative px-8 py-3.5 bg-slate-900 text-white text-sm font-medium rounded-full shadow-lg hover:shadow-xl hover:bg-slate-800 transition-all duration-300 flex items-center gap-2">
                                 Shop Now
                                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                             </ButtonStyled>
-                            <ButtonStyled className="px-8 py-3.5 bg-white border border-slate-200 text-slate-700 text-sm font-medium rounded-full hover:bg-slate-50 transition-all duration-300">
+                            <ButtonStyled className="h-15 px-8 py-3.5 bg-white border border-slate-200 text-slate-700 text-sm font-medium rounded-full hover:bg-slate-50 transition-all duration-300">
                                 Explore Collections
                             </ButtonStyled>
                         </div>
@@ -113,7 +107,7 @@ export function HomePage() {
                         </div>
 
                         {/* Main Image */}
-                        <div className="relative w-full aspect-4/5 lg:aspect-auto lg:h-full rounded-3xl overflow-hidden shadow-2xl bg-slate-200">
+                        <div className="relative w-full aspect-[4/5] lg:aspect-auto lg:h-full rounded-3xl overflow-hidden shadow-2xl bg-slate-200">
                             <img
                                 src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/917d6f93-fb36-439a-8c48-884b67b35381_1600w.jpg"
                                 alt="White Phalaenopsis Orchid"
@@ -138,10 +132,6 @@ export function HomePage() {
                     </div>
                 </div>
             </header>
-
-            <FeaturesSection />
-            <CategoriesSection />
-            <TrendingSection />
         </div>
     )
 }

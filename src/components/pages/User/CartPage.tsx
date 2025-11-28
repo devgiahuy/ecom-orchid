@@ -72,7 +72,7 @@ export default function CartPage() {
                             >
                                 <td className="p-4 flex items-center gap-3">
                                     <img
-                                        src={it.orchid.image}
+                                        src={it.orchid.imageUrl}
                                         alt={it.orchid.name}
                                         className="w-16 h-16 object-cover rounded-2xl border border-green-100 dark:border-gray-700 shadow-sm"
                                     />

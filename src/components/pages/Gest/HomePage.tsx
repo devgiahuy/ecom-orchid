@@ -1,7 +1,6 @@
 import { CategoriesSection } from "@/components/models/HomeItem/CategoriesSection"
 import { FeaturesSection } from "@/components/models/HomeItem/FeaturesSection"
 import { TrendingSection } from "@/components/models/HomeItem/TrendingSection"
-import HeroSection from "@/components/share/HeroSection"
 import { ButtonStyled } from "@/components/styled"
 import { ArrowRight, Droplets, Plus } from "lucide-react"
 

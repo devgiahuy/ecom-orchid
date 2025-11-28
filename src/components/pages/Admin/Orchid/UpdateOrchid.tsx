@@ -2,7 +2,7 @@ import { useFormik } from "formik"
 import * as Yup from "yup"
 import { useNavigate, useParams } from "react-router-dom"
 import { useGetOrchidById, useUpdateOrchid } from "@/hooks/queries/useOrchid"
-import { Checkbox, Card, CardBody, AutocompleteItem, image, Spinner } from "@heroui/react"
+import { Checkbox, Card, CardBody, AutocompleteItem, Spinner } from "@heroui/react"
 import {
     Flower2,
     Palette,
